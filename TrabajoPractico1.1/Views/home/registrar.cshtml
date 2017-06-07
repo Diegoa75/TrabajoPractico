@@ -1,0 +1,83 @@
+﻿@using TrabajoPractico.Models
+@model Pelicula
+@{
+    ViewBag.Title = "Reservar";
+}
+
+<html> 
+<body>
+    <div class="container-fluid">
+	    <div class="panel panel-primary"> 
+  		<div class="panel-heading">
+	    <div class="row">
+<div class="col-sm-6"><img src="/imagenes/Cinemark2.png"  alt="..." /></div>
+<div class="col-sm-6">
+  <form action="/home/inicio" method="post" class="navbar-form pull-right input-sm">
+
+<!--<input class="form-control input-sm" type="text" name="dni" placeholder="1234"/>
+<input class="form-control input-sm" type="text" name="email" placeholder="mail"/>
+<input type="submit" value="login" class="btn btn-info btn-sm "/>
+<a href="/home/registrar" class="btn btn-info btn-sm" >Registrarse</a>-->
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div> <br><br/>
+    <div class="col-sm-1"></div>
+    <form>
+   <div class="col-sm-2">
+   <select class="form-control" name="version" >
+   <option value="">Elige una versión</option>
+   <option value ="i">Ingles</option>
+   <option value ="c">Castellano</option>
+   </select>
+    </div>
+
+    <div class="col-sm-2">
+   <select class="form-control" name="complejo">
+   <option value="">Elige un complejo</option>
+   <option value ="s">San Justo</option>
+   <option value ="h">Haedo</option>
+   <option value ="h">Morón</option>
+   </select>
+    </div>
+
+   <div class="col-sm-2">
+   <select class="form-control" name="dia" >
+   <option value="">Elige un dia</option>
+   <option value ="v">Viernes</option>
+   <option value ="s">Sabado</option>
+   <option value ="d">Domingo</option>
+   </select>
+    </div>
+
+   <div class="col-sm-2">
+   <select class="form-control" name="horario">
+   <option value="">Elige un horario</option>
+   <option value ="q">15:00hs</option>
+   <option value ="d">17:00hs</option>
+   <option value ="v">20:hs</option>
+   </select>
+    </div>
+    <div class="col-sm-2">
+    <input type="submit" value="Reservar" class="btn btn-info btn-block"/>
+    </div>
+    </form>
+    <div class="col-sm-1"></div>
+    <br><br/>
+<h2>@Model.nombre</h2>
+         
+    <form action="/peliculas/reserva" method="post">
+        
+            <input type="text" placeholder="Nombre de Usuario" name="NombreUsuario" />
+            <input type="text" placeholder="Contraseña" name="Password" />
+       
+<input type="submit" value="Grabar usuario admin en la BD" class="btn btn-primary"/>
+
+    </form>
+</body>
+</html>
+
+

@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="C_TPModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ContextoTP" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Calificaciones" EntityType="C_TPModel.Calificacione" />
+    <EntitySet Name="Carteleras" EntityType="C_TPModel.Cartelera" />
+    <EntitySet Name="Generos" EntityType="C_TPModel.Genero" />
+    <EntitySet Name="Peliculas" EntityType="C_TPModel.Pelicula" />
+    <EntitySet Name="Reservas" EntityType="C_TPModel.Reserva" />
+    <EntitySet Name="Sedes" EntityType="C_TPModel.Sede" />
+    <EntitySet Name="TiposDocumentos" EntityType="C_TPModel.TiposDocumento" />
+    <EntitySet Name="Usuarios" EntityType="C_TPModel.Usuario" />
+    <EntitySet Name="Versiones" EntityType="C_TPModel.Versione" />
+    <AssociationSet Name="FK_Peliculas_Calificaciones" Association="C_TPModel.FK_Peliculas_Calificaciones">
+      <End Role="Calificaciones" EntitySet="Calificaciones" />
+      <End Role="Peliculas" EntitySet="Peliculas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carteleras_Peliculas" Association="C_TPModel.FK_Carteleras_Peliculas">
+      <End Role="Peliculas" EntitySet="Peliculas" />
+      <End Role="Carteleras" EntitySet="Carteleras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carteleras_Sedes" Association="C_TPModel.FK_Carteleras_Sedes">
+      <End Role="Sedes" EntitySet="Sedes" />
+      <End Role="Carteleras" EntitySet="Carteleras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carteleras_Versiones" Association="C_TPModel.FK_Carteleras_Versiones">
+      <End Role="Versiones" EntitySet="Versiones" />
+      <End Role="Carteleras" EntitySet="Carteleras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Peliculas_Generos" Association="C_TPModel.FK_Peliculas_Generos">
+      <End Role="Generos" EntitySet="Generos" />
+      <End Role="Peliculas" EntitySet="Peliculas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservas_Peliculas" Association="C_TPModel.FK_Reservas_Peliculas">
+      <End Role="Peliculas" EntitySet="Peliculas" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservas_Sedes" Association="C_TPModel.FK_Reservas_Sedes">
+      <End Role="Sedes" EntitySet="Sedes" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservas_TiposDocumentos" Association="C_TPModel.FK_Reservas_TiposDocumentos">
+      <End Role="TiposDocumentos" EntitySet="TiposDocumentos" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservas_Versiones" Association="C_TPModel.FK_Reservas_Versiones">
+      <End Role="Versiones" EntitySet="Versiones" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Calificacione">
+    <Key>
+      <PropertyRef Name="IdCalificacion" />
+    </Key>
+    <Property Name="IdCalificacion" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Peliculas" Relationship="C_TPModel.FK_Peliculas_Calificaciones" FromRole="Calificaciones" ToRole="Peliculas" />
+  </EntityType>
+  <EntityType Name="Cartelera">
+    <Key>
+      <PropertyRef Name="IdCartelera" />
+    </Key>
+    <Property Name="IdCartelera" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="IdSede" Type="Int32" Nullable="false" />
+    <Property Name="IdPelicula" Type="Int32" Nullable="false" />
+    <Property Name="HoraInicio" Type="Int32" Nullable="false" />
+    <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NumeroSala" Type="Int32" Nullable="false" />
+    <Property Name="IdVersion" Type="Int32" Nullable="false" />
+    <Property Name="Lunes" Type="Boolean" Nullable="false" />
+    <Property Name="Martes" Type="Boolean" Nullable="false" />
+    <Property Name="Miercoles" Type="Boolean" Nullable="false" />
+    <Property Name="Jueves" Type="Boolean" Nullable="false" />
+    <Property Name="Viernes" Type="Boolean" Nullable="false" />
+    <Property Name="Sabado" Type="Boolean" Nullable="false" />
+    <Property Name="Domingo" Type="Boolean" Nullable="false" />
+    <Property Name="FechaCarga" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Pelicula" Relationship="C_TPModel.FK_Carteleras_Peliculas" FromRole="Carteleras" ToRole="Peliculas" />
+    <NavigationProperty Name="Sede" Relationship="C_TPModel.FK_Carteleras_Sedes" FromRole="Carteleras" ToRole="Sedes" />
+    <NavigationProperty Name="Versione" Relationship="C_TPModel.FK_Carteleras_Versiones" FromRole="Carteleras" ToRole="Versiones" />
+  </EntityType>
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="IdGenero" />
+    </Key>
+    <Property Name="IdGenero" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Peliculas" Relationship="C_TPModel.FK_Peliculas_Generos" FromRole="Generos" ToRole="Peliculas" />
+  </EntityType>
+  <EntityType Name="Pelicula">
+    <Key>
+      <PropertyRef Name="IdPelicula" />
+    </Key>
+    <Property Name="IdPelicula" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="750" Unicode="true" FixedLength="false" />
+    <Property Name="Imagen" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="IdCalificacion" Type="Int32" Nullable="false" />
+    <Property Name="IdGenero" Type="Int32" Nullable="false" />
+    <Property Name="Duracion" Type="Int32" Nullable="false" />
+    <Property Name="FechaCarga" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Calificacione" Relationship="C_TPModel.FK_Peliculas_Calificaciones" FromRole="Peliculas" ToRole="Calificaciones" />
+    <NavigationProperty Name="Carteleras" Relationship="C_TPModel.FK_Carteleras_Peliculas" FromRole="Peliculas" ToRole="Carteleras" />
+    <NavigationProperty Name="Genero" Relationship="C_TPModel.FK_Peliculas_Generos" FromRole="Peliculas" ToRole="Generos" />
+    <NavigationProperty Name="Reservas" Relationship="C_TPModel.FK_Reservas_Peliculas" FromRole="Peliculas" ToRole="Reservas" />
+  </EntityType>
+  <EntityType Name="Reserva">
+    <Key>
+      <PropertyRef Name="IdReserva" />
+    </Key>
+    <Property Name="IdReserva" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="IdSede" Type="Int32" Nullable="false" />
+    <Property Name="IdVersion" Type="Int32" Nullable="false" />
+    <Property Name="IdPelicula" Type="Int32" Nullable="false" />
+    <Property Name="FechaHoraInicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
+    <Property Name="NumeroDocumento" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CantidadEntradas" Type="Int32" Nullable="false" />
+    <Property Name="FechaCarga" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Pelicula" Relationship="C_TPModel.FK_Reservas_Peliculas" FromRole="Reservas" ToRole="Peliculas" />
+    <NavigationProperty Name="Sede" Relationship="C_TPModel.FK_Reservas_Sedes" FromRole="Reservas" ToRole="Sedes" />
+    <NavigationProperty Name="TiposDocumento" Relationship="C_TPModel.FK_Reservas_TiposDocumentos" FromRole="Reservas" ToRole="TiposDocumentos" />
+    <NavigationProperty Name="Versione" Relationship="C_TPModel.FK_Reservas_Versiones" FromRole="Reservas" ToRole="Versiones" />
+  </EntityType>
+  <EntityType Name="Sede">
+    <Key>
+      <PropertyRef Name="IdSede" />
+    </Key>
+    <Property Name="IdSede" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Direccion" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="PrecioGeneral" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <NavigationProperty Name="Carteleras" Relationship="C_TPModel.FK_Carteleras_Sedes" FromRole="Sedes" ToRole="Carteleras" />
+    <NavigationProperty Name="Reservas" Relationship="C_TPModel.FK_Reservas_Sedes" FromRole="Sedes" ToRole="Reservas" />
+  </EntityType>
+  <EntityType Name="TiposDocumento">
+    <Key>
+      <PropertyRef Name="IdTipoDocumento" />
+    </Key>
+    <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Reservas" Relationship="C_TPModel.FK_Reservas_TiposDocumentos" FromRole="TiposDocumentos" ToRole="Reservas" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreUsuario" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Versione">
+    <Key>
+      <PropertyRef Name="IdVersion" />
+    </Key>
+    <Property Name="IdVersion" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Carteleras" Relationship="C_TPModel.FK_Carteleras_Versiones" FromRole="Versiones" ToRole="Carteleras" />
+    <NavigationProperty Name="Reservas" Relationship="C_TPModel.FK_Reservas_Versiones" FromRole="Versiones" ToRole="Reservas" />
+  </EntityType>
+  <Association Name="FK_Peliculas_Calificaciones">
+    <End Role="Calificaciones" Type="C_TPModel.Calificacione" Multiplicity="1" />
+    <End Role="Peliculas" Type="C_TPModel.Pelicula" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calificaciones">
+        <PropertyRef Name="IdCalificacion" />
+      </Principal>
+      <Dependent Role="Peliculas">
+        <PropertyRef Name="IdCalificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carteleras_Peliculas">
+    <End Role="Peliculas" Type="C_TPModel.Pelicula" Multiplicity="1" />
+    <End Role="Carteleras" Type="C_TPModel.Cartelera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Peliculas">
+        <PropertyRef Name="IdPelicula" />
+      </Principal>
+      <Dependent Role="Carteleras">
+        <PropertyRef Name="IdPelicula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carteleras_Sedes">
+    <End Role="Sedes" Type="C_TPModel.Sede" Multiplicity="1" />
+    <End Role="Carteleras" Type="C_TPModel.Cartelera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sedes">
+        <PropertyRef Name="IdSede" />
+      </Principal>
+      <Dependent Role="Carteleras">
+        <PropertyRef Name="IdSede" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carteleras_Versiones">
+    <End Role="Versiones" Type="C_TPModel.Versione" Multiplicity="1" />
+    <End Role="Carteleras" Type="C_TPModel.Cartelera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Versiones">
+        <PropertyRef Name="IdVersion" />
+      </Principal>
+      <Dependent Role="Carteleras">
+        <PropertyRef Name="IdVersion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Peliculas_Generos">
+    <End Role="Generos" Type="C_TPModel.Genero" Multiplicity="1" />
+    <End Role="Peliculas" Type="C_TPModel.Pelicula" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Generos">
+        <PropertyRef Name="IdGenero" />
+      </Principal>
+      <Dependent Role="Peliculas">
+        <PropertyRef Name="IdGenero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservas_Peliculas">
+    <End Role="Peliculas" Type="C_TPModel.Pelicula" Multiplicity="1" />
+    <End Role="Reservas" Type="C_TPModel.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Peliculas">
+        <PropertyRef Name="IdPelicula" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="IdPelicula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservas_Sedes">
+    <End Role="Sedes" Type="C_TPModel.Sede" Multiplicity="1" />
+    <End Role="Reservas" Type="C_TPModel.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sedes">
+        <PropertyRef Name="IdSede" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="IdSede" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservas_TiposDocumentos">
+    <End Role="TiposDocumentos" Type="C_TPModel.TiposDocumento" Multiplicity="1" />
+    <End Role="Reservas" Type="C_TPModel.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposDocumentos">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservas_Versiones">
+    <End Role="Versiones" Type="C_TPModel.Versione" Multiplicity="1" />
+    <End Role="Reservas" Type="C_TPModel.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Versiones">
+        <PropertyRef Name="IdVersion" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="IdVersion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
