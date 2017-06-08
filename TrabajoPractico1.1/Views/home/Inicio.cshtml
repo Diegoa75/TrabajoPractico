@@ -1,94 +1,92 @@
 ﻿@using TrabajoPractico.Models
 @model Pelicula
 @{
-    ViewBag.Title = "Login";
+	Layout = "/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Login";
 }
 
-<html> 
-    
-    <body>
-        <div class="container-fluid">
-	    <div class="panel panel-primary"> 
-  		<div class="panel-heading">
-	    <div class="row">
-<div class="col-sm-10"><img src="/imagenes/Cinemark2.png"  alt="..." /></div>
-<div class="col-sm-2">
-  
-<br/><br/>
-<a href="/home/Login" class="btn btn-info btn-block" >Administrativo</a>
+<ul class="listado-cartelera">
+	<li class="cartelera">
+		<a href="/home/registrar" >
+			<img src="/imagenes/TheAvengers2012Poster.jpg"/>
+		</a>
+		<div class="info-peli">
+			<div class="titulo">@Model.nombre</div>
+			<div class="clasificacion">P13r</div>
+			<div class="genero">Accion</div>
+			<div class="reservar">
+				<a href="/home/registrar">Reservar</a>
+			</div>
+		</div>
+	</li>
 
+	<li class="cartelera">         
+		<a href="/home/registrar">
+			<img src="/imagenes/kill-bill-2003.jpg"/>
+		</a>
+		<div class="info-peli">
+			<div class="titulo">Kill Bill</div>
+			<div class="clasificacion">P13r</div>
+			<div class="genero">Accion</div>
+			<div class="reservar">
+				<a href="/home/registrar">Reservar</a>
+			</div>
+		</div>     
+	</li>
 
-</div>
-</div>
-</div>
-</div>
-</div>
+	<li class="cartelera">         
+		<a href="/home/registrar">
+			<img src="/imagenes/First_Blood-Rambo-Poster.jpg"/>
+		</a>
+		<div class="info-peli">
+			<div class="titulo">Rambo</div>
+			<div class="clasificacion">P13r</div>
+			<div class="genero">Accion</div>
+			<div class="reservar">
+				<a href="/home/registrar">Reservar</a>
+			</div>
+		</div>    
+	</li>
 
-<div class="container-fluid">
-	<div class="panel panel-info"> 
-  		<div class="panel-body">
+	<li class="cartelera">         
+		<a href="/home/registrar">
+			<img src="/imagenes/the-godfather.jpeg"/>
+		</a>
+		<div class="info-peli">
+			<div class="titulo">El Padrino</div>
+			<div class="clasificacion">P13r</div>
+			<div class="genero">Drama</div>
+			<div class="reservar">
+				<a href="/home/registrar">Reservar</a>
+			</div>
+		</div>     
+	</li>
 
- <div class="cartelera">         
-<a href="/home/registrar" ><img src="/imagenes/TheAvengers2012Poster.jpg"  /> </a>
-<div class="info-peli"><div class="titulo">@Model.nombre</div>
-    <div class="clasificacion">P13r</div> <div class="genero">Accion</div>
-    <a href="/home/registrar"> <div class="reservar">Reservar</div> </a>
-</div>
- </div>
-      
+	<li class="cartelera">         
+		<a href="/home/registrar">
+			<img src="/imagenes/madagascar_three_ver3.jpg" />
+		</a>
+		<div class="info-peli">
+			<div class="titulo">Madagascar 3</div>
+			<div class="clasificacion">ATP</div>
+			<div class="genero">Animacion</div>
+			<div class="reservar">
+				<a href="/home/registrar">Reservar</a>
+			</div>
+		</div>
+	</li>
 
-<div class="cartelera">         
-<a href="/home/registrar" ><img src="/imagenes/kill-bill-2003.jpg" /> </a>
-<div class="info-peli"><div class="titulo">Kill Bill</div>
-    <div class="clasificacion">P13r</div> <div class="genero">Accion</div>
-    <a href="/home/registrar"> <div class="reservar">Reservar</div> </a>
-</div>
-     
-</div>
-
-<div class="cartelera">         
-<a href="/home/registrar" ><img src="/imagenes/First_Blood-Rambo-Poster.jpg" /> </a>
-<div class="info-peli"><div class="titulo">Rambo</div>
-    <div class="clasificacion">P13r</div> <div class="genero">Accion</div>
-    <a href="/home/registrar"> <div class="reservar">Reservar</div> </a>
-</div>
-    
-</div>
-
-<div class="cartelera">         
-<a href="/home/registrar" ><img src="/imagenes/the-godfather.jpeg" /> </a>
-<div class="info-peli"><div class="titulo">El Padrino</div>
-    <div class="clasificacion">P13r</div> <div class="genero">Drama</div>
-    <a href="/home/registrar"> <div class="reservar">Reservar</div> </a>
-</div>
-     
-</div>
-
-<div class="cartelera">         
-<a href="/home/registrar" ><img src="/imagenes/madagascar_three_ver3.jpg" /> </a>
-<div class="info-peli"><div class="titulo">Madagascar 3</div>
-    <div class="clasificacion">ATP</div> <div class="genero">Animacion</div>
-    <a href="/home/registrar"> <div class="reservar">Reservar</div> </a>
-</div>
-     
-</div>
-
-<div class="cartelera">         
-<a href="/home/registrar" ><img src="/imagenes/Bourne_Ultimatum_Postr_2.jpg" /> </a>
-<div class="info-peli"><div class="titulo">The Bourne Ultimatum</div>
-   <div class="clasificacion">P13r</div> <div class="genero">Accion</div>
-    <a href="/home/registrar"> <div class="reservar">Reservar</div> </a>
-
-</div>
-   
-</div>
-
-</div>
-        
-</div>	
-  
-  
-    		
-</div>
-</body>
-</html>
+	<li class="cartelera">
+		<a href="/home/registrar">
+			<img src="/imagenes/Bourne_Ultimatum_Postr_2.jpg" />
+		</a>
+		<div class="info-peli">
+			<div class="titulo">The Bourne Ultimatum</div>
+			<div class="clasificacion">P13r</div>
+			<div class="genero">Accion</div>
+			<div class="reservar">
+				<a href="/home/registrar">Reservar</a>
+			</div>
+		</div>  		
+	</li>
+</ul>

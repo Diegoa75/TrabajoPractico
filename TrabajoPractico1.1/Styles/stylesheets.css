@@ -1,0 +1,81 @@
+﻿* {
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	color: black;
+	list-style-type: none;
+	border: 0px;
+	position: relative;
+	width: 100%;
+}
+
+ul, li {
+	list-style-type: none;
+	margin: 0px;
+}
+
+main h2 {
+	font-weight: bold;
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+
+main h1 {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+header {
+	padding: 1%;
+	background-color: #337ab7;
+	box-shadow: 1px 1px 1px 1px #c2c2c2;
+}
+
+.login-button {
+	float: right !important;
+}
+
+main {
+	width: 100%;
+	max-width: 1024px;
+	margin: 20px auto;
+}
+
+.listado-cartelera {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.cartelera {
+	width: calc(25% - 20px);
+	margin: 10px;
+}
+
+.form-login {
+	width: 100%;
+	max-width: 500px;
+  display: block;
+  margin: 30px auto;
+	padding: 40px;
+
+	background: #f7f7f7;
+	box-shadow: 1px 1px 1px 1px #c2c2c2;
+	border-radius: 20px;
+}
+
+.form-login label {
+	margin-bottom: 20px;
+}
+
+.formulario-reservas {
+	width: 100%;
+	position: relative;
+}
+
+.formulario-reservas .btn-block {
+	width: calc(100% - 30px);
+	left: 15px;
+}

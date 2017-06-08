@@ -139,7 +139,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ControllerWithContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AdministrativoController.cs" />
+    <Compile Include="Controllers\administrativoController.cs" />
     <Compile Include="Controllers\homeController.cs" />
     <Compile Include="Controllers\peliculasController.cs" />
     <Compile Include="Generos.cs">
@@ -367,6 +367,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Styles\stylesheets.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -389,8 +390,10 @@
     <Content Include="Views\Shared\_html5shiv.cshtml" />
     <Content Include="Views\home\registrar.cshtml" />
     <Content Include="Views\home\Login.cshtml" />
-    <Content Include="Views\Administrativo\Error.cshtml" />
-    <Content Include="Views\Administrativo\GestionAdmin.cshtml" />
+    <Content Include="Views\administrativo\Error.cshtml" />
+    <Content Include="Views\administrativo\GestionAdmin.cshtml" />
+    <Content Include="Views\Shared\_header.cshtml" />
+    <Content Include="Views\Shared\_footer.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

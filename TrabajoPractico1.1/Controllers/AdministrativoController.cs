@@ -8,7 +8,7 @@ using TrabajoPractico1._1;
 
 namespace TrabajoPractico1._1.Controllers
 {
-    public class AdministrativoController : Controller
+    public class administrativoController : Controller
     {
         //
         // GET: /Administrativo/
