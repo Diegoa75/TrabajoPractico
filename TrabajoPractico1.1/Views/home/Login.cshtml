@@ -1,9 +1,41 @@
-﻿@{
+﻿@model TrabajoPractico1._1.Usuarios
+@{
 	Layout = "/Views/Shared/_Layout.cshtml";
 	ViewBag.Title = "Login";
 }
 
-<form action="/Administrativo/VerificarUsuario" method="post" class="form-group form-login">
+@using (Html.BeginForm())
+
+{
+    @Html.AntiForgeryToken()
+    
+    
+        <form action="/Administrativo/VerificarUsuario" method="post" class="form-group form-login">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NombreUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NombreUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NombreUsuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+   
+    
+      <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div> 
+    <button type="submit" class="btn btn-info btn-lg btn-block">Login</button>
+</form> 
+    }
+
+<!--<form action="/Administrativo/VerificarUsuario" method="post" class="form-group form-login">
 	<label>
 		<input class="form-control input-lg" type="text" name="NombreUsuario" placeholder="Usuario" />
 	</label>
@@ -11,4 +43,7 @@
 		<input class="form-control input-lg" type="text" name="Password" placeholder="Contraseña" />
 	</label>
 	<button type="submit" class="btn btn-info btn-lg btn-block">Login</button>
-</form>
+</form>-->
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

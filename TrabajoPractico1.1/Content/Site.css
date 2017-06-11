@@ -112,15 +112,19 @@ textarea {
 }
 
 .reservar2 {
-	background-color:#337ab7;
-	text-align:center;
-	font-size: medium;
-	margin-top:4.5%;
-	position:relative;
-	color:black;   
+	 background-color:#337ab7;
+     height:30px;
+     text-align:center;
+     font-size: medium;
+     margin-top:4.5%;
+     /*float:left;*/
+     position:relative;
+    /* bottom:35px;*/
+   /*  width:98%;*/
+     color:whitesmoke;   
 }
 
-.reservar a,
-.reservar2 a {
+.reservar a
+ {
 	color: whitesmoke;
 }
