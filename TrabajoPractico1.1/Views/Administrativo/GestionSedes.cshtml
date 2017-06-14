@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "GestionSedes";
+}
+@using TrabajoPractico1._1
+@model List<Sedes>
+
+<h2>GestionSede</h2>
+
+<a href="~/Administrativo/CrearNuevaSede" class="btn btn-info">Nueva sede</a>
+
+<table class="table table-hover">
+	<thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Direccion</td>
+            <td>Precio</td>
+            <td>Acciones</td>
+        </tr>
+	</thead>
+    @foreach (var sede in @Model)
+    {
+        <tr>
+            <td>@sede.Nombre</td>
+            <td>@sede.Direccion</td>
+            <td>@sede.PrecioGeneral</td>
+            <td><a href="~/Administrativo/ModificarSedeSeleccionada/@sede.IdSede" class="btn btn-info">Modificar</a></td>
+        </tr>
+     }
+</table>
