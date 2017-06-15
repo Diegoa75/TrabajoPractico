@@ -396,6 +396,7 @@
     <Content Include="Views\administrativo\GestionAdmin.cshtml" />
     <Content Include="Views\Shared\_header.cshtml" />
     <Content Include="Views\Shared\_footer.cshtml" />
+    <Content Include="Views\administrativo\CargarPeliculas.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

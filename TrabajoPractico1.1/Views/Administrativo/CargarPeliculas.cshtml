@@ -1,0 +1,20 @@
+﻿@using TrabajoPractico.Models
+
+@{
+    ViewBag.Title = "CargarPeliculas";
+}
+
+<h2>CargarPeliculas</h2>
+
+<form action="/Administrativo/GrabarPelicula" method="post" class="form-group">
+<input class="form-control input-lg" type="text" name="Nombre" placeholder="Nombre de pelicula"/><br/><br/><br/>
+<input class="form-control input-lg" type="text" name="Descripcion" placeholder="Descripcion"/><br/><br/><br/>
+<input class="form-control input-lg" type="text" name="Duracion" placeholder="Duracion"/><br/><br/><br/>
+
+   @Html.DropDownList("GeneroId","Seleccione el Genero") <br/><br/><br/>
+   @Html.DropDownList("CalificacionId","Seleccione la Calificacion") <br/><br/><br/>
+
+<input type="submit" value="Login" class="btn btn-info btn-lg btn-block"/><br/>
+</form>
+
+

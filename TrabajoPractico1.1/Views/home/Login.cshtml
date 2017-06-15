@@ -4,7 +4,7 @@
 	Layout = "/Views/Shared/_Layout.cshtml";
 	ViewBag.Title = "Login";
 }
-<form action="/Administrativo/VerificarUsuario" method="post" class="row formulario-reservas">
+<form action="/administrativo/VerificarUsuario" method="post" class="row formulario-reservas">
     <div class="form-group">
         @Html.AntiForgeryToken()
         <div class="col-md-10">
@@ -27,3 +27,4 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

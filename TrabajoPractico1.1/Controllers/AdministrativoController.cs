@@ -96,13 +96,19 @@ namespace TrabajoPractico1._1.Controllers
             return View("ModificarSedeSeleccionada", sede);
         }
 
-      /*  protected override void Dispose(bool disposing)
+        // [HttpPost]
+        public ActionResult CargarPeliculas()
         {
-            if (disposing)
-            {
-                ctx.Dispose();
-            }
+            ViewBag.GeneroId = new SelectList(ctx.Generos, "IdGenero", "Nombre");
+            ViewBag.CalificacionId = new SelectList(ctx.Calificaciones, "IdCalificacion", "Nombre");
+            return View();
+
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            ctx.Dispose();
             base.Dispose(disposing);
-        }*/
+        }
     }
 }
