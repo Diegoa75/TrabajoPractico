@@ -1,0 +1,58 @@
+﻿@using TrabajoPractico1._1
+@using TrabajoPractico1._1.ModelViews
+@model Reservas
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Confirmacion";
+}
+
+@if (ViewBag.confirmacion != null)
+{//Entra cuando trae los datos de confirmacion   
+    <form action="/peliculas/confirmarPelicula" method="post" class="form-group">
+        @Html.AntiForgeryToken()
+        <div >
+            @Html.TextBox("Email", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Email" })
+            @Html.ValidationMessage("Email")
+
+            @Html.DropDownList("IdTipoDocumento", new SelectList(ViewBag.TiposDocumentos, "IdTipoDocumento", "Descripcion"))
+            @Html.ValidationMessage("IdTipoDocumento")
+
+            @Html.TextBox("NumeroDocumento", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Documento" })
+            @Html.ValidationMessage("NumeroDocumento")
+
+            @Html.TextBox("CantidadEntradas", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Entradas" })
+            @Html.ValidationMessage("CantidadEntradas")
+        </div>
+        <hr />
+
+        <input type="submit" value="Confirmar Compra" class="btn btn-info btn-lg btn-block" />
+    </form>
+
+    vConfirmacion Datos = ViewBag.confirmacion as vConfirmacion;
+
+    <div class="info-peli">
+        <div id="titulo">@Datos.pelicula.Nombre </div>
+        <div id="descripcion">@Datos.pelicula.Descripcion</div>
+        <div id="genero">@Datos.pelicula.Generos.Nombre</div>
+        <div id="clasificacion">@Datos.pelicula.Calificaciones.Nombre</div>
+        <div id="precio">$ @Datos.cartelera.Sedes.PrecioGeneral</div>
+        <div id="version">@Datos.cartelera.Versiones.Nombre</div>
+        <div id="sede">@Datos.cartelera.Sedes.Nombre </div>
+        <div id="dia">@Datos.FechaHoraInicio </div>
+    </div>
+    
+    <h4>la reserva estará vigente hasta 1hr antes de la función elegida y deberá ser confirmada en el cine seleccionado</h4>
+
+}
+else if (ViewBag.CodigoReserva != null)
+{//Entra si Se guardo La reserva
+    <div>
+        <h5>Codigo Reserva: @ViewBag.CodigoReserva</h5>
+        <h5>Importe Total: @ViewBag.Precio</h5>
+        <h5>Cantidad Entradas: @ViewBag.CantidadEntradas</h5>
+    </div>
+    <h4>la reserva estará vigente hasta 1hr antes de la función elegida y deberá ser confirmada en el cine seleccionado</h4>
+
+    <a href="/home/Inicio" > <div class="reservar2">finalizar</div> </a>
+}

@@ -1,5 +1,45 @@
-﻿@{
-    ViewBag.Title = "reserva";
+﻿@using TrabajoPractico1._1.ModelViews
+@model vReserva
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Reservar";
 }
 
-<h2>reserva</h2>
+<section>
+    @using (Html.BeginForm("reserva", "peliculas", FormMethod.Post))
+    {
+        if (Model.Versiones.Count() > 0)
+        {
+            <h2>Bienvenido al panel de reservas</h2>
+            @Html.HiddenFor(x => x.IdPelicula, Model.IdPelicula);
+
+        <p>
+            @Html.DropDownListFor(x => x.idVersion, new SelectList(Model.Versiones, "IdVersion", "Nombre"), "--Seleccione region--")
+        </p>
+
+        <p>
+            @Html.DropDownListFor(x => x.idSede, new SelectList(Model.Sedes, "IdSede", "Nombre"), "--Seleccione Sede--")
+        </p>
+
+        <p>
+            @Html.DropDownListFor(x => x.Dia, new SelectList(Model.Dias), "--Seleccione Dia--")
+        </p>
+
+        <p>
+            @Html.DropDownListFor(x => x.FechaHora, new SelectList(Model.Horarios), "--Seleccione Hora--")
+        </p>
+
+        <button type="submit" name="btnComprar" id="btnComprar">Comprar Entradas</button>
+        }
+        else
+        {
+            <h3>La Pelicula Seleccionada no Tiene funciones disponibles</h3>
+            <a href="/home/Inicio"> <div class="reservar2">Volver</div> </a>
+        }
+    }
+
+</section>
+@section scripts
+{
+    <script src="~/Scripts/registrar.js"></script>
+}

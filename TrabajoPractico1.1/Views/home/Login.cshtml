@@ -1,30 +1,22 @@
 ﻿@using TrabajoPractico1._1
 @model Usuarios
 @{
-	Layout = "/Views/Shared/_Layout.cshtml";
-	ViewBag.Title = "Login";
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
 }
-<form action="/administrativo/VerificarUsuario" method="post" class="row formulario-reservas">
+<form action="/Administrativo/VerificarUsuario" method="post" class="row formulario-reservas">
     <div class="form-group">
         @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.NombreUsuario, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Usuario" })
-            @Html.ValidationMessageFor(model => model.NombreUsuario, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Contraseña" })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
-        <div class="col-md-10">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         </div>
         <hr />
         <button type="submit" class="btn btn-info btn-lg btn-block">Login</button>
     </div>
-</form> 
-
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</form>
+ 
 

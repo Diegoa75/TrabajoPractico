@@ -1,92 +1,22 @@
-﻿@using TrabajoPractico.Models
-@model Pelicula
+﻿@using TrabajoPractico1._1
+@model IEnumerable<Peliculas>
 @{
-	Layout = "/Views/Shared/_Layout.cshtml";
-	ViewBag.Title = "Login";
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home";
 }
-
 <ul class="listado-cartelera">
-	<li class="cartelera">
-		<a href="/home/registrar" >
-			<img src="/imagenes/TheAvengers2012Poster.jpg"/>
-		</a>
-		<div class="info-peli">
-			<div class="titulo">@Model.nombre</div>
-			<div class="clasificacion">P13r</div>
-			<div class="genero">Accion</div>
-			<a href="/home/registrar"> <div class="reservar2">Reservar</div> </a>
-				
-			</div>
-		
-	</li>
-
-	<li class="cartelera">         
-		<a href="/home/registrar">
-			<img src="/imagenes/kill-bill-2003.jpg"/>
-		</a>
-		<div class="info-peli">
-			<div class="titulo">Kill Bill</div>
-			<div class="clasificacion">P13r</div>
-			<div class="genero">Accion</div>
-			<div class="reservar">
-				<a href="/home/registrar">Reservar</a>
-			</div>
-		</div>     
-	</li>
-
-	<li class="cartelera">         
-		<a href="/home/registrar">
-			<img src="/imagenes/First_Blood-Rambo-Poster.jpg"/>
-		</a>
-		<div class="info-peli">
-			<div class="titulo">Rambo</div>
-			<div class="clasificacion">P13r</div>
-			<div class="genero">Accion</div>
-			<div class="reservar">
-				<a href="/home/registrar">Reservar</a>
-			</div>
-		</div>    
-	</li>
-
-	<li class="cartelera">         
-		<a href="/home/registrar">
-			<img src="/imagenes/the-godfather.jpeg"/>
-		</a>
-		<div class="info-peli">
-			<div class="titulo">El Padrino</div>
-			<div class="clasificacion">P13r</div>
-			<div class="genero">Drama</div>
-			<div class="reservar">
-				<a href="/home/registrar">Reservar</a>
-			</div>
-		</div>     
-	</li>
-
-	<li class="cartelera">         
-		<a href="/home/registrar">
-			<img src="/imagenes/madagascar_three_ver3.jpg" />
-		</a>
-		<div class="info-peli">
-			<div class="titulo">Madagascar 3</div>
-			<div class="clasificacion">ATP</div>
-			<div class="genero">Animacion</div>
-			<div class="reservar">
-				<a href="/home/registrar">Reservar</a>
-			</div>
-		</div>
-	</li>
-
-	<li class="cartelera">
-		<a href="/home/registrar">
-			<img src="/imagenes/Bourne_Ultimatum_Postr_2.jpg" />
-		</a>
-		<div class="info-peli">
-			<div class="titulo">The Bourne Ultimatum</div>
-			<div class="clasificacion">P13r</div>
-			<div class="genero">Accion</div>
-			<div class="reservar">
-				<a href="/home/registrar">Reservar</a>
-			</div>
-		</div>  		
-	</li>
+    @foreach (Peliculas Item in Model)
+    {
+        <li class="cartelera">
+            <a href="/peliculas/registrar">
+                <img src=@Item.Imagen />
+            </a>
+            <div class="info-peli">
+                <div class="titulo">@Item.Nombre</div>
+                <div class="clasificacion">@Item.Calificaciones.Nombre</div>
+                <div class="genero">@Item.Generos.Nombre</div>
+                <a href="/peliculas/reserva/@Item.IdPelicula"> <div class="reservar2">Reservar</div> </a>
+            </div>
+        </li>
+    }
 </ul>

@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using TrabajoPractico.Models;
+using TrabajoPractico1._1;
+using TrabajoPractico1._1.Servicios;
+
+
 
 namespace TrabajoPractico.Controllers
 {
     public class homeController : Controller
     {
-        //
+        ContextoPractico ctx = new ContextoPractico();
         // GET: /home/
 
-        public ActionResult Index()
-        {
-            return View();
-        }
         public ActionResult Inicio()
         {
-            Pelicula peli = new Pelicula();
-            peli.nombre = "The Avengers";
-            return View(peli);
+            sInicio inicio = new sInicio();
+            List<TrabajoPractico1._1.Peliculas> peliculas = inicio.listarPeliculas();
+
+            return View(peliculas);
         }
 
         public ActionResult clienteincorrecto()
@@ -28,26 +25,9 @@ namespace TrabajoPractico.Controllers
             return View();
         }
 
-       /* [HttpPost]
-        public ActionResult inicio(int dni, string email)
-        {
-            Cliente cli = new Cliente();
-            if ((cli.dni != dni) || (cli.email != email))
-                return View("clienteincorrecto");
-            else
-                return View("inicio");
-        }*/
-
         public ActionResult Login()
         {
             return View();
-        }
-
-        public ActionResult registrar()
-        {
-            Pelicula peli = new Pelicula();
-            peli.nombre = "The Avengers";
-            return View(peli);
         }
 
     }

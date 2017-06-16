@@ -163,10 +163,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\ModelViews\vConfirmacion.cs" />
+    <Compile Include="Models\ModelViews\vReserva.cs" />
     <Compile Include="Models\Pelicula.cs" />
+    <Compile Include="Models\Reservas.cs" />
+    <Compile Include="Models\Servicios\sConfirmar.cs" />
+    <Compile Include="Models\Servicios\sConfirmarPelicula.cs" />
+    <Compile Include="Models\Servicios\sInicio.cs" />
+    <Compile Include="Models\Servicios\sRegistrar.cs" />
     <Compile Include="Models\Usuarios.cs" />
-    <Compile Include="Models\UsuariosMetadata.cs" />
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />
     <Compile Include="NavigationRoutes\NavigationExtensions.cs" />
@@ -368,6 +373,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\registrar.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Styles\stylesheets.css" />
     <Content Include="Web.config">
@@ -390,13 +396,13 @@
     <Content Include="Views\home\Inicio.cshtml" />
     <Content Include="Views\peliculas\reserva.cshtml" />
     <Content Include="Views\Shared\_html5shiv.cshtml" />
-    <Content Include="Views\home\registrar.cshtml" />
     <Content Include="Views\home\Login.cshtml" />
     <Content Include="Views\administrativo\Error.cshtml" />
     <Content Include="Views\administrativo\GestionAdmin.cshtml" />
     <Content Include="Views\Shared\_header.cshtml" />
     <Content Include="Views\Shared\_footer.cshtml" />
     <Content Include="Views\administrativo\CargarPeliculas.cshtml" />
+    <Content Include="Views\peliculas\confirmar.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
