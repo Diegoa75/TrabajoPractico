@@ -11,7 +11,7 @@
         if (Model.Versiones.Count() > 0)
         {
             <h2>Bienvenido al panel de reservas</h2>
-            @Html.HiddenFor(x => x.IdPelicula, Model.IdPelicula);
+            @Html.HiddenFor(x => x.IdPelicula, Model.IdPelicula)
 
         <p>
             @Html.DropDownListFor(x => x.idVersion, new SelectList(Model.Versiones, "IdVersion", "Nombre"), "--Seleccione region--")

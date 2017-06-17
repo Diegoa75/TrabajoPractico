@@ -1,13 +1,55 @@
-﻿@{
+﻿@using TrabajoPractico1._1
+@model Sedes
+@{
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Sedes";
 }
-@using TrabajoPractico1._1
-@model List<Sedes>
+
 
 <h2>GestionSede</h2>
 
 <a href="~/Administrativo/CrearNuevaSede" class="btn btn-info">Nueva sede</a>
+
+@if (ViewBag.Nuevo == true)
+{//Entra si se quiere cargar una nueva sede
+    
+    <form action="~/Administrativo/NuevaSede" method="post" class="form-group form-login">
+        <h4>Nueva Sede</h4>
+
+        @Html.TextBox("Nombre", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Nombre" })
+        @Html.ValidationMessage("Nombre")
+
+        @Html.TextBox("Direccion", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Direccion" })
+        @Html.ValidationMessage("Direccion")
+
+        @Html.TextBox("PrecioGeneral", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "PrecioGeneral" })
+        @Html.ValidationMessage("PrecioGeneral")
+
+        <button type="submit" class="btn btn-info">Guardar Sede</button>
+        <a href="~/Administrativo/Sedes" class="btn btn-info">Cancelar</a>
+    </form>
+}
+else if (Model != null)
+{//entra si se quiere modificar una sede
+    
+    <form action="~/Administrativo/ModificarSede" method="post" class="form-group form-login">
+        <h4>Modificar Sede</h4>
+
+        @Html.Hidden("IdSede", Model.IdSede )
+
+        @Html.TextBox("Nombre", Model.Nombre , new { htmlAttributes = new { @class = "class" }, @placeholder = "Nombre" })
+        @Html.ValidationMessage("Nombre")
+
+        @Html.TextBox("Direccion", Model.Direccion, new { htmlAttributes = new { @class = "class" }, @placeholder = "Direccion" })
+        @Html.ValidationMessage("Direccion")
+
+        @Html.TextBox("PrecioGeneral", Model.PrecioGeneral, new { htmlAttributes = new { @class = "class" }, @placeholder = "PrecioGeneral" })
+        @Html.ValidationMessage("PrecioGeneral")
+
+        <button type="submit" class="btn btn-info">Modificar Sede</button>
+        <a href="~/Administrativo/Sedes" class="btn btn-info">Cancelar</a>
+    </form>
+}
 
 <table class="table table-hover">
 	<thead>
@@ -18,7 +60,7 @@
             <td>Acciones</td>
         </tr>
 	</thead>
-    @foreach (var sede in @Model)
+    @foreach (var sede in ViewBag.Listado)
     {
         <tr>
             <td>@sede.Nombre</td>

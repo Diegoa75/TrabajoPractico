@@ -168,6 +168,7 @@
     <Compile Include="Models\ModelViews\vReserva.cs" />
     <Compile Include="Models\Pelicula.cs" />
     <Compile Include="Models\Reservas.cs" />
+    <Compile Include="Models\Sedes.cs" />
     <Compile Include="Models\Servicios\sConfirmar.cs" />
     <Compile Include="Models\Servicios\sConfirmarPelicula.cs" />
     <Compile Include="Models\Servicios\sInicio.cs" />
@@ -400,9 +401,7 @@
     <Content Include="Views\Shared\_footer.cshtml" />
     <Content Include="Views\administrativo\Peliculas.cshtml" />
     <Content Include="Views\peliculas\confirmar.cshtml" />
-    <Content Include="Views\administrativo\CrearNuevaSede.cshtml" />
     <Content Include="Views\administrativo\Sedes.cshtml" />
-    <Content Include="Views\administrativo\ModificarSedeSeleccionada.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

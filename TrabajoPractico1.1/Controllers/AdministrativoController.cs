@@ -22,23 +22,29 @@ namespace TrabajoPractico1._1.Controllers
 
         public ActionResult Sedes()
         {
-            return View(ctx.Sedes.ToList());
+            ViewBag.Listado = ctx.Sedes.ToList();
+            return View();
         }
 
-        public ActionResult CrearNuevaSede()
+        public ActionResult crearNuevaSede()
         {
-            return View();
+            ViewBag.Nuevo = true;
+            ViewBag.Listado = ctx.Sedes.ToList();
+
+            return View("Sedes");
         }
 
         [HttpPost]
         public ActionResult NuevaSede(Sedes nuevaSede)
         {
-            ctx.Sedes.Add(nuevaSede);
-            ctx.SaveChanges();
-            List<Sedes> listaSedes = new List<Sedes>();
-            listaSedes = (from p in ctx.Sedes
-                          select p).ToList();
-            return View("Sedes", listaSedes);
+            if (ModelState.IsValid)
+            { 
+                ctx.Sedes.Add(nuevaSede);
+                ctx.SaveChanges();
+            }
+            ViewBag.Listado = ctx.Sedes.ToList();
+
+            return View("Sedes");
         }
 
         [HttpPost]
@@ -52,9 +58,10 @@ namespace TrabajoPractico1._1.Controllers
                 sedeEncontrada.PrecioGeneral = sedeModificada.PrecioGeneral;
                 ctx.SaveChanges();
             }
-            List<Sedes> listaSedes = new List<Sedes>();
-            listaSedes = (from p in ctx.Sedes select p).ToList();
-            return View("Sedes", listaSedes);
+
+            ViewBag.Listado = ctx.Sedes.ToList();
+
+            return View("Sedes");
         }
 
         [HttpGet]
@@ -64,7 +71,9 @@ namespace TrabajoPractico1._1.Controllers
             sede = (from p in ctx.Sedes
                     where (p.IdSede == id)
                     select p).FirstOrDefault();
-            return View("ModificarSedeSeleccionada", sede);
+            ViewBag.Listado = ctx.Sedes.ToList();
+
+            return View("Sedes",sede);
         }
 
         // [HttpPost]
@@ -85,7 +94,7 @@ namespace TrabajoPractico1._1.Controllers
                 Usuarios admin = ctx.Usuarios.Where(us => us.NombreUsuario == usuario.NombreUsuario &&
                                                     us.Password == usuario.Password).SingleOrDefault();
                 if (admin != null)
-                    return View("Inicio");
+                    return RedirectToAction("Inicio");
                 else
                     TempData["Error"] = "Error de usuario y/o contraseña";
             }
