@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -390,19 +391,18 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\home\clienteincorrecto.cshtml" />
     <Content Include="Views\home\Inicio.cshtml" />
     <Content Include="Views\peliculas\reserva.cshtml" />
-    <Content Include="Views\Shared\_html5shiv.cshtml" />
     <Content Include="Views\home\Login.cshtml" />
-    <Content Include="Views\administrativo\Error.cshtml" />
-    <Content Include="Views\administrativo\GestionAdmin.cshtml" />
+    <Content Include="Views\administrativo\Inicio.cshtml" />
     <Content Include="Views\Shared\_header.cshtml" />
     <Content Include="Views\Shared\_footer.cshtml" />
-    <Content Include="Views\administrativo\CargarPeliculas.cshtml" />
+    <Content Include="Views\administrativo\Peliculas.cshtml" />
     <Content Include="Views\peliculas\confirmar.cshtml" />
+    <Content Include="Views\administrativo\CrearNuevaSede.cshtml" />
+    <Content Include="Views\administrativo\Sedes.cshtml" />
+    <Content Include="Views\administrativo\ModificarSedeSeleccionada.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

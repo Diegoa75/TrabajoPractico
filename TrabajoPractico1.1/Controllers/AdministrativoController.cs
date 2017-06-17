@@ -13,45 +13,16 @@ namespace TrabajoPractico1._1.Controllers
     public class administrativoController : Controller
     {
         ContextoPractico ctx = new ContextoPractico();
-        //
         // GET: /Administrativo/
 
-        public ActionResult Index()
+        public ActionResult Inicio()
         {
             return View();
         }
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult VerificarUsuario([Bind(Include="IdUsuario,NombreUsuario,Password" )]Usuarios usuario)
+        public ActionResult Sedes()
         {
-            if (ModelState.IsValid)
-            {
-                Usuarios admin = ctx.Usuarios.Where(us => us.NombreUsuario == usuario.NombreUsuario && 
-                                                    us.Password == usuario.Password).SingleOrDefault();
-                if (admin == null)
-                    return View("Error");
-                else
-                    return View("GestionAdmin");
-            }
-            else return View("Login");
-
-        }
-
-        public ActionResult GestionAdmin()
-        {
-            return View();
-        }
-
-        public ActionResult GestionSedes()
-        {
-            List<Sedes> listaSedes = new List<Sedes>();
-
-            listaSedes = (from p in ctx.Sedes
-                          select p).ToList();
-
-            return View("GestionSedes", listaSedes);
+            return View(ctx.Sedes.ToList());
         }
 
         public ActionResult CrearNuevaSede()
@@ -67,7 +38,7 @@ namespace TrabajoPractico1._1.Controllers
             List<Sedes> listaSedes = new List<Sedes>();
             listaSedes = (from p in ctx.Sedes
                           select p).ToList();
-            return View("GestionSedes", listaSedes);
+            return View("Sedes", listaSedes);
         }
 
         [HttpPost]
@@ -83,7 +54,7 @@ namespace TrabajoPractico1._1.Controllers
             }
             List<Sedes> listaSedes = new List<Sedes>();
             listaSedes = (from p in ctx.Sedes select p).ToList();
-            return View("GestionSedes", listaSedes);
+            return View("Sedes", listaSedes);
         }
 
         [HttpGet]
@@ -97,7 +68,7 @@ namespace TrabajoPractico1._1.Controllers
         }
 
         // [HttpPost]
-        public ActionResult CargarPeliculas()
+        public ActionResult Peliculas()
         {
             ViewBag.GeneroId = new SelectList(ctx.Generos, "IdGenero", "Nombre");
             ViewBag.CalificacionId = new SelectList(ctx.Calificaciones, "IdCalificacion", "Nombre");
@@ -105,10 +76,21 @@ namespace TrabajoPractico1._1.Controllers
 
         }
 
-        protected override void Dispose(bool disposing)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult VerificarUsuario(Usuarios usuario)
         {
-            ctx.Dispose();
-            base.Dispose(disposing);
+            if (ModelState.IsValid)
+            {
+                Usuarios admin = ctx.Usuarios.Where(us => us.NombreUsuario == usuario.NombreUsuario &&
+                                                    us.Password == usuario.Password).SingleOrDefault();
+                if (admin != null)
+                    return View("Inicio");
+                else
+                    TempData["Error"] = "Error de usuario y/o contraseña";
+            }
+            return RedirectToAction("Login", "home");
+
         }
     }
 }

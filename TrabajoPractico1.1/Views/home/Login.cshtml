@@ -4,6 +4,10 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Login";
 }
+@if (ViewBag.Error != null)
+{
+    <h2>@ViewBag.Error</h2>
+}
 <form action="/Administrativo/VerificarUsuario" method="post" class="row formulario-reservas">
     <div class="form-group">
         @Html.AntiForgeryToken()

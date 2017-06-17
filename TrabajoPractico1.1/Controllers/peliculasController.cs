@@ -55,6 +55,7 @@ namespace TrabajoPractico.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult confirmarPelicula(Reservas myReserva)
         {
             if (ModelState.IsValid)

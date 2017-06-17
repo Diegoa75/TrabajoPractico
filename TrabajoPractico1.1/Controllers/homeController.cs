@@ -9,8 +9,6 @@ namespace TrabajoPractico.Controllers
 {
     public class homeController : Controller
     {
-        ContextoPractico ctx = new ContextoPractico();
-        // GET: /home/
 
         public ActionResult Inicio()
         {
@@ -20,13 +18,12 @@ namespace TrabajoPractico.Controllers
             return View(peliculas);
         }
 
-        public ActionResult clienteincorrecto()
-        {
-            return View();
-        }
-
         public ActionResult Login()
         {
+            if (TempData["Error"] != null)
+            { 
+                ViewBag.Error = TempData["Error"] as string;
+            }
             return View();
         }
 
