@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using TrabajoPractico.Models;
-using TrabajoPractico1._1;
-using System.Data.Entity;
-using System.Net;
+using TrabajoPractico1._1.Models.Servicios;
 
 namespace TrabajoPractico1._1.Controllers
 {
@@ -79,10 +73,94 @@ namespace TrabajoPractico1._1.Controllers
         // [HttpPost]
         public ActionResult Peliculas()
         {
-            ViewBag.GeneroId = new SelectList(ctx.Generos, "IdGenero", "Nombre");
-            ViewBag.CalificacionId = new SelectList(ctx.Calificaciones, "IdCalificacion", "Nombre");
+            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
             return View();
+        }
+        public ActionResult crearNuevaPelicula()
+        {
+            ViewBag.Nuevo = true;
+            ViewBag.GeneroId = ctx.Generos.ToList();
+            ViewBag.CalificacionId = ctx.Calificaciones.ToList();
+            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
 
+            return View("Peliculas");
+        }
+        [HttpPost]
+        public ActionResult NuevaPelicula(Peliculas nuevaPelicula)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+                {
+                    //uso el nombre de la pelicula  para crear un nombre significativo
+                    string nombrePelicula = nuevaPelicula.Nombre;
+                    //Guardar Imagen
+                    string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombrePelicula);
+                    nuevaPelicula.Imagen = pathRelativoImagen;
+                }
+                nuevaPelicula.FechaCarga = System.DateTime.Now;
+
+                ctx.Peliculas.Add(nuevaPelicula);
+                ctx.SaveChanges();
+
+            }
+            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
+
+            return View("Peliculas");
+        }
+
+        [HttpPost]
+        public ActionResult ModificarPelicula(Peliculas peliculaModificada, string myImagen)
+        {
+            Peliculas peliculaEncontrada = ctx.Peliculas.Find(peliculaModificada.IdPelicula);
+
+            if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+            {
+                //TODO: Agregar validacion para confirmar que el archivo es una imagen
+                if (!string.IsNullOrEmpty(myImagen))
+                {
+                    //elimina la foto anterior si tenia
+                    if (!string.IsNullOrEmpty(peliculaEncontrada.Imagen))
+                    {
+                        sImagenes.Borrar(peliculaEncontrada.Imagen);
+                    }
+
+                    //creo un nombre "nombre" 
+                    string nombreSignificativo = peliculaModificada.Nombre;
+                    //Guardar Imagen
+                    string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombreSignificativo);
+                    peliculaEncontrada.Imagen = pathRelativoImagen;
+                }
+            }
+
+            if (peliculaEncontrada != null)
+            {
+                peliculaEncontrada.Nombre = peliculaModificada.Nombre;
+                peliculaEncontrada.Descripcion = peliculaModificada.Descripcion;
+                peliculaEncontrada.IdCalificacion = peliculaModificada.IdCalificacion;
+                peliculaEncontrada.IdGenero = peliculaModificada.IdGenero;
+                peliculaEncontrada.Duracion = peliculaModificada.Duracion;
+
+                ctx.SaveChanges();
+            }
+
+            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
+
+            return View("Peliculas");
+        }
+
+        [HttpGet]
+        public ActionResult ModificarPeliculaSeleccionada(int id)
+        {
+            Peliculas Pelicula = new Peliculas();
+            Pelicula = (from p in ctx.Peliculas
+                    where (p.IdPelicula == id)
+                    select p).FirstOrDefault();
+            ViewBag.Listado = ctx.Peliculas.ToList();
+            ViewBag.GeneroId = ctx.Generos.ToList();
+            ViewBag.CalificacionId = ctx.Calificaciones.ToList();
+
+            return View("Peliculas", Pelicula);
         }
 
         [HttpPost]

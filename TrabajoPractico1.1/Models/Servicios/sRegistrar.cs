@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using TrabajoPractico1._1.ModelViews;
 
 namespace TrabajoPractico1._1.Servicios
@@ -22,7 +23,18 @@ namespace TrabajoPractico1._1.Servicios
         public vReserva cargarSedes(vReserva reserva)
         {//Busca las Sedes que tienen la pelicula elegida en la version seleccionada
             if (reserva.idVersion > 0)
-            {
+            {   
+                /*reserva.Sedes = ctx.Sedes
+                                    .Join(ctx.Carteleras,
+                                        se => se.IdSede,
+                                        ca => ca.IdSede,
+                                        (se, ca) => new { Sedes = se, Carteleras = ca })
+                                    .Where(seca => seca.Carteleras.IdPelicula == reserva.IdPelicula
+                                        && seca.Carteleras.IdVersion == reserva.idVersion)
+                                    .Select(se=>se.Sedes)
+                                    .Distinct()
+                                    .ToList();*/
+
                 reserva.Sedes = (from se in ctx.Sedes
                                  join ca in ctx.Carteleras on se.IdSede equals ca.IdSede
                                  where ca.IdPelicula == reserva.IdPelicula
