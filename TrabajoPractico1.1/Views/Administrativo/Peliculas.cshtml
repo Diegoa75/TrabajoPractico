@@ -1,20 +1,97 @@
-﻿@using TrabajoPractico.Models
-
+﻿@using TrabajoPractico1._1
+@model Peliculas
 @{
+    Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Peliculas";
 }
 
-<h2>CargarPeliculas</h2>
 
-<form action="/Administrativo/GrabarPelicula" method="post" class="form-group">
-<input class="form-control input-lg" type="text" name="Nombre" placeholder="Nombre de pelicula"/><br/><br/><br/>
-<input class="form-control input-lg" type="text" name="Descripcion" placeholder="Descripcion"/><br/><br/><br/>
-<input class="form-control input-lg" type="text" name="Duracion" placeholder="Duracion"/><br/><br/><br/>
+<h2>Gestion de Peliculas</h2>
 
-   @Html.DropDownList("GeneroId","Seleccione el Genero") <br/><br/><br/>
-   @Html.DropDownList("CalificacionId","Seleccione la Calificacion") <br/><br/><br/>
+<a href="~/Administrativo/CrearNuevaPelicula" class="btn btn-info">Nueva Pelicula</a>
 
-<input type="submit" value="Login" class="btn btn-info btn-lg btn-block"/><br/>
-</form>
+@if (ViewBag.Nuevo == true)
+{//Entra si se quiere cargar una nueva Pelicula
+    <h4>Nueva Pelicula</h4>
+
+    using (Html.BeginForm("NuevaPelicula", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        @Html.TextBox("Nombre", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Nombre" })
+        @Html.ValidationMessage("Nombre")
+
+        @Html.TextBox("Descripcion", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Descripcion" })
+        @Html.ValidationMessage("Descripcion")
+
+        @Html.DropDownListFor(x => x.IdCalificacion, new SelectList(ViewBag.CalificacionId, "idCalificacion", "Nombre"), "--Seleccione Clasificacion--")
+        @Html.ValidationMessage("IdCalificacion")
+
+        @Html.DropDownListFor(x => x.IdGenero, new SelectList(ViewBag.GeneroId, "idGenero", "Nombre"), "--Seleccione Genero--")
+        @Html.ValidationMessage("IdGenero")
+
+        @Html.TextBoxFor(m => m.Imagen, new { type = "file" })
+        @Html.ValidationMessage("Imagen")
+
+        @Html.TextBox("Duracion", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Duracion" })
+        @Html.ValidationMessage("Duracion")
+
+        <button type="submit" class="btn btn-info">Guardar Pelicula</button>
+        <a href="~/Administrativo/Peliculas" class="btn btn-info">Cancelar</a>
+    }
+}
+else if (Model != null)
+{//entra si se quiere modificar una Pelicula
+    <h4>Modificar Pelicula</h4>
+
+    using (Html.BeginForm("ModificarPelicula", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    { 
+        @Html.Hidden("IdPelicula", Model.IdPelicula)
+
+        @Html.TextBox("Nombre", Model.Nombre, new { htmlAttributes = new { @class = "class" }, @placeholder = "Nombre" })
+        @Html.ValidationMessage("Nombre")
+
+        @Html.TextBox("Descripcion", Model.Descripcion , new { htmlAttributes = new { @class = "class" }, @placeholder = "Descripcion" })
+        @Html.ValidationMessage("Descripcion")
+
+        @Html.DropDownListFor(x => x.IdCalificacion, new SelectList(ViewBag.CalificacionId, "idCalificacion", "Nombre"), "--Seleccione Clasificacion--")
+        @Html.ValidationMessage("IdCalificacion")
+
+        @Html.DropDownListFor(x => x.IdGenero, new SelectList(ViewBag.GeneroId, "idGenero", "Nombre"), "--Seleccione Genero--")
+        @Html.ValidationMessage("IdGenero")
+
+        if (!string.IsNullOrEmpty(Model.Imagen))
+        {
+            <img src="@Model.Imagen" height="100" class="img-responsive" alt="@Model.Nombre" />
+        }
+        @Html.TextBox("myImagen","", new { type = "file" })
+
+        @Html.TextBox("Duracion", Model.Duracion, new { htmlAttributes = new { @class = "class" }, @placeholder = "Duracion" })
+        @Html.ValidationMessage("Duracion")
+
+        <button type="submit" class="btn btn-info">Modificar Pelicula</button>
+        <a href="~/Administrativo/Peliculas" class="btn btn-info">Cancelar</a>
+    }
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Duracion</td>
+            <td>Genero</td>
+            <td>Acciones</td>
+        </tr>
+    </thead>
+    @foreach (var pelicula in ViewBag.Listado as IEnumerable<Peliculas>)
+    {
+        <tr>
+            <td>@pelicula.Nombre </td>
+            <td>@pelicula.Duracion</td>
+            <td>@pelicula.Generos.Nombre</td>
+            <td><a href="~/Administrativo/ModificarPeliculaSeleccionada/@pelicula.IdPelicula" class="btn btn-info">Modificar</a></td>
+        </tr>
+    }
+</table>
+
 
 
