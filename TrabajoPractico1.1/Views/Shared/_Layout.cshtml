@@ -3,6 +3,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width" />
 		<title>@ViewBag.Title</title>
+		<link href="~/Styles/stylesheets2.css" rel="stylesheet" />
 		<link href="~/Styles/stylesheets.css" rel="stylesheet" />
 		@Styles.Render("~/Content/css")
 		@Scripts.Render("~/bundles/modernizr")
@@ -13,10 +14,10 @@
 			@RenderBody()
 		</main>
 		@Html.Partial("_footer")
-			@Scripts.Render("~/bundles/jquery")
-			@RenderSection("scripts", required: false)
-        <script src="~/Scripts/jquery-3.0.0.min.js"></script>
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+		@Scripts.Render("~/bundles/jquery")
+		@RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 	</body>
 </html>

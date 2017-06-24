@@ -10,8 +10,84 @@
 	width: 100%;
 }
 
-input {
-	font-size: 14px;
+td {
+    font-size: 15px;
+}
+
+thead {
+	font-weight: bold;
+}
+
+.cartelera {
+	padding: 10px;
+	background-color: red;
+	float: left;
+}
+
+.info-peli {
+  width: 100%;
+}
+
+.titulo {
+  background-color:whitesmoke;
+  padding: 5px;
+  text-align: center;
+  font-size: 14px;
+	font-weight: bold;
+  margin-top: 3%;
+	margin-bottom: 10px;
+}
+
+.clasificacion,
+.genero {
+	display: inline-block;
+}
+
+.clasificacion {
+  background-color:whitesmoke;
+  width: 28%;
+  text-align:center; 
+  font-size: medium;    
+	margin-right: 2%;
+	float: left;
+}
+
+.genero {
+	background-color: whitesmoke;
+	width: 70%;
+	position: relative;
+	text-align: center;  
+	font-size: medium;
+}
+
+.reservar {
+	background-color:#337ab7;
+	text-align:center;
+	font-size: medium;
+	margin-top: 4.5%;
+	position:relative;
+	color:whitesmoke;
+}
+
+.reservar2 {
+	background-color:#337ab7;
+	height:30px;
+	text-align:center;
+	font-size: medium;
+	margin-top:4.5%;
+	position:relative;
+	color:whitesmoke;   
+}
+
+.reservar a {
+	color: whitesmoke;
+}
+
+label input {
+	font-size: 16px;
+	font-weight: normal;
+	padding: 7px;
+	border: solid 1px gray;
 }
 
 input::placeholder {
@@ -89,5 +165,21 @@ main {
 }
 
 .formulario-reservas label {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
+
+.panel-de-administracion {
+	display: inline-block;
+	position: relative;
+}
+
+.btn-nueva-pelicula {
+	width: 20%;
+	margin-top: 20px;
+	display: inline-block;
+}
+
+.listado-peliculas {
+	margin-top: 20px;
+}
+

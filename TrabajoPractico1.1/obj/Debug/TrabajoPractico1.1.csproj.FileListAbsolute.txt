@@ -182,6 +182,5 @@ C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.Razor
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPages.resources.dll
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.dll
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.pdb

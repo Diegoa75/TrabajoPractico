@@ -1,14 +1,11 @@
-﻿
-@{
+﻿@{
 	Layout = "/Views/Shared/_Layout.cshtml";
 	ViewBag.Title = "Inicio";
 }
 
-
-
-<ul class="row">
-	<li class="col-sm-4"><a href="~/administrativo/Peliculas" class="btn btn-info">Gestion de Peliculas</a></li>
-	<li class="col-sm-4"><a href="~/administrativo/Sedes" class="btn btn-info">Gestion de Sedes</a></li>
-	<li class="col-sm-4"><a href="~/home/Login" class="btn btn-info">Gestion de Carteleras</a></li>
-	<li class="col-sm-4"><a href="~/home/Login" class="btn btn-info">Reporte de Reservas</a></li>
-</ul>
+<div class="panel-de-administracion">
+	<a href="~/administrativo/Peliculas" class="col-sm-3 btn btn-info">Gestion de Peliculas</a>
+	<a href="~/administrativo/Sedes" class="col-sm-3 btn btn-info">Gestion de Sedes</a>
+	<a href="~/home/Login" class="col-sm-3 btn btn-info">Gestion de Carteleras</a>
+	<a href="~/home/Login" class="col-sm-3 btn btn-info">Reporte de Reservas</a>
+</div>
