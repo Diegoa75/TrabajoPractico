@@ -32,7 +32,13 @@ namespace TrabajoPractico1._1.Controllers
         public ActionResult NuevaSede(Sedes nuevaSede)
         {
             if (ModelState.IsValid)
-            { 
+            {
+                Sedes sede = new Sedes();
+                sede = (from p in ctx.Sedes
+                        where (p.Nombre == nuevaSede.Nombre || p.Direccion == nuevaSede.Direccion)
+                        select p).FirstOrDefault();
+                if (sede != null)
+                    return View("Sede Repetida");
                 ctx.Sedes.Add(nuevaSede);
                 ctx.SaveChanges();
             }
@@ -90,23 +96,34 @@ namespace TrabajoPractico1._1.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+                Peliculas peli = new Peliculas();
+                peli = (from p in ctx.Peliculas
+                        where (p.Nombre == nuevaPelicula.Nombre && p.IdGenero == nuevaPelicula.IdGenero)
+                        select p).FirstOrDefault();
+                if (peli != null)
+                    return View("Pelicula Repetida");
+                else
                 {
-                    //uso el nombre de la pelicula  para crear un nombre significativo
-                    string nombrePelicula = nuevaPelicula.Nombre;
-                    //Guardar Imagen
-                    string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombrePelicula);
-                    nuevaPelicula.Imagen = pathRelativoImagen;
+
+                    if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+                    {
+                        //uso el nombre de la pelicula  para crear un nombre significativo
+                        string nombrePelicula = nuevaPelicula.Nombre;
+                        //Guardar Imagen
+                        string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombrePelicula);
+                        nuevaPelicula.Imagen = pathRelativoImagen;
+                    }
+                    nuevaPelicula.FechaCarga = System.DateTime.Now;
+
+                    ctx.Peliculas.Add(nuevaPelicula);
+                    ctx.SaveChanges();
+
                 }
-                nuevaPelicula.FechaCarga = System.DateTime.Now;
-
-                ctx.Peliculas.Add(nuevaPelicula);
-                ctx.SaveChanges();
-
             }
-            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
+                ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
 
-            return View("Peliculas");
+                return View("Peliculas");
+            
         }
 
         [HttpPost]

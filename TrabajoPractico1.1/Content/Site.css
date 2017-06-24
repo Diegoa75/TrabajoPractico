@@ -111,6 +111,11 @@ textarea {
 	color:whitesmoke;
 }
 
+.pelicula {
+	width: 20%;
+    height: 30%;
+}
+
 .reservar2 {
 	 background-color:#337ab7;
      height:30px;
@@ -128,3 +133,8 @@ textarea {
  {
 	color: whitesmoke;
 }
+
+    table thead {
+      color: black;
+      background-color:  #ebcccc;
+    }

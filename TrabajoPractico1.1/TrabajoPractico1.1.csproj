@@ -404,6 +404,8 @@
     <Content Include="Views\administrativo\Peliculas.cshtml" />
     <Content Include="Views\peliculas\confirmar.cshtml" />
     <Content Include="Views\administrativo\Sedes.cshtml" />
+    <Content Include="Views\administrativo\Pelicula repetida.cshtml" />
+    <Content Include="Views\administrativo\Sede Repetida.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

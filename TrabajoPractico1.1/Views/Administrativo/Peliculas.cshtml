@@ -7,8 +7,12 @@
 
 
 <h2>Gestion de Peliculas</h2>
-
-<a href="~/Administrativo/CrearNuevaPelicula" class="btn btn-info">Nueva Pelicula</a>
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+<a href="~/Administrativo/CrearNuevaPelicula"  class="btn btn-danger">Nueva Pelicula</a>
+</div>
+<div class="col-sm-4"></div>
+<br/><br/><br/><br/><br/><br/><br/><br/>
 
 @if (ViewBag.Nuevo == true)
 {//Entra si se quiere cargar una nueva Pelicula
@@ -73,22 +77,27 @@ else if (Model != null)
     }
 }
 
-<table class="table table-hover">
+<table class="table table-hover" >
     <thead>
         <tr>
-            <td>Nombre</td>
-            <td>Duracion</td>
-            <td>Genero</td>
-            <td>Acciones</td>
+            <td class="col-sm-2" >Nombre</td>
+            <td class="col-sm-1">Duracion</td>
+            <td class="col-sm-1">Genero</td>
+            <td class="col-sm-2">Imagen</td>
+            <td class="col-sm-1">Acciones</td>
         </tr>
     </thead>
     @foreach (var pelicula in ViewBag.Listado as IEnumerable<Peliculas>)
     {
         <tr>
-            <td>@pelicula.Nombre </td>
-            <td>@pelicula.Duracion</td>
-            <td>@pelicula.Generos.Nombre</td>
-            <td><a href="~/Administrativo/ModificarPeliculaSeleccionada/@pelicula.IdPelicula" class="btn btn-info">Modificar</a></td>
+            <td class="col-sm-2">@pelicula.Nombre </td>
+            <td class="col-sm-1">@pelicula.Duracion</td>
+            <td class="col-sm-1">@pelicula.Generos.Nombre</td>
+         
+           <td class="col-sm-2"> <a href="@pelicula.Imagen" target="_blank"><img class="pelicula" src="@pelicula.Imagen"/></a></td>
+            
+
+            <td class="col-sm-1"><a href="~/Administrativo/ModificarPeliculaSeleccionada/@pelicula.IdPelicula" class="btn btn-info">Modificar</a></td>
         </tr>
     }
 </table>
