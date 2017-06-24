@@ -24,7 +24,8 @@ namespace TrabajoPractico.Controllers
             { 
                 ViewBag.Error = TempData["Error"] as string;
             }
-            return View();
+
+					return View();
         }
 
     }

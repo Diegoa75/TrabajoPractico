@@ -10,6 +10,14 @@
 	width: 100%;
 }
 
+input {
+	font-size: 14px;
+}
+
+input::placeholder {
+	color: gray;
+}
+
 ul, li {
 	list-style-type: none;
 	margin: 0px;
@@ -78,4 +86,8 @@ main {
 .formulario-reservas .btn-block {
 	width: calc(100% - 30px);
 	left: 15px;
+}
+
+.formulario-reservas label {
+  margin-bottom: 20px;
 }

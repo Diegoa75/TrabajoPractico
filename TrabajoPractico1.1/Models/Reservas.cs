@@ -20,12 +20,12 @@ namespace TrabajoPractico1._1
             public System.DateTime FechaHoraInicio { get; set; }
 
             [EmailAddress(ErrorMessage = "El Email ingresado no es válido")]
-            [Required(ErrorMessage = "el Email es un dato requerido")]
+            [Required(ErrorMessage = "El Email es un dato requerido")]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "el Tipo de documento es un dato requerido")]
+            [Required(ErrorMessage = "El Tipo de documento es un dato requerido")]
             public int IdTipoDocumento { get; set; }
-            [RegularExpression("^\\d+$", ErrorMessage = "el documento debe contener sólo números.")]
+            [RegularExpression("^\\d+$", ErrorMessage = "El documento debe contener sólo números.")]
             [StringLength(10, ErrorMessage = "El número de documento no puede exceder los 10 caracteres")]
             [Required(ErrorMessage = "Debe ingresar su número de documento")]
             public string NumeroDocumento { get; set; }
