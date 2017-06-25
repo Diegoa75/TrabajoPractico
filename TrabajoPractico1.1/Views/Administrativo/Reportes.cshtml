@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Reportes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using TrabajoPractico1._1
+@model List<Reservas>
+
+<h2>Reportes</h2>
+
+<form method="post" action="~/administrativo/ArmarReporte">
+    <label>Fecha inicio:</label>   <input type="date" name="fechaInicio" />
+    <label>Fecha fin:</label>   <input type="date" name="fechaFin" />
+    <button type="submit">Buscar</button>
+</form>
+    
+    @Html.Partial("_ResultadosReportes", Model)
+

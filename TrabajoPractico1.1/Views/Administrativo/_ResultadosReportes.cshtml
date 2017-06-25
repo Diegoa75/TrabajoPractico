@@ -1,0 +1,48 @@
+﻿@using TrabajoPractico1._1
+@model List<Reservas>
+
+    @if(ViewBag.error != null)
+    {
+        <div>
+            <h5>@(ViewBag.error)</h5>
+        </div>
+    }
+
+    @if(ViewBag.IntervaloFechas != null)
+    {
+        <div>
+            <h5>@(ViewBag.IntervaloFechas)</h5>
+        </div>
+    }
+    <div>
+        <table class="table table-hover">
+                <tr>
+                    <td>Sede</td>
+                    <td>Versión</td>
+                    <td>Nombre de la pelicula</td>
+                    <td>Precio</td>
+                </tr>
+
+            @if (Model != null && Model.Any()) { 
+    
+                foreach (var reserva in Model)
+                {
+                    <tr>
+                        <td>@reserva.Sedes.Nombre</td>
+                        <td>@reserva.Versiones.Nombre</td>
+                        <td>@reserva.Peliculas.Nombre</td>
+                        <td>@reserva.Sedes.PrecioGeneral</td>
+                    </tr>
+                }
+    
+            } else {
+                <tr>
+                    <td>Sin resultados</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+
+        </table>
+    </div>

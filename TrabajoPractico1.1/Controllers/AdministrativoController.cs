@@ -1,6 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using TrabajoPractico1._1.Models.Servicios;
+using TrabajoPractico1._1.Servicios;
+
 
 namespace TrabajoPractico1._1.Controllers
 {
@@ -56,6 +60,12 @@ namespace TrabajoPractico1._1.Controllers
                 sedeEncontrada.Nombre = sedeModificada.Nombre;
                 sedeEncontrada.Direccion = sedeModificada.Direccion;
                 sedeEncontrada.PrecioGeneral = sedeModificada.PrecioGeneral;
+                Sedes sede = new Sedes();
+                sede = (from p in ctx.Sedes
+                        where (p.Nombre == sedeModificada.Nombre || p.Direccion == sedeModificada.Direccion)
+                        select p).FirstOrDefault();
+                if (sede != null)
+                    return View("Sede Repetida");
                 ctx.SaveChanges();
             }
 
@@ -130,7 +140,7 @@ namespace TrabajoPractico1._1.Controllers
         public ActionResult ModificarPelicula(Peliculas peliculaModificada, string myImagen)
         {
             Peliculas peliculaEncontrada = ctx.Peliculas.Find(peliculaModificada.IdPelicula);
-
+            Peliculas peli = new Peliculas();
             if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
             {
                 //TODO: Agregar validacion para confirmar que el archivo es una imagen
@@ -157,6 +167,13 @@ namespace TrabajoPractico1._1.Controllers
                 peliculaEncontrada.IdCalificacion = peliculaModificada.IdCalificacion;
                 peliculaEncontrada.IdGenero = peliculaModificada.IdGenero;
                 peliculaEncontrada.Duracion = peliculaModificada.Duracion;
+
+                
+                peli = (from p in ctx.Peliculas
+                        where (p.Nombre == peliculaModificada.Nombre && p.IdGenero == peliculaModificada.IdGenero)
+                        select p).FirstOrDefault();
+                if (peli != null)
+                    return View("Pelicula Repetida");
 
                 ctx.SaveChanges();
             }
@@ -195,6 +212,48 @@ namespace TrabajoPractico1._1.Controllers
             }
             return RedirectToAction("Login", "home");
 
+        }
+
+        public ActionResult Reportes()
+        {
+            ViewBag.Listado = ctx.Sedes.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ArmarReporte(FormCollection formulario)
+        {
+            sReportes reservaServ = new sReportes();
+            DateTime fechaInicio;
+            DateTime fechaFin;
+            TimeSpan ts;
+
+            try
+            {
+                fechaInicio = Convert.ToDateTime(formulario["fechaInicio"]);
+                fechaFin = Convert.ToDateTime(formulario["fechaFin"]);
+                ts = fechaFin - fechaInicio;
+            }
+            catch (Exception)
+            {
+                ViewBag.error = "No se cargaron todos los datos";
+                return View("Reportes");
+            }
+
+            List<Reservas> reservas = new List<Reservas>();
+
+            ViewBag.error = reservaServ.validarReservas(ts);
+
+            if (ViewBag.error != null)
+            {
+                return View("Reportes");
+            }
+
+            reservas = reservaServ.buscarReservasEntreFechas(fechaInicio, fechaFin);
+
+            ViewBag.IntervaloFechas = "El intervalo de fechas buscado es del " + fechaInicio.ToShortDateString() + " hasta " + fechaFin.ToShortDateString() + "";
+
+            return View("Reportes", reservas);
         }
     }
 }

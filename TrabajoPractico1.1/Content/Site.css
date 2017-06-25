@@ -59,7 +59,8 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
-
+/* Styles for otros
+-----------------------------------------------------------*/
 .cartelera {
 	padding: 10px;
 	background-color: red;
