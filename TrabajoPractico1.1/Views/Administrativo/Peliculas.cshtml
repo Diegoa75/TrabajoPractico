@@ -81,8 +81,10 @@ else if (Model != null)
 		</label>
 
 		<label>
-			if (!string.IsNullOrEmpty(Model.Imagen))
-			{ <img src="@Model.Imagen" height="100" class="img-responsive" alt="@Model.Nombre" /> }
+			@{
+				if (!string.IsNullOrEmpty(Model.Imagen))
+				{ <img src="@Model.Imagen" height="100" class="img-responsive" alt="@Model.Nombre" /> }
+			}
 			@Html.TextBox("myImagen", "", new { type = "file" })
 		</label>
 
