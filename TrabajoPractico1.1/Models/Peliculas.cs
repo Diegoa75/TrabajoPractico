@@ -2,10 +2,10 @@
 
 namespace TrabajoPractico1._1
 {
-    [MetadataType(typeof(PeliculaMetadata))]
+    [MetadataType(typeof(PeliculasMetadata))]
     public partial class Peliculas
     {
-        public class PeliculaMetadata
+        public class PeliculasMetadata
         {
             [Required(ErrorMessage = "El nombre es requerido")]
             public string Nombre { get; set; }
