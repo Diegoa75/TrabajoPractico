@@ -184,7 +184,6 @@ C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPa
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPages.Razor.resources.dll
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.dll
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.pdb
-<<<<<<< HEAD
 C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\TrabajoPractico1.1\bin\TrabajoPractico1.1.dll
 C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\TrabajoPractico1.1\bin\TrabajoPractico1.1.pdb
 C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\TrabajoPractico1.1\bin\Antlr3.Runtime.dll
@@ -227,6 +226,46 @@ C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\Trabajo
 C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
 C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.dll
 C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.pdb
-=======
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
->>>>>>> 4e3d85a82bd46b896f510506cded59b10fceb07f
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\TrabajoPractico1.1.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\TrabajoPractico1.1.pdb
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\Antlr3.Runtime.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\EntityFramework.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\Microsoft.Web.Mvc.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\Newtonsoft.Json.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Net.Http.Formatting.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Http.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Http.WebHost.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Mvc.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Optimization.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Providers.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Razor.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.WebPages.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.WebPages.Razor.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\WebGrease.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\EntityFramework.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\Newtonsoft.Json.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Net.Http.Formatting.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Http.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Http.WebHost.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Mvc.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.Razor.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.WebPages.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\System.Web.WebPages.Razor.xml
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\EntityFramework.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Net.Http.Formatting.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.Http.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.Http.WebHost.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.Mvc.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.Optimization.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.Providers.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.Razor.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPages.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.dll
+C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.pdb
