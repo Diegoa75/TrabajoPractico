@@ -8,16 +8,38 @@
 {
 	<h2>@ViewBag.Error</h2>
 }
+
+<br/><br/><br/><br/>
+<div class="container-fluid">
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+
+
+                  
+     <div class="panel panel-info">             
+        <div class="panel-primary">
+	    <div class="container-fluid panel-heading"><h5>Ingresar Credenciales</h5></div></div>
 <form action="/Administrativo/VerificarUsuario" method="post" class="formulario-reservas">
+    
+  
 	@Html.AntiForgeryToken()
 	@Html.ValidationSummary(false, "", new { @class = "text-danger" })
-	<label class="input-text">
-		@Html.TextBoxFor(model => model.NombreUsuario, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Usuario" })
-	</label>
-	<label class="input-text">
-		@Html.TextBoxFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Contraseña" })
-	</label>
-	<button type="submit" class="btn btn-info btn-lg btn-block">Login</button>
-</form>
- 
+    <br /><br />
 
+	 <div class="form-control">
+		@Html.TextBoxFor(model => model.NombreUsuario, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Usuario" })
+	</div>
+    <br /><br />
+	 <div class="form-control">
+		@Html.TextBoxFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Contraseña" })
+	</div>
+
+    <br /><br />
+	<button type="submit" class="btn btn-info">Login</button>   
+</form>
+
+          
+</div>
+</div>
+<div class="col-sm-4"></div>
+</div>
