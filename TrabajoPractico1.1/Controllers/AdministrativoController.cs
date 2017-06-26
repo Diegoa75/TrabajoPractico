@@ -256,6 +256,13 @@ namespace TrabajoPractico1._1.Controllers
             return View("Reportes", reservas);
         }
 
+		public ActionResult carteleras ()
+		{
+			List<Carteleras> listado = ctx.Carteleras.ToList();
+			ViewBag.carteleras = listado;
+			return View();
+		}
+
 		public ActionResult crearCartelera()
 		{
 			List<Sedes> sedes = ctx.Sedes.ToList();
@@ -289,5 +296,21 @@ namespace TrabajoPractico1._1.Controllers
 			return View("crearCartelera", carteleras);
 		}
 
+		public ActionResult eliminarCartelera (int id)
+		{
+			Carteleras aBorrar = new Carteleras();
+			var misCarteleras = ctx.Carteleras.ToList();
+			foreach (Carteleras c in misCarteleras)
+			{
+				if (c.IdCartelera == id)
+				{
+					aBorrar = c;
+					misCarteleras.Remove(aBorrar);
+					ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
+				}
+			}
+			ViewBag.mensajeBorrar = "El registro no se ha podido borrar.";
+			return View("carteleras");
+		}
 	}
 }

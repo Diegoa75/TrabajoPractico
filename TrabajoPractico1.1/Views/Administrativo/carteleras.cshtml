@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "carteleras";
+}
+
+<h2>Listado de carteleras</h2>
+@{ 
+	if (ViewBag.mensajeBorrar != null) {
+		<p class="mensaje-notificacion">ViewBag.mensajeBorrar</p>
+	}
+}
+<a href="~/administrativo/crearCartelera">Agregar nueva cartelera</a>
+<table class="table table-hover listado-cartelera">
+	<thead>
+		<tr>
+			<td>Sede</td>
+			<td>Pelicula</td>
+			<td>Hora de Inicio</td>
+			<td>Fecha de Inicio</td>
+			<td>Fecha de Fin</td>
+			<td>Sala</td>
+			<td>Version</td>
+			<td>Dias</td>
+			<td>Fecha de carga</td>
+		</tr>
+	</thead>
+	@foreach (var c in ViewBag.carteleras)
+	{
+		<tr>
+			<td>@c.IdSede</td>
+			<td>@c.IdPelicula</td>
+			<td>@c.HoraInicio</td>
+			<td>@c.FechaInicio</td>
+			<td>@c.FechaFin</td>
+			<td>@c.NumeroSala</td>
+			<td>@c.FechaInicio</td>
+			<td>
+				@{
+					string l = "";
+					string m = "";
+					string mi = "";
+					string j = "";
+					string v = "";
+					string s = "";
+					string d = "";
+					if (c.Lunes != false) { l = "Lunes"; }
+					@l
+
+					if (c.Martes != false) { m = "Martes"; }
+					@m
+
+					if (c.Miercoles != false) { mi = "Miercoles"; }
+					@mi
+
+					if (c.Jueves != false) { j = "Jueves"; }
+					@j
+
+					if (c.Viernes != false) { v = "Viernes"; }
+					@v
+
+					if (c.Sabado != false) { s = "Sábado"; }
+					@s
+
+					if (c.Domingo != false) { d = "Domingo"; }
+					@d
+				}
+			</td>
+			<td>@c.FechaCarga</td>
+			<td><a href="~/administrativo/crearCartelera/@c.IdCartelera" class="btn btn-info">Modificar</a></td>
+			<td><a href="~/administrativo/eliminarCartelera/@c.IdCartelera" class="btn btn-info">Eliminar</a></td>
+		</tr>
+	}
+</table>

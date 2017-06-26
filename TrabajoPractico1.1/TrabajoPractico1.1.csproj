@@ -408,6 +408,7 @@
     <Content Include="Views\peliculas\confirmar.cshtml" />
     <Content Include="Views\administrativo\Sedes.cshtml" />
     <Content Include="Views\administrativo\crearCartelera.cshtml" />
+    <Content Include="Views\administrativo\carteleras.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
