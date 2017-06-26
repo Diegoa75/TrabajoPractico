@@ -409,6 +409,8 @@
     <Content Include="Views\administrativo\Sedes.cshtml" />
     <Content Include="Views\administrativo\crearCartelera.cshtml" />
     <Content Include="Views\administrativo\carteleras.cshtml" />
+    <Content Include="Views\administrativo\_ResultadosReportes.cshtml" />
+    <Content Include="Views\administrativo\Reportes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />

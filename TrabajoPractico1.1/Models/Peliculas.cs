@@ -24,6 +24,7 @@ namespace TrabajoPractico1._1
             public int IdGenero { get; set; }
 
             [Required(ErrorMessage = "La duracion de la pelicula es un dato requerido")]
+            [Range(1, 90, ErrorMessage = "La duración de la Pelicula no es válida")]
             public int Duracion { get; set; }
 
             [Required]

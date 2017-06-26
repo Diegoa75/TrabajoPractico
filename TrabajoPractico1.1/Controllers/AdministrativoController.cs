@@ -320,7 +320,7 @@ namespace TrabajoPractico1._1.Controllers
         }
 
         [HttpPost]
-        public ActionResult ArmarReporte(FormCollection formulario)
+        public ActionResult Reporte(FormCollection formulario)
         {
             sReportes reservaServ = new sReportes();
             DateTime fechaInicio;
