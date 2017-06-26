@@ -177,6 +177,7 @@
     <Compile Include="Models\Servicios\sInicio.cs" />
     <Compile Include="Models\Servicios\sRegistrar.cs" />
     <Compile Include="Models\Servicios\sString.cs" />
+    <Compile Include="Models\Servicios\sUsuarios.cs" />
     <Compile Include="Models\Usuarios.cs" />
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />

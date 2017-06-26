@@ -311,19 +311,27 @@ namespace TrabajoPractico1._1.Controllers
 
 		public ActionResult eliminarCartelera (int id)
 		{
-			Carteleras aBorrar = new Carteleras();
-			var misCarteleras = ctx.Carteleras.ToList();
-			foreach (Carteleras c in misCarteleras)
+			List<Carteleras> misCarteleras = ctx.Carteleras.ToList();
+
+			Carteleras aBorrar = (from c in ctx.Carteleras
+														where c.IdCartelera == id
+														select c).FirstOrDefault();
+			if (aBorrar != null)
 			{
-				if (c.IdCartelera == id)
-				{
-					aBorrar = c;
-					misCarteleras.Remove(aBorrar);
-					ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
-				}
+				ctx.Carteleras.Remove(aBorrar);
+				ctx.SaveChanges();
+
+				ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
 			}
-			ViewBag.mensajeBorrar = "El registro no se ha podido borrar.";
+
+			ViewBag.carteleras = ctx.Carteleras.ToList();
 			return View("carteleras");
+		}
+
+		public ActionResult modificarCartelera (Carteleras c)
+		{
+
+			return View("crearCartelera");
 		}
 
 		private String usuarioEnSesion()
