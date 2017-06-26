@@ -12,8 +12,6 @@ namespace TrabajoPractico1._1.Controllers
     {
         ContextoPractico ctx = new ContextoPractico();
         //Administrativo/
-
-
                                             //LOGIN
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -57,9 +55,9 @@ namespace TrabajoPractico1._1.Controllers
                 {
                     return true;
                 }
-
             }
-            Session["Action"] = action;
+
+						Session["Action"] = action;
             return false;
         }
 
@@ -260,7 +258,7 @@ namespace TrabajoPractico1._1.Controllers
                 //consulta si existe otra pelicula con el mismo nombre
                 var peliculaExistente = ctx.Peliculas.Where(p => p.Nombre == peliculaModificada.Nombre 
                                                             && p.IdPelicula != peliculaModificada.IdPelicula)
-                                                            .FirstOrDefault(); 
+                                                            .FirstOrDefault();
 
                 if (peliculaExistente != null)
                 {

@@ -411,6 +411,7 @@
     <Content Include="Views\administrativo\carteleras.cshtml" />
     <Content Include="Views\administrativo\_ResultadosReportes.cshtml" />
     <Content Include="Views\administrativo\Reportes.cshtml" />
+    <Content Include="Views\Shared\_menuAdministrativo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />

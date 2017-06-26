@@ -84,7 +84,7 @@ namespace TrabajoPractico1._1.Servicios
                         dia = (int)Inicio.DayOfWeek;
                         if (Dias[dia] == true)
                         {
-                            reserva.Dias.Add(Inicio.ToString("dddd") + " " + Inicio.ToShortDateString());
+                            reserva.Dias.Add(Inicio.ToString("dddd") + " " + Inicio.ToString("dd-MM-yyyy"));
                         }
                         Inicio = Inicio.AddDays(1);
                     }
