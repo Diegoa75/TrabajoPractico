@@ -14,7 +14,7 @@ namespace TrabajoPractico1._1.Controllers
         //Administrativo/
 
 
-                                                //LOGIN
+                                            //LOGIN
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult VerificarUsuario(Usuarios usuario)
@@ -44,7 +44,7 @@ namespace TrabajoPractico1._1.Controllers
             return RedirectToAction("Login", "home");
 
         }
-                                                //VERIFICAR SESION
+                                            //VERIFICAR SESION
         public Boolean comprobarUsuario(String action)
         {
             //si el usuario existe devuelve true, sino crea la variable de sesion con el action al que tiene que volver
@@ -63,7 +63,7 @@ namespace TrabajoPractico1._1.Controllers
             return false;
         }
 
-                                        //INICIO
+                                            //INICIO
         public ActionResult Inicio()
         {
             if (comprobarUsuario("Inicio"))
@@ -72,7 +72,7 @@ namespace TrabajoPractico1._1.Controllers
                 return RedirectToAction("Login", "home");
         }
 
-                                        //SEDES
+                                            //SEDES
         public ActionResult Sedes()
         {
             if (comprobarUsuario("Sedes"))
@@ -172,9 +172,7 @@ namespace TrabajoPractico1._1.Controllers
         }
 
 
-
-
-                                        //PELICULAS
+                                            //PELICULAS
         public ActionResult Peliculas()
         {
             if (comprobarUsuario("Peliculas"))
@@ -312,7 +310,6 @@ namespace TrabajoPractico1._1.Controllers
         {
             if (comprobarUsuario("Reportes"))
             {
-                ViewBag.Listado = ctx.Sedes.ToList();
                 return View();
             }
             else

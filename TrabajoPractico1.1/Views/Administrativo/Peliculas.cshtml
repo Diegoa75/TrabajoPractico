@@ -7,21 +7,23 @@
 <!--Si hubo un error al agregar o modificar pelicula-->
 @if (ViewBag.Error != null)
 {
-    <h2>@ViewBag.Error</h2>
+    <div class="alert alert-danger text-center">
+        <h5>@ViewBag.Error</h5>
+    </div>
 }
 
 @if (ViewBag.Nuevo == true)
 {//Entra si se quiere cargar una nueva Pelicula
-
-    using (Html.BeginForm("NuevaPelicula", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="col-md-5 col-md-offset-3 ">
-            <div class="panel-body panel panel-info">
-                <div class="form-group panel-primary">
-                    <div class="text-center panel-heading">
-                        <h5>Nueva Pelicula</h5>
-                    </div>
+    
+    <div class="col-md-6 col-md-offset-3 ">
+        <div class="panel-body panel panel-info">
+            <div class="form-group panel-primary">
+                <div class="text-center panel-heading">
+                    <h5>Nueva Pelicula</h5>
                 </div>
+            </div>
+            @using (Html.BeginForm("NuevaPelicula", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
                 <div class="form-group">
                     <div class="form-control">
                         @Html.TextBox("Nombre", "", new { @placeholder = "Nombre" })
@@ -60,24 +62,22 @@
                 </div>
                 <button type="submit" class="btn btn-info">Guardar Pelicula</button> <br /><br />
                 <a href="~/Administrativo/Peliculas" class="btn btn-info">Cancelar</a> <br /><br />
-            </div>
+            }
         </div>
-    }
-
+    </div>
 }
 else if (Model != null)
-{
-    //entra si se quiere modificar una Pelicula
+{//entra si se quiere modificar una Pelicula
 
-    using (Html.BeginForm("ModificarPelicula", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="col-md-5 col-md-offset-3">
-            <div class="panel-body panel panel-info">
-                <div class="form-group panel-primary">
-                    <div class="text-center panel-heading">
-                        <h5>Modificar Pelicula</h5>
-                    </div>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel-body panel panel-info">
+            <div class="form-group panel-primary">
+                <div class="text-center panel-heading">
+                    <h5>Modificar Pelicula</h5>
                 </div>
+            </div>
+            @using (Html.BeginForm("ModificarPelicula", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
                 @Html.Hidden("IdPelicula", Model.IdPelicula)
 
                 <div class="form-group">
@@ -94,7 +94,7 @@ else if (Model != null)
                 </div>
                 <div class="form-group">
                     <div class="form-control">
-                       @Html.DropDownListFor(x => x.IdCalificacion, new SelectList(ViewBag.CalificacionId, "idCalificacion", "Nombre"), "--Seleccione Clasificacion--")
+                        @Html.DropDownListFor(x => x.IdCalificacion, new SelectList(ViewBag.CalificacionId, "idCalificacion", "Nombre"), "--Seleccione Clasificacion--")
                     </div>
                     @Html.ValidationMessage("IdCalificacion")
                 </div>
@@ -120,19 +120,20 @@ else if (Model != null)
 
                 <button type="submit" class="btn btn-info">Modificar Pelicula</button><br /><br />
                 <a href="~/Administrativo/Peliculas" class="btn btn-info">Cancelar</a>
-
-            </div>
+            }
         </div>
-    }
+    </div>
+    
 }
 else
-{
-    //si no carga el formulario de alta o modificacion, muestra el boton de alta
+{//si no carga el formulario de alta o modificacion, muestra el boton de alta
+    
     <div class="form-group navbar-right col-sm-4">
         <a href="~/Administrativo/NuevaPelicula" class="btn btn-danger">Nueva Pelicula</a>
     </div>
 }
 
+@*Listado de peliculas cargadas*@
 <table class="listado-peliculas table table-hover">
     <thead>
         <tr>

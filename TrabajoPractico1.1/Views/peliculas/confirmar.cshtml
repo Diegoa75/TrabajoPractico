@@ -8,51 +8,76 @@
 }
 
 @if (ViewBag.confirmacion != null)
-{//Entra cuando trae los datos de confirmacion   
-    <form action="/peliculas/confirmarPelicula" method="post" class="form-group">
-        @Html.AntiForgeryToken()
-        <div >
-            @Html.TextBox("Email", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Email" })
-            @Html.ValidationMessage("Email")
+{//Entra cuando trae los datos de confirmacion
+    <div class="col-md-5 col-md-offset-3">
+        <div class="panel-body panel panel-info">
+            <div class="form-group panel-primary">
+                <div class="text-center panel-heading">
+                    <h5>Reserva</h5>
+                </div>
+            </div>
+            @{vConfirmacion Datos = ViewBag.confirmacion as vConfirmacion;}
+            <div class="form-group">
+                <img class="pelicula" src=@Datos.pelicula.Imagen />
+                <div class="col-lg-8 ">
+                    <div id="titulo">@Datos.pelicula.Nombre </div>
+                    <div id="descripcion">@Datos.pelicula.Descripcion</div>
+                    <div id="genero">@Datos.pelicula.Generos.Nombre</div>
+                    <div id="clasificacion">@Datos.pelicula.Calificaciones.Nombre</div>
+                    <div id="precio">$ @Datos.cartelera.Sedes.PrecioGeneral</div>
+                    <div id="version">@Datos.cartelera.Versiones.Nombre</div>
+                    <div id="sede">@Datos.cartelera.Sedes.Nombre </div>
+                    <div id="dia">@Datos.FechaHoraInicio </div>
+                </div>
 
-            @Html.DropDownList("IdTipoDocumento", new SelectList(ViewBag.TiposDocumentos, "IdTipoDocumento", "Descripcion"))
-            @Html.ValidationMessage("IdTipoDocumento")
+            </div>
+            @using (Html.BeginForm("confirmarPelicula", "peliculas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("Email", "", new { @placeholder = "Email" })
+                    </div>
+                    @Html.ValidationMessage("Email")
+                </div>
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.DropDownList("IdTipoDocumento", new SelectList(ViewBag.TiposDocumentos, "IdTipoDocumento", "Descripcion"))
+                    </div>
+                    @Html.ValidationMessage("IdTipoDocumento")
+                </div>
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("NumeroDocumento", "", new { @placeholder = "Documento" })
+                    </div>
+                    @Html.ValidationMessage("NumeroDocumento")
+                </div>
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("CantidadEntradas", "", new { @placeholder = "Entradas" })
+                    </div>
+                    @Html.ValidationMessage("CantidadEntradas")
+                </div>
 
-            @Html.TextBox("NumeroDocumento", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Documento" })
-            @Html.ValidationMessage("NumeroDocumento")
-
-            @Html.TextBox("CantidadEntradas", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Entradas" })
-            @Html.ValidationMessage("CantidadEntradas")
+                <input type="submit" value="Confirmar Compra" class="btn btn-info btn-lg btn-block" /><br /><br />
+            }
+            <div class="form-group">
+                <div class="alert alert-info text-center">
+                    <h5>la reserva estará vigente hasta 1hr antes de la función elegida y deberá ser confirmada en el cine seleccionado</h5>
+                </div>
+            </div>
         </div>
-        <hr />
-
-        <input type="submit" value="Confirmar Compra" class="btn btn-info btn-lg btn-block" />
-    </form>
-
-    vConfirmacion Datos = ViewBag.confirmacion as vConfirmacion;
-
-    <div class="info-peli">
-        <div id="titulo">@Datos.pelicula.Nombre </div>
-        <div id="descripcion">@Datos.pelicula.Descripcion</div>
-        <div id="genero">@Datos.pelicula.Generos.Nombre</div>
-        <div id="clasificacion">@Datos.pelicula.Calificaciones.Nombre</div>
-        <div id="precio">$ @Datos.cartelera.Sedes.PrecioGeneral</div>
-        <div id="version">@Datos.cartelera.Versiones.Nombre</div>
-        <div id="sede">@Datos.cartelera.Sedes.Nombre </div>
-        <div id="dia">@Datos.FechaHoraInicio </div>
     </div>
-    
-    <h4>la reserva estará vigente hasta 1hr antes de la función elegida y deberá ser confirmada en el cine seleccionado</h4>
-
 }
 else if (ViewBag.CodigoReserva != null)
 {//Entra si Se guardo La reserva
-    <div>
-        <h5>Codigo Reserva: @ViewBag.CodigoReserva</h5>
-        <h5>Importe Total: @ViewBag.Precio</h5>
-        <h5>Cantidad Entradas: @ViewBag.CantidadEntradas</h5>
+    <div class="form-group">
+        <div class="alert alert-info text-center">
+            <h5>Codigo Reserva: @ViewBag.CodigoReserva</h5>
+            <h5>Importe Total: @ViewBag.Precio</h5>
+            <h5>Cantidad Entradas: @ViewBag.CantidadEntradas</h5>
+            <h4>la reserva estará vigente hasta 1hr antes de la función elegida y deberá ser confirmada en el cine seleccionado</h4>
+        </div>
     </div>
-    <h4>la reserva estará vigente hasta 1hr antes de la función elegida y deberá ser confirmada en el cine seleccionado</h4>
-
-    <a href="/home/Inicio" > <div class="reservar2">finalizar</div> </a>
+    <a href="/home/Inicio" class="col-sm-2  btn btn-primary">finaliza</a>
 }

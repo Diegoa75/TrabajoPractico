@@ -6,39 +6,52 @@
 }
 
 <section>
-    @using (Html.BeginForm("reserva", "peliculas", FormMethod.Post))
+    @if (Model.Versiones.Count() > 0)
     {
-        if (Model.Versiones.Count() > 0)
-        {
-            <h2>Bienvenido al panel de reservas</h2>
-            @Html.HiddenFor(x => x.IdPelicula, Model.IdPelicula)
-
-        <p>
-            @Html.DropDownListFor(x => x.idVersion, new SelectList(Model.Versiones, "IdVersion", "Nombre"), "--Seleccione region--")
-        </p>
-
-        <p>
-            @Html.DropDownListFor(x => x.idSede, new SelectList(Model.Sedes, "IdSede", "Nombre"), "--Seleccione Sede--")
-        </p>
-
-        <p>
-            @Html.DropDownListFor(x => x.Dia, new SelectList(Model.Dias), "--Seleccione Dia--")
-        </p>
-
-        <p>
-            @Html.DropDownListFor(x => x.FechaHora, new SelectList(Model.Horarios), "--Seleccione Hora--")
-        </p>
-
-        <button type="submit" name="btnComprar" id="btnComprar">Comprar Entradas</button>
-        }
-        else
-        {
-            <h3>La Pelicula Seleccionada no Tiene funciones disponibles</h3>
-            <a href="/home/Inicio"> <div class="reservar2">Volver</div> </a>
-        }
+        <div class="col-md-5 col-md-offset-3">
+            <div class="panel-body panel panel-info">
+                <div class="form-group panel-primary">
+                    <div class="text-center panel-heading">
+                        <h5>Bienvenido al panel de reservas</h5>
+                    </div>
+                </div>
+                @using (Html.BeginForm("reserva", "peliculas", FormMethod.Post))
+                {
+                    @Html.HiddenFor(x => x.IdPelicula, Model.IdPelicula)
+                    <div class="form-group">
+                        <div class="form-control">
+                            @Html.DropDownListFor(x => x.idVersion, new SelectList(Model.Versiones, "IdVersion", "Nombre"), "--Seleccione region--")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-control">
+                            @Html.DropDownListFor(x => x.idSede, new SelectList(Model.Sedes, "IdSede", "Nombre"), "--Seleccione Sede--")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-control">
+                            @Html.DropDownListFor(x => x.Dia, new SelectList(Model.Dias), "--Seleccione Dia--")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-control">
+                            @Html.DropDownListFor(x => x.FechaHora, new SelectList(Model.Horarios), "--Seleccione Hora--")
+                        </div>
+                    </div>
+                    
+                    <button type="submit" name="btnComprar"  class="btn btn-info">Confirmar Reserva</button><br /><br />
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>La Pelicula Seleccionada no Tiene funciones disponibles</h3>
+        <a href="/home/Inicio"> <div class="reservar2">Volver</div> </a>
     }
 
 </section>
+
 @section scripts
 {
     <script src="~/Scripts/registrar.js"></script>

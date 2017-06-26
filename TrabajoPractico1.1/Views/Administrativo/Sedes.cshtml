@@ -4,71 +4,113 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Sedes";
 }
-
+<!--Si hubo un error al agregar o modificar sedes-->
 @if (ViewBag.Error != null)
 {
-    <h2>@ViewBag.Error</h2>
+    <div class="alert alert-danger text-center">
+        <h5>@ViewBag.Error</h5>
+    </div>
 }
-
-<a href="~/Administrativo/NuevaSede" class="btn btn-info">Nueva sede</a>
 
 @if (ViewBag.Nuevo == true)
 {//Entra si se quiere cargar una nueva sede
-    
-    <form action="~/Administrativo/NuevaSede" method="post" class="form-group form-login">
-        <h4>Nueva Sede</h4>
-
-        @Html.TextBox("Nombre", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Nombre" })
-        @Html.ValidationMessage("Nombre")
-
-        @Html.TextBox("Direccion", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "Direccion" })
-        @Html.ValidationMessage("Direccion")
-
-        @Html.TextBox("PrecioGeneral", "", new { htmlAttributes = new { @class = "class" }, @placeholder = "PrecioGeneral" })
-        @Html.ValidationMessage("PrecioGeneral")
-
-        <button type="submit" class="btn btn-info">Guardar Sede</button>
-        <a href="~/Administrativo/Sedes" class="btn btn-info">Cancelar</a>
-    </form>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel-body panel panel-info">
+            <div class="form-group panel-primary">
+                <div class="text-center panel-heading">
+                    <h5>Nueva Sede</h5>
+                </div>
+            </div>
+            @using (Html.BeginForm("NuevaSede", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("Nombre", "", new { @placeholder = "Nombre" })
+                    </div>
+                    @Html.ValidationMessage("Nombre")
+                </div>
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("Direccion", "", new { @placeholder = "Direccion" })
+                    </div>
+                    @Html.ValidationMessage("Direccion")
+                </div>
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("PrecioGeneral", "", new { @placeholder = "PrecioGeneral" })
+                    </div>
+                    @Html.ValidationMessage("PrecioGeneral")
+                </div>
+                
+                <button type="submit" class="btn btn-info">Guardar Sede</button><br /><br />
+                <a href="~/Administrativo/Sedes" class="btn btn-info">Cancelar</a><br /><br />
+            }
+        </div>
+    </div>
 }
 else if (Model != null)
 {//entra si se quiere modificar una sede
-    
-    <form action="~/Administrativo/ModificarSede" method="post" class="form-group form-login">
-        <h4>Modificar Sede</h4>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel-body panel panel-info">
+            @using (Html.BeginForm("ModificarSede", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group panel-primary">
+                    <div class="text-center panel-heading">
+                        <h5>Modificar Sede</h5>
+                    </div>
+                </div>
+                @Html.Hidden("IdSede", Model.IdSede)
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("Nombre", Model.Nombre, new { @placeholder = "Nombre" })
+                    </div>
+                    @Html.ValidationMessage("Nombre")
+                </div>
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("Direccion", Model.Direccion, new { @placeholder = "Direccion" })
+                    </div>
+                    @Html.ValidationMessage("Direccion")
+                </div>
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("PrecioGeneral", Model.PrecioGeneral, new { @placeholder = "PrecioGeneral" })
+                    </div>
+                    @Html.ValidationMessage("PrecioGeneral")
+                </div>
 
-        @Html.Hidden("IdSede", Model.IdSede )
+                <button type="submit" class="btn btn-info">Modificar Sede</button><br /><br />
+                <a href="~/Administrativo/Sedes" class="btn btn-info">Cancelar</a><br /><br />
+            }
+        </div>
+    </div>
 
-        @Html.TextBox("Nombre", Model.Nombre , new { htmlAttributes = new { @class = "class" }, @placeholder = "Nombre" })
-        @Html.ValidationMessage("Nombre")
 
-        @Html.TextBox("Direccion", Model.Direccion, new { htmlAttributes = new { @class = "class" }, @placeholder = "Direccion" })
-        @Html.ValidationMessage("Direccion")
-
-        @Html.TextBox("PrecioGeneral", Model.PrecioGeneral, new { htmlAttributes = new { @class = "class" }, @placeholder = "PrecioGeneral" })
-        @Html.ValidationMessage("PrecioGeneral")
-
-        <button type="submit" class="btn btn-info">Modificar Sede</button>
-        <a href="~/Administrativo/Sedes" class="btn btn-info">Cancelar</a>
-    </form>
 }
-
-<table class="table table-hover">
-	<thead>
+else
+{
+    //si no carga el formulario de alta o modificacion, muestra el boton de alta
+    <div class="form-group navbar-right col-sm-4">
+        <a href="~/Administrativo/NuevaSede" class="btn btn-danger">Nueva sede</a>
+    </div>
+}
+@*Listado de Sedes cargadas*@
+<table class="listado-peliculas table table-hover">
+    <thead>
         <tr>
-            <td>Nombre</td>
-            <td>Direccion</td>
-            <td>Precio</td>
-            <td>Acciones</td>
+            <td class="col-sm-1">Nombre</td>
+            <td class="col-sm-1">Direccion</td>
+            <td class="col-sm-1">Precio</td>
+            <td class="col-sm-1">Acciones</td>
         </tr>
-	</thead>
+    </thead>
     @foreach (var sede in ViewBag.Listado)
     {
         <tr>
-            <td>@sede.Nombre</td>
-            <td>@sede.Direccion</td>
-            <td>@sede.PrecioGeneral</td>
-            <td><a href="~/Administrativo/ModificarSede/@sede.IdSede" class="btn btn-info">Modificar</a></td>
+            <td class="col-sm-1">@sede.Nombre</td>
+            <td class="col-sm-1">@sede.Direccion</td>
+            <td class="col-sm-1">@sede.PrecioGeneral</td>
+            <td class="col-sm-1"><a href="~/Administrativo/ModificarSede/@sede.IdSede" class="btn btn-info">Modificar</a></td>
         </tr>
-     }
+    }
 </table>

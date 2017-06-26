@@ -12,8 +12,8 @@ namespace TrabajoPractico.Controllers
 
         public ActionResult Inicio()
         {
-            sInicio inicio = new sInicio();
-            List<Peliculas> peliculas = inicio.listarPeliculas();
+            sInicio servicioInicio = new sInicio();
+            List<Peliculas> peliculas = servicioInicio.listarPeliculas();
 
             return View(peliculas);
         }
