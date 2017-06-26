@@ -8,7 +8,8 @@ namespace TrabajoPractico1._1.ModelViews
     public class vConfirmacion
     {
         public Peliculas pelicula = new Peliculas();
-        public Carteleras cartelera = new Carteleras();
+
+				public Carteleras cartelera = new Carteleras();
 
         public DateTime FechaHoraInicio { get; set; }
     }
