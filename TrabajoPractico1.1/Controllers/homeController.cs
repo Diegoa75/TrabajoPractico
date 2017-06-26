@@ -27,5 +27,11 @@ namespace TrabajoPractico.Controllers
             return View();
         }
 
+        public ActionResult cerrarSesion()
+        {
+            Session.Remove("usuarioEnSesion");
+            return RedirectToAction("Inicio");
+        }
+
     }
 }

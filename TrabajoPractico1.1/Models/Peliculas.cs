@@ -18,15 +18,12 @@ namespace TrabajoPractico1._1
             public string Imagen { get; set; }
 
             [Required(ErrorMessage = "La Clasificacion es requerida")]
-            [RegularExpression("^\\d+$", ErrorMessage = "El documento debe contener sólo números.")]
             public int IdCalificacion { get; set; }
 
             [Required(ErrorMessage = "El Genero es requerido")]
-            [RegularExpression("^\\d+$", ErrorMessage = "El documento debe contener sólo números.")]
             public int IdGenero { get; set; }
 
             [Required(ErrorMessage = "La duracion de la pelicula es un dato requerido")]
-            [RegularExpression("^\\d+$", ErrorMessage = "El documento debe contener sólo números.")]
             public int Duracion { get; set; }
 
             [Required]

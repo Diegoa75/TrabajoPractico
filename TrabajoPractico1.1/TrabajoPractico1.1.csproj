@@ -171,11 +171,10 @@
     <Compile Include="Models\Reservas.cs" />
     <Compile Include="Models\Sedes.cs" />
     <Compile Include="Models\Servicios\sReportes.cs" />
-    <Compile Include="Models\Servicios\sConfirmar.cs" />
-    <Compile Include="Models\Servicios\sConfirmarPelicula.cs" />
+    <Compile Include="Models\Servicios\sPeliculas.cs" />
     <Compile Include="Models\Servicios\sImagenes.cs" />
     <Compile Include="Models\Servicios\sInicio.cs" />
-    <Compile Include="Models\Servicios\sRegistrar.cs" />
+    <Compile Include="Models\Servicios\sReservas.cs" />
     <Compile Include="Models\Servicios\sString.cs" />
     <Compile Include="Models\Servicios\sUsuarios.cs" />
     <Compile Include="Models\Usuarios.cs" />
@@ -411,7 +410,9 @@
     <Content Include="Views\administrativo\crearCartelera.cshtml" />
     <Content Include="Views\administrativo\carteleras.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

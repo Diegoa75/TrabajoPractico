@@ -141,7 +141,6 @@ C:\Users\Matufe\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPages.De
 C:\Users\Matufe\TrabajoPractico\TrabajoPractico1.1\bin\es\System.Web.WebPages.Razor.resources.dll
 C:\Users\Matufe\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.dll
 C:\Users\Matufe\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.pdb
-C:\Users\Matufe\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\TrabajoPractico1.1.dll.config
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\TrabajoPractico1.1.dll
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\TrabajoPractico1.1.pdb
@@ -226,6 +225,7 @@ C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\Trabajo
 C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
 C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.dll
 C:\Users\Mostok Computacion\Desktop\El que hay que subir\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.pdb
+C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
 C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\TrabajoPractico1.1.dll
 C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\TrabajoPractico1.1.pdb
 C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\Antlr3.Runtime.dll
@@ -268,4 +268,4 @@ C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\bin\es\Sy
 C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
 C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.dll
 C:\Users\Mostok Computacion\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.pdb
-C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
+C:\Users\Matufe\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache

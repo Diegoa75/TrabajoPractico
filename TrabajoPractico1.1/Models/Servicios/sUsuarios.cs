@@ -21,8 +21,24 @@ namespace TrabajoPractico1._1.Models.Servicios
             {
                 admin = null;
             }
-                return admin;
+            return admin;
         }
 
+        public Boolean comprobarUsuario(String action)
+        {
+            if (Session["usuarioEnSesion"] != null)
+            {
+                string usuario = Session["usuarioEnSesion"] as string;
+                var usuarioExistente = ctx.Usuarios.Where(u => u.NombreUsuario == usuario
+                                                          ).SingleOrDefault();
+                if (usuarioExistente != null)
+                {
+                    return true;
+                }
+
+            }
+            Session["Action"] = action;
+            return false;
+        }
     }
 }

@@ -4,7 +4,14 @@
 			<img src="/imagenes/Cinemark2.png" alt="..." />
 		</div>
 		<div class="col-sm-2 login-button">
-			<a href="/home/Login" class="btn btn-info btn-block">Administrativo</a>
+            @if (Session["usuarioEnSesion"] == null)
+            {
+                <a href="/home/Login" class="btn btn-info btn-block">Administrativo</a>
+            }
+            else
+            {
+                <a href="/home/cerrarSesion" class="btn btn-info btn-block">Cerrar Sesion</a>
+            }
 		</div>
 	</div>
 </header>

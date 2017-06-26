@@ -8,6 +8,10 @@
 {
 	<h2>@ViewBag.Error</h2>
 }
+else if (Session["Action"] != null)
+{   
+    <h2>Necesita estar logueado para ingresar a esta pagina</h2>
+}
 
 <br/><br/><br/><br/>
 <div class="container-fluid">

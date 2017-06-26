@@ -5,10 +5,12 @@
     ViewBag.Title = "Sedes";
 }
 
+@if (ViewBag.Error != null)
+{
+    <h2>@ViewBag.Error</h2>
+}
 
-<h2>GestionSede</h2>
-
-<a href="~/Administrativo/CrearNuevaSede" class="btn btn-info">Nueva sede</a>
+<a href="~/Administrativo/NuevaSede" class="btn btn-info">Nueva sede</a>
 
 @if (ViewBag.Nuevo == true)
 {//Entra si se quiere cargar una nueva sede
@@ -66,7 +68,7 @@ else if (Model != null)
             <td>@sede.Nombre</td>
             <td>@sede.Direccion</td>
             <td>@sede.PrecioGeneral</td>
-            <td><a href="~/Administrativo/ModificarSedeSeleccionada/@sede.IdSede" class="btn btn-info">Modificar</a></td>
+            <td><a href="~/Administrativo/ModificarSede/@sede.IdSede" class="btn btn-info">Modificar</a></td>
         </tr>
      }
 </table>

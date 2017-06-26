@@ -4,11 +4,17 @@
 	Layout = "/Views/Shared/_Layout.cshtml";
 	ViewBag.Title = "Peliculas";
 }
+<!--Si hubo un error al agregar o modificar pelicula-->
+@if( ViewBag.Error != null)
+{
+    <h2>@ViewBag.Error</h2>
+}
+
 <div class="container-fluid">
 	<div class="col-sm-4"></div>
 	<div class="col-sm-4"></div>
 	<div class="col-sm-4">
-		<a href="~/Administrativo/CrearNuevaPelicula" class=" btn btn-danger">Nueva Pelicula</a>
+		<a href="~/Administrativo/NuevaPelicula" class=" btn btn-danger">Nueva Pelicula</a>
 	</div>
 </div>
 
@@ -153,7 +159,7 @@
 			<td class="col-sm-1">@pelicula.Generos.Nombre</td>
 			<td class="col-sm-1">@pelicula.Calificaciones.Nombre</td>
 			<td class="col-sm-2"> <a href="@pelicula.Imagen" target="_blank"><img class="pelicula" src="@pelicula.Imagen" /></a></td>
-			<td class="col-sm-1"><a href="~/Administrativo/ModificarPeliculaSeleccionada/@pelicula.IdPelicula" class="btn btn-info">Modificar</a></td>
+			<td class="col-sm-1"><a href="~/Administrativo/ModificarPelicula/@pelicula.IdPelicula" class="btn btn-info">Modificar</a></td>
 		</tr>
 	}
 </table>
