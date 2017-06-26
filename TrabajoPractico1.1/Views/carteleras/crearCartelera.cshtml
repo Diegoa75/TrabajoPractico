@@ -1,0 +1,100 @@
+﻿@using TrabajoPractico1._1
+@model Carteleras
+@{
+	ViewBag.Title = "crearCartelera";
+}
+
+<h2>Crear nueva Cartelera: </h2>
+@{
+	if (ViewBag.ingresoCorrecto != null)
+	{
+		<p class="error-message"></p>
+	}
+}
+
+using (Html.BeginForm("NuevaCartelera", "Cartelera", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	<label>
+		@Html.DropDownListFor(x => x.IdSede, new SelectList(ViewBag.sedes, "IdSede", "Nombre"), "Sedes")
+		@Html.ValidationMessage("IdSede")
+	</label>
+
+	<label>
+		@Html.DropDownListFor(x => x.IdPelicula, new SelectList(ViewBag.peliculas, "IdPelicula", "Nombre"), "Películas")
+		@Html.ValidationMessage("IdPelicula")
+	</label>
+
+	<label>
+		<select name="HoraInicio" id="HoraInicio">
+			<option>Horario de Inicio</option>
+			@{
+				int value = 0;
+				foreach (string i in ViewBag.horas)
+				{
+					<option value="@value">@i</option>
+					value++;
+				};
+			}
+		</select>
+		@Html.ValidationMessage("HoraInicio")
+	</label>
+
+	<label>
+		@Html.TextBox("FechaInicio", "", new { htmlAttributes = new { @class = "input-date" }, @placeholder = "Fecha de Inicio" })
+		@Html.ValidationMessage("FechaInicio")
+	</label>
+
+	<label>
+		@Html.TextBox("FechaFin", "", new { htmlAttributes = new { @class = "input-date" }, @placeholder = "Fecha de Fin" })
+		@Html.ValidationMessage("FechaFin")
+	</label>
+
+	<label>
+		@Html.TextBox("NumeroSala", "", new { htmlAttributes = new { @class = "input-text" }, @placeholder = "Número de sala" })
+		@Html.ValidationMessage("NumeroSala")
+	</label>
+
+	<label>
+		@Html.DropDownListFor(x => x.IdVersion, new SelectList(ViewBag.versiones, "IdVersion", "Nombre"), "Versiones")
+		@Html.ValidationMessage("IdVersiones")
+	</label>
+
+	<label>
+		<span>
+			<input type="checkbox" value="Lunes" name="Lunes" />
+			<strong>Lunes</strong>
+		</span>
+
+		<span>
+			<input type="checkbox" value="Martes" name="Martes" />
+			<strong>Martes</strong>
+		</span>
+
+		<span>
+			<input type="checkbox" value="Miercoles" name="Miercoles" />
+			<strong>Miércoles</strong>
+		</span>
+
+		<span>
+			<input type="checkbox" value="Jueves" name="Jueves" />
+			<strong>Jueves</strong>
+		</span>
+
+		<span>
+			<input type="checkbox" value="Viernes" name="Viernes" />
+			<strong>Viernes</strong>
+		</span>
+
+		<span>
+			<input type="checkbox" value="Sabado" name="Sabado" />
+			<strong>Sábado</strong>
+		</span>
+
+		<span>
+			<input type="checkbox" value="Domingo" name="Domingo" />
+			<strong>Domingo</strong>
+		</span>
+	</label>
+	
+	<input type="submit" value="Cargar Cartelera"/>	
+}

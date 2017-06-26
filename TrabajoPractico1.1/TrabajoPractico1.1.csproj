@@ -141,6 +141,7 @@
       <DependentUpon>ControllerWithContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\administrativoController.cs" />
+    <Compile Include="Controllers\cartelerasController.cs" />
     <Compile Include="Controllers\homeController.cs" />
     <Compile Include="Controllers\peliculasController.cs" />
     <Compile Include="Generos.cs">
@@ -164,6 +165,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Carteleras.cs" />
     <Compile Include="Models\ModelViews\vConfirmacion.cs" />
     <Compile Include="Models\ModelViews\vReserva.cs" />
     <Compile Include="Models\Peliculas.cs" />
@@ -406,6 +408,7 @@
     <Content Include="Views\administrativo\Peliculas.cshtml" />
     <Content Include="Views\peliculas\confirmar.cshtml" />
     <Content Include="Views\administrativo\Sedes.cshtml" />
+    <Content Include="Views\carteleras\crearCartelera.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
