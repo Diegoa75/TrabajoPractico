@@ -16,13 +16,14 @@
     }
     <div>
         <table class="table table-hover">
+            <thead>
                 <tr>
                     <td>Sede</td>
                     <td>Versión</td>
-                    <td>Nombre de la pelicula</td>
+                    <td>Pelicula</td>
                     <td>Precio</td>
                 </tr>
-
+            </thead>
             @if (Model != null && Model.Any()) { 
     
                 foreach (var reserva in Model)
