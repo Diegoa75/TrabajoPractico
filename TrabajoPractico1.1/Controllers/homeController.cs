@@ -12,8 +12,8 @@ namespace TrabajoPractico.Controllers
 
         public ActionResult Inicio()
         {
-            sInicio inicio = new sInicio();
-            List<Peliculas> peliculas = inicio.listarPeliculas();
+            sInicio servicioInicio = new sInicio();
+            List<Peliculas> peliculas = servicioInicio.listarPeliculas();
 
             return View(peliculas);
         }
@@ -25,6 +25,12 @@ namespace TrabajoPractico.Controllers
                 ViewBag.Error = TempData["Error"] as string;
             }
             return View();
+        }
+
+        public ActionResult cerrarSesion()
+        {
+            Session.Remove("usuarioEnSesion");
+            return RedirectToAction("Inicio");
         }
 
     }

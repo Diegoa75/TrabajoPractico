@@ -12,7 +12,7 @@
 	}
 }
 
-<form action="~/administrativo/cargarCartelera" method="POST" class="crear-cartelera-form">
+<form action="~/administrativo/cargarCartelera" method="POST" class="">
 	<label>
 		@Html.DropDownListFor(x => x.IdSede, new SelectList(ViewBag.sedes, "IdSede", "Nombre"), "Sedes")
 		@Html.ValidationMessage("IdSede")
@@ -59,41 +59,41 @@
 	</label>
 
 	<label>
-		<span class="input-checkbox">
+		<span>
 			<strong>Lunes</strong>
 			<input type="checkbox" value="Lunes" name="Lunes" />
 		</span>
 
-		<span class="input-checkbox">
+		<span>
 			<strong>Martes</strong>
 			<input type="checkbox" value="Martes" name="Martes" />
 		</span>
 
-		<span class="input-checkbox">
+		<span>
 			<strong>Miércoles</strong>
 			<input type="checkbox" value="Miercoles" name="Miercoles" />
 		</span>
 
-		<span class="input-checkbox">
+		<span>
 			<strong>Jueves</strong>
 			<input type="checkbox" value="Jueves" name="Jueves" />
 		</span>
 
-		<span class="input-checkbox">
+		<span>
 			<strong>Viernes</strong>
 			<input type="checkbox" value="Viernes" name="Viernes" />
 		</span>
 
-		<span class="input-checkbox">
+		<span>
 			<strong>Sábado</strong>
 			<input type="checkbox" value="Sabado" name="Sabado" />
 		</span>
 
-		<span class="input-checkbox">
+		<span>
 			<strong>Domingo</strong>
 			<input type="checkbox" value="Domingo" name="Domingo" />
 		</span>
 	</label>
 
-	<button type="submit" class="btn-crear-cartelera btn btn-info btn-lg">Crear Cartelera</button>
+	<button type="submit" class="btn btn-info btn-lg btn-block">Crear Cartelera</button>
 </form>

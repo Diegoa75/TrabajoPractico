@@ -11,26 +11,90 @@ namespace TrabajoPractico1._1.Controllers
     public class administrativoController : Controller
     {
         ContextoPractico ctx = new ContextoPractico();
-        sUsuarios usuariosServiceImpl = new sUsuarios();
-        // GET: /Administrativo/
+        //Administrativo/
 
+
+                                            //LOGIN
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult VerificarUsuario(Usuarios usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                sUsuarios servicioUsuarios = new sUsuarios();
+                Usuarios admin = servicioUsuarios.logearUsuario(usuario);
+                if (admin != null)
+                {
+                    //verifica si necesita redirigir a una pagina
+                    Session["usuarioEnSesion"] = admin.NombreUsuario;
+                    if (Session["Action"] == null)
+                        return RedirectToAction("Inicio");
+                    else
+                    { 
+                        string action = Session["Action"] as string ;
+                        Session.Remove("Action");
+                        return RedirectToAction(action);
+                    }
+                }
+                else
+                {
+                    TempData["Error"] = "Error de usuario y/o contraseña";
+                }
+            }
+            return RedirectToAction("Login", "home");
+
+        }
+                                            //VERIFICAR SESION
+        public Boolean comprobarUsuario(String action)
+        {
+            //si el usuario existe devuelve true, sino crea la variable de sesion con el action al que tiene que volver
+            if (Session["usuarioEnSesion"] != null)
+            {
+                string usuario = Session["usuarioEnSesion"] as string;
+                var usuarioExistente = ctx.Usuarios.Where(u => u.NombreUsuario == usuario
+                                                          ).SingleOrDefault();
+                if (usuarioExistente != null)
+                {
+                    return true;
+                }
+
+            }
+            Session["Action"] = action;
+            return false;
+        }
+
+                                            //INICIO
         public ActionResult Inicio()
         {
-            return View();
+            if (comprobarUsuario("Inicio"))
+                return View();
+            else
+                return RedirectToAction("Login", "home");
         }
 
+                                            //SEDES
         public ActionResult Sedes()
         {
-            ViewBag.Listado = ctx.Sedes.ToList();
-            return View();
+            if (comprobarUsuario("Sedes"))
+            { 
+                ViewBag.Listado = ctx.Sedes.ToList();
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "home");
         }
 
-        public ActionResult crearNuevaSede()
+        public ActionResult NuevaSede()
         {
-            ViewBag.Nuevo = true;
-            ViewBag.Listado = ctx.Sedes.ToList();
+            if (comprobarUsuario("Sedes"))
+            {
+                ViewBag.Nuevo = true;
+                ViewBag.Listado = ctx.Sedes.ToList();
 
-            return View("Sedes");
+                return View("Sedes");
+            }
+            else
+                return RedirectToAction("Login", "home");
         }
 
         [HttpPost]
@@ -38,84 +102,118 @@ namespace TrabajoPractico1._1.Controllers
         {
             if (ModelState.IsValid)
             {
-                Sedes sede = new Sedes();
-                sede = (from p in ctx.Sedes
-                        where (p.Nombre == nuevaSede.Nombre || p.Direccion == nuevaSede.Direccion)
-                        select p).FirstOrDefault();
-                if (sede != null)
-                    return View("Sede Repetida");
-                ctx.Sedes.Add(nuevaSede);
-                ctx.SaveChanges();
+                //verifica que no se este cargando una sede con mismo nombre y direccion a una existente
+                var sedeExistente = ctx.Sedes.Where(s => s.Nombre == nuevaSede.Nombre 
+                                                    && s.Direccion == nuevaSede.Direccion).FirstOrDefault();
+
+                if (sedeExistente != null)
+                {
+                    ViewBag.Error = "Ya existe una Sede con ese nombre y esa dirección";
+                }
+                else
+                {   
+                    //guarda la nueva sede
+                    ctx.Sedes.Add(nuevaSede);
+                    ctx.SaveChanges();
+                }
             }
             ViewBag.Listado = ctx.Sedes.ToList();
 
             return View("Sedes");
+        }
+
+        public ActionResult ModificarSede(int id)
+        {
+            if (comprobarUsuario("Sedes"))
+            {
+                Sedes sede = ctx.Sedes.Where(p => p.IdSede == id).SingleOrDefault();
+                ViewBag.Listado = ctx.Sedes.ToList();
+
+                //si la sede es encontrada la devuelve para modificarla
+                if (sede != null)
+                    return View("Sedes", sede);
+                else
+                    return View("Sedes");
+            }
+            else
+                return RedirectToAction("Login", "home");
         }
 
         [HttpPost]
         public ActionResult ModificarSede(Sedes sedeModificada)
         {
-            Sedes sedeEncontrada = ctx.Sedes.Find(sedeModificada.IdSede);
-            if (sedeEncontrada != null)
-            {
-                sedeEncontrada.Nombre = sedeModificada.Nombre;
-                sedeEncontrada.Direccion = sedeModificada.Direccion;
-                sedeEncontrada.PrecioGeneral = sedeModificada.PrecioGeneral;
-                Sedes sede = new Sedes();
-                sede = (from p in ctx.Sedes
-                        where (p.Nombre == sedeModificada.Nombre || p.Direccion == sedeModificada.Direccion)
-                        select p).FirstOrDefault();
-                if (sede != null)
-                    return View("Sede Repetida");
-                ctx.SaveChanges();
-            }
+            //verifica que no se este cargando una sede con mismo nombre y direccion a una existente
+            var sedeExistente = ctx.Sedes.Where(s => s.Nombre == sedeModificada.Nombre
+                                                    && s.Direccion == sedeModificada.Direccion
+                                                    && s.IdSede != sedeModificada.IdSede).FirstOrDefault();
 
+            if (sedeExistente != null)
+            {
+                ViewBag.Error = "Ya existe una Sede con ese nombre y esa dirección";
+            }
+            else
+            {
+                //busca la sede a modificar
+                Sedes sedeEncontrada = ctx.Sedes.Find(sedeModificada.IdSede);
+
+                if (sedeEncontrada != null)
+                {
+                    //modifica los datos por los actuales
+                    sedeEncontrada.Nombre = sedeModificada.Nombre;
+                    sedeEncontrada.Direccion = sedeModificada.Direccion;
+                    sedeEncontrada.PrecioGeneral = sedeModificada.PrecioGeneral;
+
+                    ctx.SaveChanges();
+                }
+            }
             ViewBag.Listado = ctx.Sedes.ToList();
 
             return View("Sedes");
         }
 
-        [HttpGet]
-        public ActionResult ModificarSedeSeleccionada(int id)
-        {
-            Sedes sede = new Sedes();
-            sede = (from p in ctx.Sedes
-                    where (p.IdSede == id)
-                    select p).FirstOrDefault();
-            ViewBag.Listado = ctx.Sedes.ToList();
 
-            return View("Sedes",sede);
-        }
-
-        // [HttpPost]
+                                            //PELICULAS
         public ActionResult Peliculas()
         {
-            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
-            return View();
-        }
-        public ActionResult crearNuevaPelicula()
+            if (comprobarUsuario("Peliculas"))
+            { 
+                ViewBag.Listado = ctx.Peliculas.ToList();
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "home");
+    }
+        public ActionResult NuevaPelicula()
         {
-            ViewBag.Nuevo = true;
-            ViewBag.GeneroId = ctx.Generos.ToList();
-            ViewBag.CalificacionId = ctx.Calificaciones.ToList();
-            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
+            if (comprobarUsuario("Peliculas"))
+            {
+                ViewBag.Nuevo = true;
+                ViewBag.GeneroId = ctx.Generos.ToList();
+                ViewBag.CalificacionId = ctx.Calificaciones.ToList();
+                ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
 
-            return View("Peliculas");
+                return View("Peliculas");
+            }
+            else
+                return RedirectToAction("Login", "home");
         }
+
         [HttpPost]
         public ActionResult NuevaPelicula(Peliculas nuevaPelicula)
         {
             if (ModelState.IsValid)
             {
-                Peliculas peli = new Peliculas();
-                peli = (from p in ctx.Peliculas
-                        where (p.Nombre == nuevaPelicula.Nombre && p.IdGenero == nuevaPelicula.IdGenero)
-                        select p).FirstOrDefault();
-                if (peli != null)
-                    return View("Pelicula Repetida");
+                //Revisa que no exista otra pelicula con el mismo nombre
+                var peliculaExistente = ctx.Peliculas.Where(p => p.Nombre == nuevaPelicula.Nombre
+                                                            && p.IdPelicula != nuevaPelicula.IdPelicula)
+                                                            .FirstOrDefault(); 
+                if (peliculaExistente != null)
+                {
+                    ViewBag.Error = "Ya existe una Pelicula con ese nombre";
+                }
                 else
                 {
-
+                    //Revisa si existe una imagen cargada para la pelicula
                     if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
                     {
                         //uso el nombre de la pelicula  para crear un nombre significativo
@@ -131,110 +229,95 @@ namespace TrabajoPractico1._1.Controllers
 
                 }
             }
-                ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
+            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
 
-                return View("Peliculas");
-            
+            return View("Peliculas");     
+        }
+
+        public ActionResult ModificarPelicula(int id)
+        {
+            if (comprobarUsuario("Peliculas"))
+            {
+                Peliculas Pelicula = ctx.Peliculas.Where(p => p.IdPelicula == id).FirstOrDefault();
+                ViewBag.Listado = ctx.Peliculas.ToList();
+                ViewBag.GeneroId = ctx.Generos.ToList();
+                ViewBag.CalificacionId = ctx.Calificaciones.ToList();
+
+                return View("Peliculas", Pelicula);
+            }
+            else
+                return RedirectToAction("Login", "home");
         }
 
         [HttpPost]
         public ActionResult ModificarPelicula(Peliculas peliculaModificada, string myImagen)
         {
+            //busca la pelicula a modificar
             Peliculas peliculaEncontrada = ctx.Peliculas.Find(peliculaModificada.IdPelicula);
-            Peliculas peli = new Peliculas();
-            if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
-            {
-                //TODO: Agregar validacion para confirmar que el archivo es una imagen
-                if (!string.IsNullOrEmpty(myImagen))
-                {
-                    //elimina la foto anterior si tenia
-                    if (!string.IsNullOrEmpty(peliculaEncontrada.Imagen))
-                    {
-                        sImagenes.Borrar(peliculaEncontrada.Imagen);
-                    }
-
-                    //creo un nombre "nombre" 
-                    string nombreSignificativo = peliculaModificada.Nombre;
-                    //Guardar Imagen
-                    string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombreSignificativo);
-                    peliculaEncontrada.Imagen = pathRelativoImagen;
-                }
-            }
 
             if (peliculaEncontrada != null)
             {
-                peliculaEncontrada.Nombre = peliculaModificada.Nombre;
-                peliculaEncontrada.Descripcion = peliculaModificada.Descripcion;
-                peliculaEncontrada.IdCalificacion = peliculaModificada.IdCalificacion;
-                peliculaEncontrada.IdGenero = peliculaModificada.IdGenero;
-                peliculaEncontrada.Duracion = peliculaModificada.Duracion;
+                //consulta si existe otra pelicula con el mismo nombre
+                var peliculaExistente = ctx.Peliculas.Where(p => p.Nombre == peliculaModificada.Nombre 
+                                                            && p.IdPelicula != peliculaModificada.IdPelicula)
+                                                            .FirstOrDefault(); 
 
+                if (peliculaExistente != null)
+                {
+                    ViewBag.Error = "Ya existe una Pelicula con ese nombre";
+                }
+                else
+                { 
+                    //Comprueba si se agrego una foto nueva para modificar la actual
+                    if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+                    {
+                        //TODO: Agregar validacion para confirmar que el archivo es una imagen
+                        if (!string.IsNullOrEmpty(myImagen))
+                        {
+                            //elimina la foto anterior si tenia
+                            if (!string.IsNullOrEmpty(peliculaEncontrada.Imagen))
+                            {
+                                sImagenes.Borrar(peliculaEncontrada.Imagen);
+                            }
+
+                            //creo un nombre "nombre" 
+                            string nombreSignificativo = peliculaModificada.Nombre;
+                            //Guardar Imagen
+                            string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombreSignificativo);
+                            peliculaEncontrada.Imagen = pathRelativoImagen;
+                        }
+                    }
+
+                    //modifica los datos existentes por los nuevos
+                    peliculaEncontrada.Nombre = peliculaModificada.Nombre;
+                    peliculaEncontrada.Descripcion = peliculaModificada.Descripcion;
+                    peliculaEncontrada.IdCalificacion = peliculaModificada.IdCalificacion;
+                    peliculaEncontrada.IdGenero = peliculaModificada.IdGenero;
+                    peliculaEncontrada.Duracion = peliculaModificada.Duracion;
                 
-                peli = (from p in ctx.Peliculas
-                        where (p.Nombre == peliculaModificada.Nombre && p.IdGenero == peliculaModificada.IdGenero)
-                        select p).FirstOrDefault();
-                if (peli != null)
-                    return View("Pelicula Repetida");
-
-                ctx.SaveChanges();
+                    ctx.SaveChanges();
+                }
             }
-
-            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
+            ViewBag.Listado = ctx.Peliculas.ToList();
 
             return View("Peliculas");
         }
 
-        [HttpGet]
-        public ActionResult ModificarPeliculaSeleccionada(int id)
-        {
-            Peliculas Pelicula = new Peliculas();
-            Pelicula = (from p in ctx.Peliculas
-                    where (p.IdPelicula == id)
-                    select p).FirstOrDefault();
-            ViewBag.Listado = ctx.Peliculas.ToList();
-            ViewBag.GeneroId = ctx.Generos.ToList();
-            ViewBag.CalificacionId = ctx.Calificaciones.ToList();
 
-            return View("Peliculas", Pelicula);
-        }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult VerificarUsuario(Usuarios usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                Usuarios admin = usuariosServiceImpl.logearUsuario(usuario);
-                if (admin != null)
-                {
-                    Session["usuarioEnSesion"] = admin.NombreUsuario;
-                    return RedirectToAction("Inicio");
-                }
-                else
-                {
-                    TempData["Error"] = "Error de usuario y/o contraseña";
-                }
-            }
-            return RedirectToAction("Login", "home");
-
-        }
-
+                                            //REPORTES
         public ActionResult Reportes()
         {
-        //  comprobarUsuario(usuarioEnSesion(), "Reportes", "Administrativo");
-            if (usuarioEnSesion() != null)
+            if (comprobarUsuario("Reportes"))
             {
-                ViewBag.Listado = ctx.Sedes.ToList();
                 return View();
             }
-            else 
-            {
+            else
                 return RedirectToAction("Login", "home");
-            }
         }
 
         [HttpPost]
-        public ActionResult ArmarReporte(FormCollection formulario)
+        public ActionResult Reporte(FormCollection formulario)
         {
             sReportes reservaServ = new sReportes();
             DateTime fechaInicio;
@@ -269,6 +352,7 @@ namespace TrabajoPractico1._1.Controllers
             return View("Reportes", reservas);
         }
 
+                                        //CARTELERAS
 		public ActionResult carteleras ()
 		{
 			List<Carteleras> listado = ctx.Carteleras.ToList();
@@ -306,65 +390,26 @@ namespace TrabajoPractico1._1.Controllers
 			}
 
 			var carteleras = ctx.Carteleras.ToList();
-			return View("carteleras", carteleras);
+			return View("carteleras");
 		}
 
 		public ActionResult eliminarCartelera (int id)
 		{
-			List<Carteleras> misCarteleras = ctx.Carteleras.ToList();
-
-			Carteleras aBorrar = (from c in ctx.Carteleras
-														where c.IdCartelera == id
-														select c).FirstOrDefault();
-			if (aBorrar != null)
+			Carteleras aBorrar = new Carteleras();
+			var misCarteleras = ctx.Carteleras.ToList();
+			foreach (Carteleras c in misCarteleras)
 			{
-				ctx.Carteleras.Remove(aBorrar);
-				ctx.SaveChanges();
-
-				ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
+				if (c.IdCartelera == id)
+				{
+					aBorrar = c;
+					misCarteleras.Remove(aBorrar);
+					ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
+				}
 			}
-
-			ViewBag.carteleras = ctx.Carteleras.ToList();
+			ViewBag.mensajeBorrar = "El registro no se ha podido borrar.";
 			return View("carteleras");
 		}
 
-		public ActionResult modificarCartelera (int id)
-		{
-			Carteleras aModificar = (from c in ctx.Carteleras
-														where c.IdCartelera == id
-														select c).FirstOrDefault();
-			
-			return View("crearCartelera", aModificar);
-		}
-
-		private String usuarioEnSesion()
-        {
-            if (Session["usuarioEnSesion"] != null)
-            {
-                String usuario = (string)Session["usuarioEnSesion"];
-                return usuario;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        /*
-        public ActionResult redireccionarLogueo(String action, String controller)
-        {
-            TempData["Error"] = "Debe logearse para acceder a esta sección";
-            TempData["Action"] = action;
-            TempData["Controller"] = controller;
-            return RedirectToAction("Login", "home");
-        }
-
-        private void comprobarUsuario(String usuario, String action, String controller)
-        {
-            if (usuario == null)
-            {
-                redireccionarLogueo(action, controller);
-            }
-        } */
- }
+    }
 }
 

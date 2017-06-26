@@ -5,17 +5,38 @@
 @using TrabajoPractico1._1
 @model List<Reservas>
 
-<h2>Reportes</h2>
+@using (Html.BeginForm("Reporte", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="panel-body panel panel-info">
+        <div class="form-group panel-primary">
+            <div class="text-center panel-heading">
+                <h5>Reportes</h5>
+            </div>
+        </div>
+        <label>Fecha Inicio:</label>
+        <div class="form-group form-control">
+            <input type="date" name="fechaInicio" placeholder="Fecha inicio" />
+        </div>
+        <label>Fecha Fin:</label>
+        <div class="form-group form-control">
+            <input type="date" name="fechaFin" placeholder="Fecha Fin" />
+        </div>
+        <button type="submit" class="btn btn-info">Buscar</button><br /><br />
+        @if (ViewBag.error != null)
+        {
+            <div class="alert alert-danger text-center">
+                <h5>@(ViewBag.error)</h5>
+            </div>
+        }
 
-<form method="post" action="~/administrativo/ArmarReporte">
-	<label>Fecha inicio:</label>
-	<input type="date" name="fechaInicio" />
-    
-	<label>Fecha fin:</label>
-	<input type="date" name="fechaFin" />
-
-	<button type="submit">Buscar</button>
-</form>
+        @if (ViewBag.IntervaloFechas != null)
+        {
+            <div class="alert alert-info text-center">
+                <h5>@(ViewBag.IntervaloFechas)</h5>
+            </div>
+        }
+    </div>
+}
     
 @Html.Partial("_ResultadosReportes", Model)
 

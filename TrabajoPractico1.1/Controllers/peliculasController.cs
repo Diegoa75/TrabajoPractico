@@ -16,7 +16,7 @@ namespace TrabajoPractico.Controllers
 
         public ActionResult reserva(int id)
         {
-            sRegistrar reservaServ = new sRegistrar();
+            sReservas reservaServ = new sReservas();
             vReserva reserva = new vReserva();
 
             reserva.IdPelicula = id;
@@ -28,7 +28,7 @@ namespace TrabajoPractico.Controllers
         [HttpPost]
         public ActionResult reserva(FormCollection form, vReserva myReserva)
         {
-            sRegistrar reservaServ = new sRegistrar();
+            sReservas reservaServ = new sReservas();
 
             myReserva = reservaServ.cargarVersiones(myReserva);
             myReserva = reservaServ.cargarSedes(myReserva);
@@ -46,7 +46,7 @@ namespace TrabajoPractico.Controllers
 
         public ActionResult confirmar()
         {
-            sConfirmar sConfirma = new sConfirmar();
+            sPeliculas sConfirma = new sPeliculas();
             Reservas sesion = Session["reserva"] as Reservas;
 
             ViewBag.confirmacion = sConfirma.llenarVista(sesion);
@@ -54,17 +54,18 @@ namespace TrabajoPractico.Controllers
 
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult confirmarPelicula(Reservas myReserva)
         {
             if (ModelState.IsValid)
             {
-                sConfirmarPelicula confirmarServ = new sConfirmarPelicula();
+                sPeliculas confirmarServ = new sPeliculas();
 
                 myReserva = confirmarServ.completarReserva(Session["reserva"] as Reservas, myReserva);
 
-                Session["products"] = null;
+                Session.Remove("reserva");
 
                 var Datos = ctx.Sedes.Where(x => x.IdSede == myReserva.IdSede).FirstOrDefault();
 

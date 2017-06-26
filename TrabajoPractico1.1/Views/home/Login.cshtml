@@ -4,42 +4,48 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Login";
 }
+
 @if (ViewBag.Error != null)
-{
-	<h2>@ViewBag.Error</h2>
+{//si existe un error de logueo
+    <div class="col-md-6 col-md-offset-3">
+        <div class="alert alert-danger text-center">
+            <h5>@ViewBag.Error</h5>
+        </div>
+    </div>
 }
+else if (Session["Action"] != null)
+{//si se intenta ingresar a una pagina de administracion sin loguearse
+    <div class="col-md-6 col-md-offset-3">
+        <div class="alert alert-danger text-center">
+            <h5>Necesita estar logueado para ingresar a esta pagina</h5>
+        </div>
+    </div>
+}
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel-body panel panel-info">
+        <div class="form-group panel-primary">
+            <div class="text-center panel-heading">
+                <h5>Ingresar Credenciales</h5>
+            </div>
+        </div>
+        @using (Html.BeginForm("VerificarUsuario", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {//formulario de login
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="form-control">
+                    @Html.TextBoxFor(model => model.NombreUsuario, new { @placeholder = "Usuario" })
+                </div>
+                @Html.ValidationMessage("NombreUsuario")
+            </div>
+            <div class="form-group">
+                <div class="form-control">
+                    @Html.TextBoxFor(model => model.Password, new { @placeholder = "Contraseña" })
+                </div>
+                @Html.ValidationMessage("Password")
+            </div>
 
-<br/><br/><br/><br/>
-<div class="container-fluid">
-<div class="col-sm-4"></div>
-<div class="col-sm-4">
-
-
-                  
-     <div class="panel panel-info">             
-        <div class="panel-primary">
-	    <div class="container-fluid panel-heading"><h5>Ingresar Credenciales</h5></div></div>
-<form action="/Administrativo/VerificarUsuario" method="post" class="formulario-reservas">
-    
-  
-	@Html.AntiForgeryToken()
-	@Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    <br /><br />
-
-	 <div class="form-control">
-		@Html.TextBoxFor(model => model.NombreUsuario, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Usuario" })
-	</div>
-    <br /><br />
-	 <div class="form-control">
-		@Html.TextBoxFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Contraseña" })
-	</div>
-
-    <br /><br />
-	<button type="submit" class="btn btn-info">Login</button>   
-</form>
-
-          
+            <button type="submit" class="btn btn-info">Login</button><br /><br />
+        }
+    </div>
 </div>
-</div>
-<div class="col-sm-4"></div>
-</div>
+

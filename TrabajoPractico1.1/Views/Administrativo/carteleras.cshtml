@@ -1,16 +1,14 @@
-﻿@using TrabajoPractico1._1
-@model Carteleras
-@{
-	ViewBag.Title = "carteleras";
+﻿@{
+    ViewBag.Title = "carteleras";
 }
 
 <h2>Listado de carteleras</h2>
 @{ 
 	if (ViewBag.mensajeBorrar != null) {
-		<p class="mensaje-notificacion">@ViewBag.mensajeBorrar</p>
+		<p class="mensaje-notificacion">ViewBag.mensajeBorrar</p>
 	}
 }
-<a href="~/administrativo/crearCartelera" class="btn btn-info">Agregar nueva cartelera</a>
+<a href="~/administrativo/crearCartelera">Agregar nueva cartelera</a>
 <table class="table table-hover listado-cartelera">
 	<thead>
 		<tr>
@@ -23,11 +21,9 @@
 			<td>Version</td>
 			<td>Dias</td>
 			<td>Fecha de carga</td>
-			<td></td>
-			<td></td>
 		</tr>
 	</thead>
-	@foreach (Carteleras c in ViewBag.carteleras)
+	@foreach (var c in ViewBag.carteleras)
 	{
 		<tr>
 			<td>@c.IdSede</td>
@@ -69,7 +65,7 @@
 				}
 			</td>
 			<td>@c.FechaCarga</td>
-			<td><a href="~/administrativo/modificarCartelera/@c.IdCartelera" class="btn btn-info">Modificar</a></td>
+			<td><a href="~/administrativo/crearCartelera/@c.IdCartelera" class="btn btn-info">Modificar</a></td>
 			<td><a href="~/administrativo/eliminarCartelera/@c.IdCartelera" class="btn btn-info">Eliminar</a></td>
 		</tr>
 	}

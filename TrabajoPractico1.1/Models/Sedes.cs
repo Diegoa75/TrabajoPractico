@@ -7,7 +7,6 @@ namespace TrabajoPractico1._1
     {
         public class SedesMetadata
         {
-            [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "El nombre solo puede contener letras.")]
             [StringLength(100, ErrorMessage = "El nombre excede el limite de caracteres.")]
             [Required(ErrorMessage = "Debe ingresar el nombre.")]
             public string Nombre { get; set; }
