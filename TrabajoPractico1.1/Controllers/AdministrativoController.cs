@@ -11,6 +11,7 @@ namespace TrabajoPractico1._1.Controllers
     public class administrativoController : Controller
     {
         ContextoPractico ctx = new ContextoPractico();
+        sUsuarios usuariosServiceImpl = new sUsuarios();
         // GET: /Administrativo/
 
         public ActionResult Inicio()
@@ -203,12 +204,16 @@ namespace TrabajoPractico1._1.Controllers
         {
             if (ModelState.IsValid)
             {
-                Usuarios admin = ctx.Usuarios.Where(us => us.NombreUsuario == usuario.NombreUsuario &&
-                                                    us.Password == usuario.Password).SingleOrDefault();
+                Usuarios admin = usuariosServiceImpl.logearUsuario(usuario);
                 if (admin != null)
+                {
+                    Session["usuarioEnSesion"] = admin.NombreUsuario;
                     return RedirectToAction("Inicio");
+                }
                 else
+                {
                     TempData["Error"] = "Error de usuario y/o contraseña";
+                }
             }
             return RedirectToAction("Login", "home");
 
@@ -216,8 +221,16 @@ namespace TrabajoPractico1._1.Controllers
 
         public ActionResult Reportes()
         {
-            ViewBag.Listado = ctx.Sedes.ToList();
-            return View();
+        //  comprobarUsuario(usuarioEnSesion(), "Reportes", "Administrativo");
+            if (usuarioEnSesion() != null)
+            {
+                ViewBag.Listado = ctx.Sedes.ToList();
+                return View();
+            }
+            else 
+            {
+                return RedirectToAction("Login", "home");
+            }
         }
 
         [HttpPost]
@@ -289,5 +302,34 @@ namespace TrabajoPractico1._1.Controllers
 			return View("crearCartelera", carteleras);
 		}
 
-	}
+        private String usuarioEnSesion()
+        {
+            if (Session["usuarioEnSesion"] != null)
+            {
+                String usuario = (string)Session["usuarioEnSesion"];
+                return usuario;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /*
+        public ActionResult redireccionarLogueo(String action, String controller)
+        {
+            TempData["Error"] = "Debe logearse para acceder a esta sección";
+            TempData["Action"] = action;
+            TempData["Controller"] = controller;
+            return RedirectToAction("Login", "home");
+        }
+
+        private void comprobarUsuario(String usuario, String action, String controller)
+        {
+            if (usuario == null)
+            {
+                redireccionarLogueo(action, controller);
+            }
+        } */	
+
+    }
 }
