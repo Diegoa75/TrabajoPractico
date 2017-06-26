@@ -303,8 +303,6 @@ namespace TrabajoPractico1._1.Controllers
             return View("Peliculas");
         }
 
-
-
                                             //REPORTES
         public ActionResult Reportes()
         {
@@ -352,8 +350,8 @@ namespace TrabajoPractico1._1.Controllers
             return View("Reportes", reservas);
         }
 
-                                        //CARTELERAS
-		public ActionResult carteleras ()
+																			// CARTELERAS
+		public ActionResult carteleras()
 		{
 			List<Carteleras> listado = ctx.Carteleras.ToList();
 			ViewBag.carteleras = listado;
@@ -390,26 +388,36 @@ namespace TrabajoPractico1._1.Controllers
 			}
 
 			var carteleras = ctx.Carteleras.ToList();
-			return View("carteleras");
+			return View("carteleras", carteleras);
 		}
 
-		public ActionResult eliminarCartelera (int id)
+		public ActionResult eliminarCartelera(int id)
 		{
-			Carteleras aBorrar = new Carteleras();
-			var misCarteleras = ctx.Carteleras.ToList();
-			foreach (Carteleras c in misCarteleras)
+			List<Carteleras> misCarteleras = ctx.Carteleras.ToList();
+
+			Carteleras aBorrar = (from c in ctx.Carteleras
+														where c.IdCartelera == id
+														select c).FirstOrDefault();
+			if (aBorrar != null)
 			{
-				if (c.IdCartelera == id)
-				{
-					aBorrar = c;
-					misCarteleras.Remove(aBorrar);
-					ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
-				}
+				ctx.Carteleras.Remove(aBorrar);
+				ctx.SaveChanges();
+
+				ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
 			}
-			ViewBag.mensajeBorrar = "El registro no se ha podido borrar.";
+
+			ViewBag.carteleras = ctx.Carteleras.ToList();
 			return View("carteleras");
 		}
 
-    }
-}
+		public ActionResult modificarCartelera(int id)
+		{
+			Carteleras aModificar = (from c in ctx.Carteleras
+															 where c.IdCartelera == id
+															 select c).FirstOrDefault();
 
+			return View("crearCartelera", aModificar);
+		}
+
+	}
+}

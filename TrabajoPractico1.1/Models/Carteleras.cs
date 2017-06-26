@@ -73,7 +73,7 @@ namespace TrabajoPractico1._1
 		public List<string> horas ()
 		{
 			List<string> horas = new List<string>();
-			for (int i = 0; i < 24; i++)
+			for (int i = 15; i < 24; i++)
 			{
 				horas.Add(i + "hs.");
 			}

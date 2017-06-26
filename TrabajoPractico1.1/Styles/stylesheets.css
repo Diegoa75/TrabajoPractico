@@ -185,3 +185,44 @@ main {
 	margin-top: 20px;
 }
 
+.input-checkbox {
+    display: inline-block;
+    width: auto;
+    margin-right: 40px;
+}
+
+.input-checkbox input[type="checkbox"] {
+    display: inline-block;
+    margin-left: 15px;
+    width: auto;
+}
+
+.input-checkbox strong {
+    font-size: 16px;
+    font-weight: normal;
+    padding: 7px 0px;
+}
+
+.crear-cartelera-form label {
+    width: 48%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.crear-cartelera-form label:nth-child(even) {
+    float: right;
+}
+
+.crear-cartelera-form label:last-of-type {
+    width: 100%;
+    display: block;
+}
+
+label {
+    margin-bottom: 1.5em!important;
+}
+
+.btn-crear-cartelera  {
+    width: 30%;
+    display: inline-block;
+}
