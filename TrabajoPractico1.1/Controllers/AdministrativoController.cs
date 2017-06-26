@@ -255,5 +255,39 @@ namespace TrabajoPractico1._1.Controllers
 
             return View("Reportes", reservas);
         }
-    }
+
+		public ActionResult crearCartelera()
+		{
+			List<Sedes> sedes = ctx.Sedes.ToList();
+			ViewBag.sedes = sedes;
+
+			var peliculas = ctx.Peliculas.ToList();
+			ViewBag.peliculas = peliculas;
+
+			Carteleras miCartelera = new Carteleras();
+			ViewBag.horas = miCartelera.horas();
+
+			var versiones = ctx.Versiones.ToList();
+			ViewBag.versiones = versiones;
+
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult cargarCartelera(Carteleras c)
+		{
+			Carteleras miCartelera = new Carteleras();
+
+			if (ModelState.IsValid)
+			{
+				c.FechaCarga = System.DateTime.Now;
+				ctx.Carteleras.Add(c);
+				ctx.SaveChanges();
+			}
+
+			var carteleras = ctx.Carteleras.ToList();
+			return View("crearCartelera", carteleras);
+		}
+
+	}
 }

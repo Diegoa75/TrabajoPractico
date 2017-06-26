@@ -141,7 +141,6 @@
       <DependentUpon>ControllerWithContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\administrativoController.cs" />
-    <Compile Include="Controllers\cartelerasController.cs" />
     <Compile Include="Controllers\homeController.cs" />
     <Compile Include="Controllers\peliculasController.cs" />
     <Compile Include="Generos.cs">
@@ -408,7 +407,7 @@
     <Content Include="Views\administrativo\Peliculas.cshtml" />
     <Content Include="Views\peliculas\confirmar.cshtml" />
     <Content Include="Views\administrativo\Sedes.cshtml" />
-    <Content Include="Views\carteleras\crearCartelera.cshtml" />
+    <Content Include="Views\administrativo\crearCartelera.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

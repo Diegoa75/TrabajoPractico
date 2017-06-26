@@ -12,8 +12,7 @@
 	}
 }
 
-using (Html.BeginForm("NuevaCartelera", "Cartelera", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
+<form action="~/administrativo/cargarCartelera" method="POST" class="">
 	<label>
 		@Html.DropDownListFor(x => x.IdSede, new SelectList(ViewBag.sedes, "IdSede", "Nombre"), "Sedes")
 		@Html.ValidationMessage("IdSede")
@@ -61,40 +60,40 @@ using (Html.BeginForm("NuevaCartelera", "Cartelera", FormMethod.Post, new { enct
 
 	<label>
 		<span>
-			<input type="checkbox" value="Lunes" name="Lunes" />
 			<strong>Lunes</strong>
+			<input type="checkbox" value="Lunes" name="Lunes" />
 		</span>
 
 		<span>
-			<input type="checkbox" value="Martes" name="Martes" />
 			<strong>Martes</strong>
+			<input type="checkbox" value="Martes" name="Martes" />
 		</span>
 
 		<span>
-			<input type="checkbox" value="Miercoles" name="Miercoles" />
 			<strong>Miércoles</strong>
+			<input type="checkbox" value="Miercoles" name="Miercoles" />
 		</span>
 
 		<span>
-			<input type="checkbox" value="Jueves" name="Jueves" />
 			<strong>Jueves</strong>
+			<input type="checkbox" value="Jueves" name="Jueves" />
 		</span>
 
 		<span>
-			<input type="checkbox" value="Viernes" name="Viernes" />
 			<strong>Viernes</strong>
+			<input type="checkbox" value="Viernes" name="Viernes" />
 		</span>
 
 		<span>
-			<input type="checkbox" value="Sabado" name="Sabado" />
 			<strong>Sábado</strong>
+			<input type="checkbox" value="Sabado" name="Sabado" />
 		</span>
 
 		<span>
-			<input type="checkbox" value="Domingo" name="Domingo" />
 			<strong>Domingo</strong>
+			<input type="checkbox" value="Domingo" name="Domingo" />
 		</span>
 	</label>
-	
-	<input type="submit" value="Cargar Cartelera"/>	
-}
+
+	<button type="submit" class="btn btn-info btn-lg btn-block">Crear Cartelera</button>
+</form>
