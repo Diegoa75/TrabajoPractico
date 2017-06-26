@@ -10,7 +10,7 @@
 		<p class="mensaje-notificacion">@ViewBag.mensajeBorrar</p>
 	}
 }
-<a href="~/administrativo/crearCartelera">Agregar nueva cartelera</a>
+<a href="~/administrativo/crearCartelera" class="btn btn-info">Agregar nueva cartelera</a>
 <table class="table table-hover listado-cartelera">
 	<thead>
 		<tr>
@@ -23,6 +23,8 @@
 			<td>Version</td>
 			<td>Dias</td>
 			<td>Fecha de carga</td>
+			<td></td>
+			<td></td>
 		</tr>
 	</thead>
 	@foreach (Carteleras c in ViewBag.carteleras)
@@ -67,7 +69,7 @@
 				}
 			</td>
 			<td>@c.FechaCarga</td>
-			<td><a href="~/administrativo/crearCartelera/@c.IdCartelera" class="btn btn-info">Modificar</a></td>
+			<td><a href="~/administrativo/modificarCartelera/@c.IdCartelera" class="btn btn-info">Modificar</a></td>
 			<td><a href="~/administrativo/eliminarCartelera/@c.IdCartelera" class="btn btn-info">Eliminar</a></td>
 		</tr>
 	}

@@ -306,7 +306,7 @@ namespace TrabajoPractico1._1.Controllers
 			}
 
 			var carteleras = ctx.Carteleras.ToList();
-			return View("crearCartelera", carteleras);
+			return View("carteleras", carteleras);
 		}
 
 		public ActionResult eliminarCartelera (int id)
@@ -328,10 +328,13 @@ namespace TrabajoPractico1._1.Controllers
 			return View("carteleras");
 		}
 
-		public ActionResult modificarCartelera (Carteleras c)
+		public ActionResult modificarCartelera (int id)
 		{
-
-			return View("crearCartelera");
+			Carteleras aModificar = (from c in ctx.Carteleras
+														where c.IdCartelera == id
+														select c).FirstOrDefault();
+			
+			return View("crearCartelera", aModificar);
 		}
 
 		private String usuarioEnSesion()
