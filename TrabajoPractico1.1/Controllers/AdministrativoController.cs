@@ -117,6 +117,7 @@ namespace TrabajoPractico1._1.Controllers
                     sedeServiceImpl.guardarSede(nuevaSede);
                 }
             }
+
             ViewBag.Listado = sedeServiceImpl.obtenerSedes();
 
             return View("Sedes");
@@ -150,19 +151,9 @@ namespace TrabajoPractico1._1.Controllers
             }
             else
             {
-                //busca la sede a modificar
-                Sedes sedeEncontrada = sedeServiceImpl.buscarSedePorId(sedeModificada.IdSede);
-
-                if (sedeEncontrada != null)
-                {
-                    //modifica los datos por los actuales
-                    sedeEncontrada.Nombre = sedeModificada.Nombre;
-                    sedeEncontrada.Direccion = sedeModificada.Direccion;
-                    sedeEncontrada.PrecioGeneral = sedeModificada.PrecioGeneral;
-
-                    sedeServiceImpl.guardarCambiosEnContexto();
-                }
+                sedeServiceImpl.modificarSede(sedeModificada);
             }
+
             ViewBag.Listado = sedeServiceImpl.obtenerSedes();
 
             return View("Sedes");
@@ -230,6 +221,7 @@ namespace TrabajoPractico1._1.Controllers
             if (comprobarUsuario("Peliculas"))
             {
                 Peliculas Pelicula = peliculaServiceImpl.obtenerPeliculaPorId(id);
+                
                 ViewBag.Listado = peliculaServiceImpl.obtenerPeliculas();
                 ViewBag.GeneroId = generoServiceImpl.obtenerGeneros();
                 ViewBag.CalificacionId = calificacionServiceImpl.obtenerCalificaciones();
@@ -271,14 +263,8 @@ namespace TrabajoPractico1._1.Controllers
                         }
                     }
 
-                    //modifica los datos existentes por los nuevos
-                    peliculaEncontrada.Nombre = peliculaModificada.Nombre;
-                    peliculaEncontrada.Descripcion = peliculaModificada.Descripcion;
-                    peliculaEncontrada.IdCalificacion = peliculaModificada.IdCalificacion;
-                    peliculaEncontrada.IdGenero = peliculaModificada.IdGenero;
-                    peliculaEncontrada.Duracion = peliculaModificada.Duracion;
+                    peliculaServiceImpl.modificarPelicula(peliculaEncontrada, peliculaModificada);
 
-                    peliculaServiceImpl.guardarContexto();
                 }
             }
             ViewBag.Listado = peliculaServiceImpl.obtenerPeliculas();

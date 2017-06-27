@@ -52,7 +52,19 @@ namespace TrabajoPractico1._1.Servicios
         public void guardarPelicula(Peliculas nuevaPelicula)
         {
             ctx.Peliculas.Add(nuevaPelicula);
-            ctx.SaveChanges();
+            guardarContexto();
+        }
+
+        public void modificarPelicula(Peliculas Existente, Peliculas nuevaPelicula)
+        {
+            //modifica los datos existentes por los nuevos
+            Existente.Nombre = nuevaPelicula.Nombre;
+            Existente.Descripcion = nuevaPelicula.Descripcion;
+            Existente.IdCalificacion = nuevaPelicula.IdCalificacion;
+            Existente.IdGenero = nuevaPelicula.IdGenero;
+            Existente.Duracion = nuevaPelicula.Duracion;
+
+            guardarContexto();
         }
 
         public Reservas completarReserva(Reservas sesion, Reservas reserva )
@@ -64,7 +76,7 @@ namespace TrabajoPractico1._1.Servicios
             reserva.FechaCarga = DateTime.Now;
 
             ctx.Reservas.Add(reserva);
-            ctx.SaveChanges();
+            guardarContexto();
 
             return reserva;
         }

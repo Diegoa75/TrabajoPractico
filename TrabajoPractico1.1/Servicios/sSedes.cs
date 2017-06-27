@@ -19,7 +19,20 @@ namespace TrabajoPractico1._1.Servicios
         public void guardarSede(Sedes nuevaSede)
         {
             ctx.Sedes.Add(nuevaSede);
-            ctx.SaveChanges();
+            guardarContexto();
+        }
+        public void modificarSede(Sedes nuevaSede)
+        {
+            Sedes sedeEncontrada = buscarSedePorId(nuevaSede.IdSede);
+
+            if (sedeEncontrada != null)
+            {
+                sedeEncontrada.Nombre = nuevaSede.Nombre;
+                sedeEncontrada.Direccion = nuevaSede.Direccion;
+                sedeEncontrada.PrecioGeneral = nuevaSede.PrecioGeneral;
+
+                guardarContexto(); ;
+            }
         }
 
         public Sedes buscarSedePorId(int id)
@@ -52,7 +65,7 @@ namespace TrabajoPractico1._1.Servicios
             return sede;
         }
 
-        public void guardarCambiosEnContexto() 
+        public void guardarContexto()
         {
             ctx.SaveChanges();
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication1.Servicios
+namespace TrabajoPractico1._1.Servicios
 {
     public static class sString
     {
