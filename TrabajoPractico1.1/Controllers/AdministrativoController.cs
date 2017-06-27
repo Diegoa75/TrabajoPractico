@@ -376,6 +376,7 @@ namespace TrabajoPractico1._1.Controllers
 												select _c).ToList();
 
 				Carteleras pisaDias = new Carteleras();
+				Carteleras pisaFechas = new Carteleras();
 				// Verifica que no se solapen dias en las salas de las sedes.
 				foreach (Carteleras soloSedesIguales in sedes)
 				{
@@ -391,10 +392,19 @@ namespace TrabajoPractico1._1.Controllers
 						{
 							pisaDias = soloSedesIguales;
 						}
+
+						if (soloSedesIguales.validacionFecha(soloSedesIguales.FechaInicio, soloSedesIguales.FechaFin, c.FechaInicio) ||
+								soloSedesIguales.validacionFecha(soloSedesIguales.FechaInicio, soloSedesIguales.FechaFin, c.FechaFin)
+							)
+						{
+							pisaFechas = soloSedesIguales;
+						}
 					}
 				}
 
-				if (registroRepetido == null && pisaDias == null)
+
+
+				if (registroRepetido.IdCartelera > 0 && pisaDias.IdCartelera > 0 && pisaFechas.IdCartelera > 0)
 				{
 					ctx.Carteleras.Add(c);
 					ctx.SaveChanges();
