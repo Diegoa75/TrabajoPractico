@@ -10,19 +10,19 @@
 		<p class="mensaje-notificacion">@ViewBag.mensajeBorrar</p>
 	}
 }
-<a href="~/administrativo/crearCartelera" class="btn btn-info">Agregar nueva cartelera</a>
+<a href="~/administrativo/crearCartelera" class="btn-agregar-nueva-cartelera btn btn-info">Agregar nueva cartelera</a>
 <table class="table table-hover listado-cartelera">
 	<thead>
 		<tr>
 			<td class="col-sm-1">Sede</td>
 			<td class="col-sm-1">Pelicula</td>
 			<td class="col-sm-1">Hora de Inicio</td>
-			<td class="col-sm-1">Fecha de Inicio</td>
-			<td class="col-sm-1">Fecha de Fin</td>
+			<td class="col-sm-1">Inicio</td>
+			<td class="col-sm-1">Fin</td>
 			<td class="col-sm-1">Sala</td>
 			<td class="col-sm-1">Version</td>
 			<td class="col-sm-1">Dias</td>
-			<td class="col-sm-1">Fecha de carga</td>
+			<td class="col-sm-1">Carga</td>
 			<td class="col-sm-1"></td>
 			<td class="col-sm-1"></td>
 		</tr>
@@ -50,5 +50,5 @@
 			<td class="col-sm-1"><a href="~/administrativo/modificarCartelera/@c.IdCartelera" class="btn btn-info">Modificar</a></td>
 			<td class="col-sm-1"><a href="~/administrativo/eliminarCartelera/@c.IdCartelera" class="btn btn-info">Eliminar</a></td>
 		</tr>
-					}
+	}
 </table>

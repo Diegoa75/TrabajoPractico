@@ -83,7 +83,7 @@ thead {
 	color: whitesmoke;
 }
 
-label select,
+/*label select,
 label input {
 	font-size: 16px;
 	font-weight: normal;
@@ -94,7 +94,7 @@ label input {
 select::placeholder,
 input::placeholder {
 	color: gray;
-}
+}*/
 
 ul, li {
 	list-style-type: none;
@@ -222,22 +222,18 @@ main {
     vertical-align: top;
 }
 
-.crear-cartelera-form label:nth-child(even) {
-    float: right;
+.crear-cartelera-form label:nth-child(odd) {
+  float: right;
 }
 
 .crear-cartelera-form label:last-of-type {
-    width: 100%;
-    display: block;
+  width: 100%;
+  display: block;
+  float: none;
 }
 
 label {
     margin-bottom: 1.5em!important;
-}
-
-.btn-crear-cartelera  {
-    width: 30%;
-    display: inline-block;
 }
 
 footer {
@@ -264,4 +260,10 @@ footer ul {
 	display: flex;
 	justify-content: space-around;
 	margin-bottom: 0px;
+}
+
+.btn-agregar-nueva-cartelera {
+	width: 20%;
+	margin-bottom: 20px !important;
+	display: block !important;
 }
