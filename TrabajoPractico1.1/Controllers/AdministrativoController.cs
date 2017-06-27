@@ -340,22 +340,32 @@ namespace TrabajoPractico1._1.Controllers
         // CARTELERAS
         public ActionResult carteleras()
         {
-            List<Carteleras> listado = carteleraServiceImpl.obtenerCarteleras();
-            return View(listado);
+            if (comprobarUsuario("carteleras"))
+            {
+                List<Carteleras> listado = carteleraServiceImpl.obtenerCarteleras();
+                return View(listado);
+            }
+            else
+                return RedirectToAction("Login", "home");
         }
 
         public ActionResult crearCartelera()
         {
-            List<Sedes> sedes = sedeServiceImpl.obtenerSedes();
-            ViewBag.sedes = sedes;
+            if (comprobarUsuario("carteleras"))
+            {
+                List<Sedes> sedes = sedeServiceImpl.obtenerSedes();
+                ViewBag.sedes = sedes;
 
-            var peliculas = peliculaServiceImpl.obtenerPeliculas();
-            ViewBag.peliculas = peliculas;
+                var peliculas = peliculaServiceImpl.obtenerPeliculas();
+                ViewBag.peliculas = peliculas;
 
-            var versiones = versionServiceImpl.obtenerVersiones();
-            ViewBag.versiones = versiones;
+                var versiones = versionServiceImpl.obtenerVersiones();
+                ViewBag.versiones = versiones;
 
-            return View();
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "home");
         }
 
         [HttpPost]
@@ -415,34 +425,44 @@ namespace TrabajoPractico1._1.Controllers
 
         public ActionResult eliminarCartelera(int id)
         {
-            List<Carteleras> misCarteleras = carteleraServiceImpl.obtenerCarteleras();
-
-            Carteleras aBorrar = carteleraServiceImpl.buscarPorId(id);
-
-            if (aBorrar != null)
+            if (comprobarUsuario("carteleras"))
             {
-                carteleraServiceImpl.eliminarCartelera(aBorrar);
-                ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
-            }
+                List<Carteleras> misCarteleras = carteleraServiceImpl.obtenerCarteleras();
 
-            List<Carteleras> carteleras = carteleraServiceImpl.obtenerCarteleras();
-            return View("carteleras", carteleras);
+                Carteleras aBorrar = carteleraServiceImpl.buscarPorId(id);
+
+                if (aBorrar != null)
+                {
+                    carteleraServiceImpl.eliminarCartelera(aBorrar);
+                    ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
+                }
+
+                List<Carteleras> carteleras = carteleraServiceImpl.obtenerCarteleras();
+                return View("carteleras", carteleras);
+            }
+            else
+                return RedirectToAction("Login", "home");
         }
 
         public ActionResult modificarCartelera(int id)
         {
-            List<Sedes> sedes = sedeServiceImpl.obtenerSedes();
-            ViewBag.sedes = sedes;
+            if (comprobarUsuario("carteleras"))
+            {
+                List<Sedes> sedes = sedeServiceImpl.obtenerSedes();
+                ViewBag.sedes = sedes;
 
-            var peliculas = peliculaServiceImpl.obtenerPeliculas();
-            ViewBag.peliculas = peliculas;
+                var peliculas = peliculaServiceImpl.obtenerPeliculas();
+                ViewBag.peliculas = peliculas;
 
-            var versiones = versionServiceImpl.obtenerVersiones();
-            ViewBag.versiones = versiones;
+                var versiones = versionServiceImpl.obtenerVersiones();
+                ViewBag.versiones = versiones;
 
-            Carteleras aModificar = carteleraServiceImpl.buscarPorId(id);
+                Carteleras aModificar = carteleraServiceImpl.buscarPorId(id);
 
-            return View("crearCartelera", aModificar);
+                return View("crearCartelera", aModificar);
+            }
+            else
+                return RedirectToAction("Login", "home");
         }
 
     }
