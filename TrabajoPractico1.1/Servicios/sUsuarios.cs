@@ -24,6 +24,14 @@ namespace TrabajoPractico1._1.Models.Servicios
             return admin;
         }
 
+        public Usuarios buscarUsuarioPorNombre(string usuario)
+        {
+            Usuarios usuarioEncontrado = new Usuarios();
+
+            usuarioEncontrado = ctx.Usuarios.Where(u => u.NombreUsuario == usuario).SingleOrDefault();
+
+            return usuarioEncontrado;
+        }
 
     }
 }

@@ -52,6 +52,27 @@ namespace TrabajoPractico1._1.Servicios
             return cartelera;
         }
 
+        public List<Carteleras> buscarPorFechaDiasYSalas(Carteleras c)
+        {
+            List<Carteleras> carteleras = new List<Carteleras>();
+
+            carteleras = (from _c in ctx.Carteleras
+                          where _c.IdSede == c.IdSede
+                          && _c.NumeroSala == c.NumeroSala
+                          && ((c.FechaInicio >= _c.FechaInicio && c.FechaInicio <= _c.FechaFin)
+                          || (c.FechaFin >= _c.FechaInicio && c.FechaFin <= _c.FechaFin))
+                          && (c.Lunes == _c.Lunes
+                          || c.Martes == _c.Martes
+                          || c.Miercoles == _c.Miercoles
+                          || c.Jueves == _c.Jueves
+                          || c.Viernes == _c.Viernes
+                          || c.Sabado == _c.Sabado
+                          || c.Domingo == _c.Domingo)
+                          select _c).ToList();
+
+            return carteleras;
+        }
+
         public List<Carteleras> buscarPorSede(Carteleras carteleraABuscar)
         {
             List<Carteleras> carteleras = new List<Carteleras>();

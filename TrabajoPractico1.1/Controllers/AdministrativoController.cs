@@ -10,7 +10,6 @@ namespace TrabajoPractico1._1.Controllers
 {
     public class administrativoController : Controller
     {
-        ContextoPractico ctx = new ContextoPractico();
         sPeliculas peliculaServiceImpl = new sPeliculas();
         sReportes reporteServiceImpl = new sReportes();
         sSedes sedeServiceImpl = new sSedes();
@@ -18,6 +17,7 @@ namespace TrabajoPractico1._1.Controllers
         sCalificaciones calificacionServiceImpl = new sCalificaciones();
         sCarteleras carteleraServiceImpl = new sCarteleras();
         sVersiones versionServiceImpl = new sVersiones();
+        sUsuarios usuarioServiceImpl = new sUsuarios();
 
         //Administrativo/
         //LOGIN
@@ -27,8 +27,7 @@ namespace TrabajoPractico1._1.Controllers
         {
             if (ModelState.IsValid)
             {
-                sUsuarios servicioUsuarios = new sUsuarios();
-                Usuarios admin = servicioUsuarios.logearUsuario(usuario);
+                Usuarios admin = usuarioServiceImpl.logearUsuario(usuario);
                 if (admin != null)
                 {
                     //verifica si necesita redirigir a una pagina
@@ -57,8 +56,7 @@ namespace TrabajoPractico1._1.Controllers
             if (Session["usuarioEnSesion"] != null)
             {
                 string usuario = Session["usuarioEnSesion"] as string;
-                var usuarioExistente = ctx.Usuarios.Where(u => u.NombreUsuario == usuario
-                                                          ).SingleOrDefault();
+                var usuarioExistente = usuarioServiceImpl.buscarUsuarioPorNombre(usuario);
                 if (usuarioExistente != null)
                 {
                     return true;
@@ -378,19 +376,7 @@ namespace TrabajoPractico1._1.Controllers
 			{
 				var registroRepetido = carteleraServiceImpl.buscarPorSedePeliculaYVersion(c);
 
-				var _carteleras = (from _c in ctx.Carteleras
-													 where _c.IdSede == c.IdSede
-																				 && _c.NumeroSala == c.NumeroSala
-																				 && ((c.FechaInicio >= _c.FechaInicio && c.FechaInicio <= _c.FechaFin)
-																						 || (c.FechaFin >= _c.FechaInicio && c.FechaFin <= _c.FechaFin))
-																				 && (c.Lunes == _c.Lunes
-																						 || c.Martes == _c.Martes
-																						 || c.Miercoles == _c.Miercoles
-																						 || c.Jueves == _c.Jueves
-																						 || c.Viernes == _c.Viernes
-																						 || c.Sabado == _c.Sabado
-																						 || c.Domingo == _c.Domingo)
-													 select _c).ToList();
+                var _carteleras = carteleraServiceImpl.buscarPorFechaDiasYSalas(c);
 
 				if (registroRepetido == null && _carteleras.Count == 0)
 				{
