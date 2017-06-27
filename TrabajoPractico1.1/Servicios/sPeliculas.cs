@@ -10,6 +10,51 @@ namespace TrabajoPractico1._1.Servicios
     {
         ContextoPractico ctx = new ContextoPractico();
 
+        public List<Peliculas> obtenerPeliculas()
+        {
+            List<Peliculas> peliculas = new List<Peliculas>();
+
+            peliculas = ctx.Peliculas.ToList();
+
+            return peliculas;
+        }
+
+        public List<Peliculas> obtenerPeliculasYGeneros()
+        {
+            List<Peliculas> peliculas = new List<Peliculas>();
+
+            peliculas = ctx.Peliculas.Include("Generos").ToList();
+
+            return peliculas;
+        }
+
+        public Peliculas obtenerPeliculaPorId(int id)
+        {
+            Peliculas pelicula = new Peliculas();
+
+            pelicula = (from peli in ctx.Peliculas
+                         where id == peli.IdPelicula
+                         select peli).FirstOrDefault();
+
+            return pelicula;
+        }
+
+        public Peliculas buscarPeliculaConMismoNombre(Peliculas pelicula)
+        {
+            Peliculas peliculaEncontrada = new Peliculas();
+
+            peliculaEncontrada = ctx.Peliculas.Where(p => p.Nombre == pelicula.Nombre
+                                                && p.IdPelicula != pelicula.IdPelicula).FirstOrDefault();
+
+            return peliculaEncontrada;
+        }
+
+        public void guardarPelicula(Peliculas nuevaPelicula)
+        {
+            ctx.Peliculas.Add(nuevaPelicula);
+            ctx.SaveChanges();
+        }
+
         public Reservas completarReserva(Reservas sesion, Reservas reserva )
         {
             reserva.IdPelicula = sesion.IdPelicula;
@@ -39,14 +84,9 @@ namespace TrabajoPractico1._1.Servicios
             return confirmacion;
         }
 
-        public List<Peliculas> obtenerPeliculas()
+        public void guardarContexto()
         {
-            List<Peliculas> peliculas = new List<Peliculas>();
-
-            peliculas = ctx.Peliculas.ToList();
-
-            return peliculas;
+            ctx.SaveChanges();
         }
-
     }
 }
