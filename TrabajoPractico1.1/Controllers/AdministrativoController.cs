@@ -369,24 +369,28 @@ namespace TrabajoPractico1._1.Controllers
 		[HttpPost]
 		public ActionResult cargarCartelera(Carteleras c)
 		{
-			Carteleras miCartelera = new Carteleras();
+            if (ModelState.IsValid)
+            {
+                //validacion no repetir sede/pelicula/version
+                var registroRepetido = carteleraServiceImpl.buscarPorSedePeliculaYVersion(c);
+                //validacion solapamiento de fechas
+                var _carteleras = carteleraServiceImpl.buscarPorFechaDiasYSalas(c);
 
-			var registroAmodificar = carteleraServiceImpl.buscarPorId(c.IdCartelera);
+                if (registroRepetido == null && _carteleras.Count == 0)
+                {
+                    //si hay que modificar trae el registro a editar
+			        var registroAmodificar = carteleraServiceImpl.buscarPorId(c.IdCartelera);
+                    
+			        if (registroAmodificar != null)
+			        {
+                        carteleraServiceImpl.modificarCartelera(registroAmodificar, c);
 
-			if (registroAmodificar != null)
-			{
-				carteleraServiceImpl.eliminarCartelera(registroAmodificar);
-			}
-
-			c.FechaCarga = DateTime.Now;
-			if (ModelState.IsValid)
-			{				
-				var registroRepetido = carteleraServiceImpl.buscarPorSedePeliculaYVersion(c);
-
-        var _carteleras = carteleraServiceImpl.buscarPorFechaDiasYSalas(c);
-
-				if (registroRepetido == null && _carteleras.Count == 0)
-				{
+                        return RedirectToAction("carteleras");
+			        }
+                   
+                    //si no hay que modificar crea el registro nuevo
+			        c.FechaCarga = DateTime.Now;
+				
 					carteleraServiceImpl.agregarCartelera(c);
 				}
 				else
@@ -394,16 +398,14 @@ namespace TrabajoPractico1._1.Controllers
 					ViewBag.errorCarga = "No se puede cargar la cartelera.";
 				}
 			}
-			var carteleras = carteleraServiceImpl.obtenerCarteleras();
-			return View("carteleras", carteleras);
+            List<Carteleras> listado = carteleraServiceImpl.obtenerCarteleras();
+			return View("carteleras",listado);
 		}
 
 		public ActionResult eliminarCartelera(int id)
         {
             if (comprobarUsuario("carteleras"))
             {
-                List<Carteleras> misCarteleras = carteleraServiceImpl.obtenerCarteleras();
-
                 Carteleras aBorrar = carteleraServiceImpl.buscarPorId(id);
 
                 if (aBorrar != null)
@@ -412,8 +414,8 @@ namespace TrabajoPractico1._1.Controllers
                     ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
                 }
 
-                List<Carteleras> carteleras = carteleraServiceImpl.obtenerCarteleras();
-                return View("carteleras", carteleras);
+                List<Carteleras> listado = carteleraServiceImpl.obtenerCarteleras();
+                return View("carteleras", listado);
             }
             else
                 return RedirectToAction("Login", "home");
@@ -423,17 +425,13 @@ namespace TrabajoPractico1._1.Controllers
         {
             if (comprobarUsuario("carteleras"))
             {
-                List<Sedes> sedes = sedeServiceImpl.obtenerSedes();
-                ViewBag.sedes = sedes;
+                ViewBag.sedes = sedeServiceImpl.obtenerSedes();
 
-                var peliculas = peliculaServiceImpl.obtenerPeliculas();
-                ViewBag.peliculas = peliculas;
+                ViewBag.peliculas = peliculaServiceImpl.obtenerPeliculas();
 
-                var versiones = versionServiceImpl.obtenerVersiones();
-                ViewBag.versiones = versiones;
+                ViewBag.versiones = versionServiceImpl.obtenerVersiones();
 
                 Carteleras aModificar = carteleraServiceImpl.buscarPorId(id);
-								TempData["id"] = aModificar.IdCartelera;
 
                 return View("crearCartelera", aModificar);
             }

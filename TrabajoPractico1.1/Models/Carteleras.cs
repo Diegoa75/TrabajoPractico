@@ -19,12 +19,15 @@ namespace TrabajoPractico1._1
 			[Required(ErrorMessage = "El campo es requerido.")]
 			public int HoraInicio { get; set; }
 
-			[Required(ErrorMessage = "El campo es requerido.")]
-			public DateTime FechaInicio { get; set; }
+            [Required(ErrorMessage = "El campo es requerido.")]
+            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+            public DateTime FechaInicio { get; set; }
 
-			[Required(ErrorMessage = "El campo es requerido.")]
-			public DateTime FechaFin { get; set; }
+            [Required(ErrorMessage = "El campo es requerido.")]
+            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+            public DateTime FechaFin { get; set; }
 
+            [RegularExpression("^\\d+$", ErrorMessage = "La sala debe ser sólo números.")]
 			[Required(ErrorMessage = "El campo es requerido.")]
 			public int NumeroSala { get; set; }
 
@@ -34,34 +37,6 @@ namespace TrabajoPractico1._1
 			[Required(ErrorMessage = "El campo es requerido.")]
 			public DateTime FechaCarga { get; set; }
 		}
-
-		//public List<string> horariosDelDia(int horarioInicio, int duracionPelicula)
-		//{
-		//	List<string> listado = new List<string>();
-		//	float _horarioInicio = (float)horarioInicio;
-
-		//	listado.Add(horarioInicio.ToString());
-		//	int horarioInicioEnMinutos = 0;
-		//	for (int i = 1; i < 7; i++)
-		//	{
-		//		horarioInicioEnMinutos += duracionPelicula + 30;
-
-		//		int horas = horarioInicioEnMinutos / 60;
-		//		int minutos = horarioInicioEnMinutos % 60;
-
-		//		int horarioDeinicioMasHoras = horarioInicio + horas;
-		//		decimal minutosADoble = (decimal)(minutos / 100m);
-
-		//		Decimal nuevaFuncion = Decimal.Round((horarioDeinicioMasHoras + minutosADoble), 2);
-		//		if(nuevaFuncion > 24)
-		//		{
-		//			nuevaFuncion = nuevaFuncion - 24;
-		//		}
-		//		listado.Add(nuevaFuncion.ToString());
-		//	}
-
-		//	return listado;
-		//}
 
 		public bool validacionFecha (DateTime inicio, DateTime fin, DateTime _inicio, DateTime _fin)
 		{

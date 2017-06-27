@@ -4,6 +4,7 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Peliculas";
 }
+<h2>Gestión de Películas</h2>
 <!--Si hubo un error al agregar o modificar pelicula-->
 @if (ViewBag.Error != null)
 {
@@ -109,8 +110,12 @@ else if (Model != null)
                     {
                         <img src="@Model.Imagen" class="img-responsive" alt="@Model.Nombre" />
                     }
-                    @Html.TextBox("myImagen", "", new { type = "file" })
                 </label>
+                <div class="form-group">
+                    <div class="form-control">
+                        @Html.TextBox("myImagen", "", new { type = "file" })
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="form-control">
                         @Html.TextBox("Duracion", Model.Duracion, new { @placeholder = "Duracion" })
@@ -142,7 +147,7 @@ else
             <td class="col-sm-1">Genero</td>
             <td class="col-sm-1">Calificacion</td>
             <td class="col-sm-2">Imagen</td>
-            <td class="col-sm-1 ">Acciones</td>
+            <td class="col-sm-1 "></td>
         </tr>
     </thead>
     @foreach (var pelicula in ViewBag.Listado as IEnumerable<Peliculas>)

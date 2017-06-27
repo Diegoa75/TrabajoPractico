@@ -3,19 +3,26 @@
 @{
 	ViewBag.Title = "carteleras";
 }
-<h2>Listado de carteleras</h2>
+<h2>Gestión de carteleras</h2>
 @{
-	if (ViewBag.mensajeBorrar != null)
-	{
-		<p class="mensaje-notificacion">@ViewBag.mensajeBorrar</p>
-	}
+    if (ViewBag.mensajeBorrar != null)
+    {
+        <div class="alert alert-info text-center">
+            <h5>@ViewBag.mensajeBorrar</h5>
+        </div>
+    }
 
-	if (ViewBag.errorCarga != null)
-	{
-		<p class="mensaje-notificacion">@ViewBag.errorCarga</p>
-	}
+    if (ViewBag.errorCarga != null)
+    {
+        <div class="alert alert-danger text-center">
+            <h5>@ViewBag.errorCarga</h5>
+        </div>
+    }
 }
-<a href="~/administrativo/crearCartelera" class="btn-agregar-nueva-cartelera btn btn-info">Agregar nueva cartelera</a>
+<div class="form-group navbar-right col-sm-4">
+    <a href="~/administrativo/crearCartelera" class="btn btn-danger">nueva cartelera</a>
+</div>
+
 <table class="table table-hover listado-cartelera">
 	<thead>
 		<tr>
@@ -41,7 +48,7 @@
 			<td class="col-sm-1">@c.FechaInicio.ToShortDateString()</td>
 			<td class="col-sm-1">@c.FechaFin.ToShortDateString()</td>
 			<td class="col-sm-1">@c.NumeroSala</td>
-			<td class="col-sm-1">@c.FechaInicio.ToShortDateString()</td>
+			<td class="col-sm-1">@c.Versiones.Nombre</td>
 			<td class="col-sm-1">
 				@if (c.Lunes != false) { <span>Lu </span> }
 				@if (c.Martes != false) { <span>Ma </span> }

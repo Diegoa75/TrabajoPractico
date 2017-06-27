@@ -4,25 +4,25 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Home";
 }
-@*<ul class="listado-cartelera">*@
-    @foreach (Peliculas Item in Model)
-    {
-        <div class="cartelera">
-            <div class="info">
-                <div class="title">
-                    <a href="/peliculas/reserva/@Item.IdPelicula">
-                        <img src=@Item.Imagen />
-                    </a>
-                </div>
-                <div class="titulo">@Item.Nombre</div>
-                <div class="genero">
-                    @Item.Generos.Nombre
-                </div>
-                <div class="clasificacion">
-                    @Item.Calificaciones.Nombre 
-                </div>
-                <a href="/peliculas/reserva/@Item.IdPelicula"> <div class="reservar2">Reservar</div> </a>
+
+@foreach (Peliculas Item in Model)
+{
+    <div class="cartelera">
+        <div class="info">
+            <div class="title">
+                <a href="/peliculas/reserva/@Item.IdPelicula">
+                    <img src=@Item.Imagen />
+                </a>
             </div>
+            <div class="titulo">@Item.Nombre</div>
+            <div class="genero">
+                @Item.Generos.Nombre
+            </div>
+            <div class="clasificacion">
+                @Item.Calificaciones.Nombre 
+            </div>
+            <a href="/peliculas/reserva/@Item.IdPelicula"> <div class="reservar2">Reservar</div> </a>
         </div>
-    }
+    </div>
+}
 

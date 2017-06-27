@@ -4,6 +4,7 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Sedes";
 }
+<h2>Gestión de Sedes</h2>
 <!--Si hubo un error al agregar o modificar sedes-->
 @if (ViewBag.Error != null)
 {
@@ -101,7 +102,7 @@ else
             <td class="col-sm-1">Nombre</td>
             <td class="col-sm-1">Direccion</td>
             <td class="col-sm-1">Precio</td>
-            <td class="col-sm-1">Acciones</td>
+            <td class="col-sm-1"></td>
         </tr>
     </thead>
     @foreach (var sede in ViewBag.Listado)
