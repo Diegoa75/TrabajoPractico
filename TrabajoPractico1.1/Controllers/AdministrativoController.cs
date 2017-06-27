@@ -144,18 +144,19 @@ namespace TrabajoPractico1._1.Controllers
         [HttpPost]
         public ActionResult ModificarSede(Sedes sedeModificada)
         {
-            //verifica que no se este cargando una sede con mismo nombre y direccion a una existente
-            var sedeExistente = sedeServiceImpl.buscarSedeIgualALaModificada(sedeModificada);
+            if (ModelState.IsValid)
+            {//verifica que no se este cargando una sede con mismo nombre y direccion a una existente
+                var sedeExistente = sedeServiceImpl.buscarSedeIgualALaModificada(sedeModificada);
 
-            if (sedeExistente != null)
-            {
-                ViewBag.Error = "Ya existe una Sede con ese nombre y esa dirección";
+                if (sedeExistente != null)
+                {
+                    ViewBag.Error = "Ya existe una Sede con ese nombre y esa dirección";
+                }
+                else
+                {
+                    sedeServiceImpl.modificarSede(sedeModificada);
+                }
             }
-            else
-            {
-                sedeServiceImpl.modificarSede(sedeModificada);
-            }
-
             ViewBag.Listado = sedeServiceImpl.obtenerSedes();
 
             return View("Sedes");
@@ -237,36 +238,39 @@ namespace TrabajoPractico1._1.Controllers
         [HttpPost]
         public ActionResult ModificarPelicula(Peliculas peliculaModificada, string myImagen)
         {
-            Peliculas peliculaEncontrada = peliculaServiceImpl.obtenerPeliculaPorId(peliculaModificada.IdPelicula);
-
-            if (peliculaEncontrada != null)
+            if (ModelState.IsValid)
             {
-                var peliculaExistente = peliculaServiceImpl.buscarPeliculaConMismoNombre(peliculaModificada);
+                Peliculas peliculaEncontrada = peliculaServiceImpl.obtenerPeliculaPorId(peliculaModificada.IdPelicula);
 
-                if (peliculaExistente != null)
-                    ViewBag.Error = "Ya existe una Pelicula con ese nombre";
-                else
+                if (peliculaEncontrada != null)
                 {
-                    //Comprueba si se agrego una foto nueva para modificar la actual
-                    if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+                    var peliculaExistente = peliculaServiceImpl.buscarPeliculaConMismoNombre(peliculaModificada);
+
+                    if (peliculaExistente != null)
+                        ViewBag.Error = "Ya existe una Pelicula con ese nombre";
+                    else
                     {
-                        //TODO: Agregar validacion para confirmar que el archivo es una imagen
-                        if (!string.IsNullOrEmpty(myImagen))
+                        //Comprueba si se agrego una foto nueva para modificar la actual
+                        if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
                         {
-                            //elimina la foto anterior si tenia
-                            if (!string.IsNullOrEmpty(peliculaEncontrada.Imagen))
+                            //TODO: Agregar validacion para confirmar que el archivo es una imagen
+                            if (!string.IsNullOrEmpty(myImagen))
                             {
-                                sImagenes.Borrar(peliculaEncontrada.Imagen);
+                                //elimina la foto anterior si tenia
+                                if (!string.IsNullOrEmpty(peliculaEncontrada.Imagen))
+                                {
+                                    sImagenes.Borrar(peliculaEncontrada.Imagen);
+                                }
+                                //creo un nombre "nombre" 
+                                string nombreSignificativo = peliculaModificada.Nombre;
+                                string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombreSignificativo);
+                                peliculaEncontrada.Imagen = pathRelativoImagen;
                             }
-                            //creo un nombre "nombre" 
-                            string nombreSignificativo = peliculaModificada.Nombre;
-                            string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombreSignificativo);
-                            peliculaEncontrada.Imagen = pathRelativoImagen;
                         }
+
+                        peliculaServiceImpl.modificarPelicula(peliculaEncontrada, peliculaModificada);
+
                     }
-
-                    peliculaServiceImpl.modificarPelicula(peliculaEncontrada, peliculaModificada);
-
                 }
             }
             ViewBag.Listado = peliculaServiceImpl.obtenerPeliculas();
