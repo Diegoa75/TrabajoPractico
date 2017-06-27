@@ -13,6 +13,10 @@
                 <h5>Reportes</h5>
             </div>
         </div>
+        <label>Pelicula:</label>
+        <div class="form-group form-control">
+            @Html.DropDownList("idPelicula",new SelectList(ViewBag.Peliculas, "IdPelicula", "Nombre"), "--Seleccione una pelicula--")
+        </div>
         <label>Fecha Inicio:</label>
         <div class="form-group form-control">
             <input type="date" name="fechaInicio" placeholder="Fecha inicio" />

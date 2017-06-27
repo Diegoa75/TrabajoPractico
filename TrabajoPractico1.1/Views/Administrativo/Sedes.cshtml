@@ -74,7 +74,7 @@ else if (Model != null)
                 </div>
                 <div class="form-group">
                     <div class="form-control">
-                        @Html.TextBox("PrecioGeneral", Model.PrecioGeneral, new { @placeholder = "PrecioGeneral" })
+                        @Html.TextBox("PrecioGeneral", Model.PrecioGeneral.ToString("0"), new { @placeholder = "PrecioGeneral" })
                     </div>
                     @Html.ValidationMessage("PrecioGeneral")
                 </div>
@@ -109,7 +109,7 @@ else
         <tr>
             <td class="col-sm-1">@sede.Nombre</td>
             <td class="col-sm-1">@sede.Direccion</td>
-            <td class="col-sm-1">@sede.PrecioGeneral</td>
+            <td class="col-sm-1">@sede.PrecioGeneral.ToString("0")</td>
             <td class="col-sm-1"><a href="~/Administrativo/ModificarSede/@sede.IdSede" class="btn btn-info">Modificar</a></td>
         </tr>
     }

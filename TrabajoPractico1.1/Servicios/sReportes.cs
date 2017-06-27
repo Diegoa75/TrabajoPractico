@@ -11,12 +11,13 @@ namespace TrabajoPractico1._1.Servicios
     {
         ContextoPractico ctx = new ContextoPractico();
 
-        public List<Reservas> buscarReservasEntreFechas(DateTime fechaInicio, DateTime fechaFin)
+        public List<Reservas> buscarReservasEntreFechas(DateTime fechaInicio, DateTime fechaFin, int idPelicula)
         {
             List<Reservas> reservas = new List<Reservas>();
 
             reservas = (from r in ctx.Reservas
                         where (fechaFin >= r.FechaCarga && r.FechaCarga >= fechaInicio)
+                        where (r.IdPelicula == idPelicula)
                         select r).ToList();
 
             return reservas;
