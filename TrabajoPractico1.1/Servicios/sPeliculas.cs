@@ -38,5 +38,15 @@ namespace TrabajoPractico1._1.Servicios
 
             return confirmacion;
         }
+
+        public List<Peliculas> obtenerPeliculas()
+        {
+            List<Peliculas> peliculas = new List<Peliculas>();
+
+            peliculas = ctx.Peliculas.ToList();
+
+            return peliculas;
+        }
+
     }
 }

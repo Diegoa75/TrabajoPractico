@@ -12,6 +12,7 @@ namespace TrabajoPractico1._1.Controllers
     {
         ContextoPractico ctx = new ContextoPractico();
         sPeliculas peliculaServiceImpl = new sPeliculas();
+        sReportes reporteServiceImpl = new sReportes();
         sSedes sedeServiceImpl = new sSedes();
 
         //Administrativo/
@@ -302,6 +303,7 @@ namespace TrabajoPractico1._1.Controllers
         {
             if (comprobarUsuario("Reportes"))
             {
+                ViewBag.Peliculas = peliculaServiceImpl.obtenerPeliculas();
                 return View();
             }
             else
@@ -311,15 +313,17 @@ namespace TrabajoPractico1._1.Controllers
         [HttpPost]
         public ActionResult Reporte(FormCollection formulario)
         {
-            sReportes reservaServ = new sReportes();
             DateTime fechaInicio;
             DateTime fechaFin;
             TimeSpan ts;
+            int idPelicula;
+            ViewBag.Peliculas = peliculaServiceImpl.obtenerPeliculas();
 
             try
             {
-                fechaInicio = Convert.ToDateTime(formulario["fechaInicio"]);
-                fechaFin = Convert.ToDateTime(formulario["fechaFin"]);
+                fechaInicio =   Convert.ToDateTime(formulario["fechaInicio"]);
+                fechaFin =      Convert.ToDateTime(formulario["fechaFin"]);
+                idPelicula =    Convert.ToInt16(formulario["idPelicula"]);
                 ts = fechaFin - fechaInicio;
             }
             catch (Exception)
@@ -329,17 +333,15 @@ namespace TrabajoPractico1._1.Controllers
             }
 
             List<Reservas> reservas = new List<Reservas>();
-
-            ViewBag.error = reservaServ.validarReservas(ts);
+            ViewBag.error = reporteServiceImpl.validarReservas(ts);
 
             if (ViewBag.error != null)
             {
                 return View("Reportes");
             }
 
-            reservas = reservaServ.buscarReservasEntreFechas(fechaInicio, fechaFin);
-
-            ViewBag.IntervaloFechas = "El intervalo de fechas buscado es del " + fechaInicio.ToShortDateString() + " hasta " + fechaFin.ToShortDateString() + "";
+            reservas = reporteServiceImpl.buscarReservasEntreFechas(fechaInicio, fechaFin, idPelicula);
+            ViewBag.IntervaloFechas = "El intervalo de fechas buscado es del " + fechaInicio.ToShortDateString() + " hasta " + fechaFin.ToShortDateString() + " para la pelicula ";
 
             return View("Reportes", reservas);
         }
