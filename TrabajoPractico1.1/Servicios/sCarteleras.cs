@@ -13,7 +13,7 @@ namespace TrabajoPractico1._1.Servicios
 
         public List<Carteleras> obtenerCarteleras()
         {
-            return ctx.Carteleras.ToList();
+					return ctx.Carteleras.Include("Sedes").Include("Peliculas").ToList();
         }
 
         public void agregarCartelera(Carteleras nuevaCartelera)
