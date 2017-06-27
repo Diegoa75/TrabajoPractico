@@ -10,19 +10,19 @@
 		<p class="mensaje-notificacion">@ViewBag.mensajeBorrar</p>
 	}
 }
-<a href="~/administrativo/crearCartelera" class="btn btn-info">Agregar nueva cartelera</a>
+<a href="~/administrativo/crearCartelera" class="btn-agregar-nueva-cartelera btn btn-info">Agregar nueva cartelera</a>
 <table class="table table-hover listado-cartelera">
 	<thead>
 		<tr>
 			<td class="col-sm-1">Sede</td>
 			<td class="col-sm-1">Pelicula</td>
 			<td class="col-sm-1">Hora de Inicio</td>
-			<td class="col-sm-1">Fecha de Inicio</td>
-			<td class="col-sm-1">Fecha de Fin</td>
+			<td class="col-sm-1">Inicio</td>
+			<td class="col-sm-1">Fin</td>
 			<td class="col-sm-1">Sala</td>
 			<td class="col-sm-1">Version</td>
 			<td class="col-sm-1">Dias</td>
-			<td class="col-sm-1">Fecha de carga</td>
+			<td class="col-sm-1">Carga</td>
 			<td class="col-sm-1"></td>
 			<td class="col-sm-1"></td>
 		</tr>
@@ -38,39 +38,17 @@
 			<td class="col-sm-1">@c.NumeroSala</td>
 			<td class="col-sm-1">@c.FechaInicio.ToShortDateString()</td>
 			<td class="col-sm-1">
-				@{
-					string l = "";
-					string m = "";
-					string mi = "";
-					string j = "";
-					string v = "";
-					string s = "";
-					string d = "";
-					if (c.Lunes != false) { l = "Lunes "; }
-					@l
-					
-					if (c.Martes != false) { m = "Martes "; }
-					@m
-
-					if (c.Miercoles != false) { mi = "Miercoles "; }
-					@mi
-
-					if (c.Jueves != false) { j = "Jueves "; }
-					@j
-
-					if (c.Viernes != false) { v = "Viernes "; }
-					@v
-
-					if (c.Sabado != false) { s = "Sábado "; }
-					@s
-
-					if (c.Domingo != false) { d = "Domingo "; }
-					@d
-				}
+				@if (c.Lunes != false) { <span>Lu </span> }
+				@if (c.Martes != false) { <span>Ma </span> }
+				@if (c.Miercoles != false) { <span>Mi </span> }
+				@if (c.Jueves != false) { <span>Ju </span> }
+				@if (c.Viernes != false) { <span>Vi </span> }
+				@if (c.Sabado != false) { <span>Sa </span> }
+				@if (c.Domingo != false) { <span>Do </span>}
 			</td>
 			<td class="col-sm-1">@c.FechaCarga.ToShortDateString()</td>
 			<td class="col-sm-1"><a href="~/administrativo/modificarCartelera/@c.IdCartelera" class="btn btn-info">Modificar</a></td>
 			<td class="col-sm-1"><a href="~/administrativo/eliminarCartelera/@c.IdCartelera" class="btn btn-info">Eliminar</a></td>
 		</tr>
-					}
+	}
 </table>

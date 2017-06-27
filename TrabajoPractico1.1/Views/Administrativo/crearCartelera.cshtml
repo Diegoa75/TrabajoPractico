@@ -3,23 +3,25 @@
 @{
 	ViewBag.Title = "crearCartelera";
 }
-<h2>Crear nueva Cartelera: </h2>
 @{
 	if (ViewBag.ingresoCorrecto != null)
 	{
 		<p class="error-message"></p>
 	}
 }
-<form action="~/administrativo/cargarCartelera" method="POST" class="crear-cartelera-form">
-	<label>
+<form action="~/administrativo/cargarCartelera" method="POST" class="col-md-offset-3 panel-body panel panel-info col-md-6 crear-cartelera-form">
+	<div class="form-group panel-primary text-center">
+		<div class="text-center panel-heading"><h5>Nueva Cartelera</h5></div>
+	</div>
+	<label class="form-control">
 		@Html.DropDownListFor(x => x.IdSede, new SelectList(ViewBag.sedes, "IdSede", "Nombre"), "Sedes")
 		@Html.ValidationMessage("IdSede")
 	</label>
-	<label>
+	<label class="form-control">
 		@Html.DropDownListFor(x => x.IdPelicula, new SelectList(ViewBag.peliculas, "IdPelicula", "Nombre"), "Películas")
 		@Html.ValidationMessage("IdPelicula")
 	</label>
-	<label>
+	<label class="form-control">
 		<select name="HoraInicio" id="HoraInicio">
 			<option>Horario de Inicio</option>
 			@{
@@ -33,19 +35,19 @@
 		</select>
 		@Html.ValidationMessage("HoraInicio")
 	</label>
-	<label>
+	<label class="form-control">
 		@Html.TextBox("FechaInicio", "", new { htmlAttributes = new { @class = "input-date" }, @placeholder = "Fecha de Inicio" })
 		@Html.ValidationMessage("FechaInicio")
 	</label>
-	<label>
+	<label class="form-control">
 		@Html.TextBox("FechaFin", "", new { htmlAttributes = new { @class = "input-date" }, @placeholder = "Fecha de Fin" })
 		@Html.ValidationMessage("FechaFin")
 	</label>
-	<label>
+	<label class="form-control">
 		@Html.TextBox("NumeroSala", "", new { htmlAttributes = new { @class = "input-text" }, @placeholder = "Número de sala" })
 		@Html.ValidationMessage("NumeroSala")
 	</label>
-	<label>
+	<label class="form-control">
 		@Html.DropDownListFor(x => x.IdVersion, new SelectList(ViewBag.versiones, "IdVersion", "Nombre"), "Versiones")
 		@Html.ValidationMessage("IdVersiones")
 	</label>
@@ -79,5 +81,6 @@
 			<input type="checkbox" value="Domingo" name="Domingo" />
 		</span>
 	</label>
-	<button type="submit" class="btn-crear-cartelera btn btn-info btn-lg">Crear Cartelera</button>
+	<button type="submit" class="btn-crear-cartelera btn btn-info">Crear Cartelera</button>
+	<a href="~/administrativo/carteleras" class="btn-cancelar-cartelera btn btn-info">Cancelar</a>
 </form>

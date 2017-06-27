@@ -18,8 +18,7 @@
             </div>
             @{vConfirmacion Datos = ViewBag.confirmacion as vConfirmacion;}
             <div class="form-group">
-                <img class="pelicula" src=@Datos.pelicula.Imagen />
-                <div class="col-lg-8 ">
+                <div class="col-md-9 ">
                     <div id="titulo">@Datos.pelicula.Nombre </div>
                     <div id="descripcion">@Datos.pelicula.Descripcion</div>
                     <div id="genero">@Datos.pelicula.Generos.Nombre</div>
@@ -29,7 +28,7 @@
                     <div id="sede">@Datos.cartelera.Sedes.Nombre </div>
                     <div id="dia">@Datos.FechaHoraInicio </div>
                 </div>
-
+                <img class="pelicula" src=@Datos.pelicula.Imagen />    
             </div>
             @using (Html.BeginForm("confirmarPelicula", "peliculas", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
