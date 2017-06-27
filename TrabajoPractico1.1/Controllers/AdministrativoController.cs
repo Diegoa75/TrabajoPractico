@@ -14,9 +14,11 @@ namespace TrabajoPractico1._1.Controllers
         sPeliculas peliculaServiceImpl = new sPeliculas();
         sReportes reporteServiceImpl = new sReportes();
         sSedes sedeServiceImpl = new sSedes();
+        sGeneros generoServiceImpl = new sGeneros();
+        sCalificaciones calificacionServiceImpl = new sCalificaciones();
 
         //Administrativo/
-                                            //LOGIN
+        //LOGIN
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult VerificarUsuario(Usuarios usuario)
@@ -32,8 +34,8 @@ namespace TrabajoPractico1._1.Controllers
                     if (Session["Action"] == null)
                         return RedirectToAction("Inicio");
                     else
-                    { 
-                        string action = Session["Action"] as string ;
+                    {
+                        string action = Session["Action"] as string;
                         Session.Remove("Action");
                         return RedirectToAction(action);
                     }
@@ -46,7 +48,7 @@ namespace TrabajoPractico1._1.Controllers
             return RedirectToAction("Login", "home");
 
         }
-                                            //VERIFICAR SESION
+        //VERIFICAR SESION
         public Boolean comprobarUsuario(String action)
         {
             //si el usuario existe devuelve true, sino crea la variable de sesion con el action al que tiene que volver
@@ -61,11 +63,11 @@ namespace TrabajoPractico1._1.Controllers
                 }
             }
 
-						Session["Action"] = action;
+            Session["Action"] = action;
             return false;
         }
 
-                                            //INICIO
+        //INICIO
         public ActionResult Inicio()
         {
             if (comprobarUsuario("Inicio"))
@@ -74,7 +76,7 @@ namespace TrabajoPractico1._1.Controllers
                 return RedirectToAction("Login", "home");
         }
 
-                                            //SEDES
+        //SEDES
         public ActionResult Sedes()
         {
             if (comprobarUsuario("Sedes"))
@@ -111,7 +113,7 @@ namespace TrabajoPractico1._1.Controllers
                     ViewBag.Error = "Ya existe una Sede con ese nombre y esa dirección";
                 }
                 else
-                {   
+                {
                     sedeServiceImpl.guardarSede(nuevaSede);
                 }
             }
@@ -167,25 +169,26 @@ namespace TrabajoPractico1._1.Controllers
         }
 
 
-                                            //PELICULAS
+        //PELICULAS
         public ActionResult Peliculas()
         {
             if (comprobarUsuario("Peliculas"))
-            { 
-                ViewBag.Listado = ctx.Peliculas.ToList();
+            {
+                ViewBag.Listado = peliculaServiceImpl.obtenerPeliculas();
                 return View();
             }
             else
                 return RedirectToAction("Login", "home");
-    }
+        }
+
         public ActionResult NuevaPelicula()
         {
             if (comprobarUsuario("Peliculas"))
             {
                 ViewBag.Nuevo = true;
-                ViewBag.GeneroId = ctx.Generos.ToList();
-                ViewBag.CalificacionId = ctx.Calificaciones.ToList();
-                ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
+                ViewBag.GeneroId = generoServiceImpl.obtenerGeneros();
+                ViewBag.CalificacionId = calificacionServiceImpl.obtenerCalificaciones();
+                ViewBag.Listado = peliculaServiceImpl.obtenerPeliculasYGeneros();
 
                 return View("Peliculas");
             }
@@ -199,13 +202,10 @@ namespace TrabajoPractico1._1.Controllers
             if (ModelState.IsValid)
             {
                 //Revisa que no exista otra pelicula con el mismo nombre
-                var peliculaExistente = ctx.Peliculas.Where(p => p.Nombre == nuevaPelicula.Nombre
-                                                            && p.IdPelicula != nuevaPelicula.IdPelicula)
-                                                            .FirstOrDefault(); 
+                var peliculaExistente = peliculaServiceImpl.buscarPeliculaConMismoNombre(nuevaPelicula);
+
                 if (peliculaExistente != null)
-                {
                     ViewBag.Error = "Ya existe una Pelicula con ese nombre";
-                }
                 else
                 {
                     //Revisa si existe una imagen cargada para la pelicula
@@ -213,30 +213,26 @@ namespace TrabajoPractico1._1.Controllers
                     {
                         //uso el nombre de la pelicula  para crear un nombre significativo
                         string nombrePelicula = nuevaPelicula.Nombre;
-                        //Guardar Imagen
                         string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombrePelicula);
                         nuevaPelicula.Imagen = pathRelativoImagen;
                     }
                     nuevaPelicula.FechaCarga = System.DateTime.Now;
-
-                    ctx.Peliculas.Add(nuevaPelicula);
-                    ctx.SaveChanges();
-
+                    peliculaServiceImpl.guardarPelicula(nuevaPelicula);
                 }
             }
-            ViewBag.Listado = ctx.Peliculas.Include("Generos").ToList();
+            ViewBag.Listado = peliculaServiceImpl.obtenerPeliculasYGeneros();
 
-            return View("Peliculas");     
+            return View("Peliculas");
         }
 
         public ActionResult ModificarPelicula(int id)
         {
             if (comprobarUsuario("Peliculas"))
             {
-                Peliculas Pelicula = ctx.Peliculas.Where(p => p.IdPelicula == id).FirstOrDefault();
-                ViewBag.Listado = ctx.Peliculas.ToList();
-                ViewBag.GeneroId = ctx.Generos.ToList();
-                ViewBag.CalificacionId = ctx.Calificaciones.ToList();
+                Peliculas Pelicula = peliculaServiceImpl.obtenerPeliculaPorId(id);
+                ViewBag.Listado = peliculaServiceImpl.obtenerPeliculas();
+                ViewBag.GeneroId = generoServiceImpl.obtenerGeneros();
+                ViewBag.CalificacionId = calificacionServiceImpl.obtenerCalificaciones();
 
                 return View("Peliculas", Pelicula);
             }
@@ -247,22 +243,16 @@ namespace TrabajoPractico1._1.Controllers
         [HttpPost]
         public ActionResult ModificarPelicula(Peliculas peliculaModificada, string myImagen)
         {
-            //busca la pelicula a modificar
-            Peliculas peliculaEncontrada = ctx.Peliculas.Find(peliculaModificada.IdPelicula);
+            Peliculas peliculaEncontrada = peliculaServiceImpl.obtenerPeliculaPorId(peliculaModificada.IdPelicula);
 
             if (peliculaEncontrada != null)
             {
-                //consulta si existe otra pelicula con el mismo nombre
-                var peliculaExistente = ctx.Peliculas.Where(p => p.Nombre == peliculaModificada.Nombre 
-                                                            && p.IdPelicula != peliculaModificada.IdPelicula)
-                                                            .FirstOrDefault();
+                var peliculaExistente = peliculaServiceImpl.buscarPeliculaConMismoNombre(peliculaModificada);
 
                 if (peliculaExistente != null)
-                {
                     ViewBag.Error = "Ya existe una Pelicula con ese nombre";
-                }
                 else
-                { 
+                {
                     //Comprueba si se agrego una foto nueva para modificar la actual
                     if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
                     {
@@ -274,10 +264,8 @@ namespace TrabajoPractico1._1.Controllers
                             {
                                 sImagenes.Borrar(peliculaEncontrada.Imagen);
                             }
-
                             //creo un nombre "nombre" 
                             string nombreSignificativo = peliculaModificada.Nombre;
-                            //Guardar Imagen
                             string pathRelativoImagen = sImagenes.Guardar(Request.Files[0], nombreSignificativo);
                             peliculaEncontrada.Imagen = pathRelativoImagen;
                         }
@@ -289,16 +277,16 @@ namespace TrabajoPractico1._1.Controllers
                     peliculaEncontrada.IdCalificacion = peliculaModificada.IdCalificacion;
                     peliculaEncontrada.IdGenero = peliculaModificada.IdGenero;
                     peliculaEncontrada.Duracion = peliculaModificada.Duracion;
-                
-                    ctx.SaveChanges();
+
+                    peliculaServiceImpl.guardarContexto();
                 }
             }
-            ViewBag.Listado = ctx.Peliculas.ToList();
+            ViewBag.Listado = peliculaServiceImpl.obtenerPeliculas();
 
             return View("Peliculas");
         }
 
-                                            //REPORTES
+        //REPORTES
         public ActionResult Reportes()
         {
             if (comprobarUsuario("Reportes"))
@@ -321,9 +309,9 @@ namespace TrabajoPractico1._1.Controllers
 
             try
             {
-                fechaInicio =   Convert.ToDateTime(formulario["fechaInicio"]);
-                fechaFin =      Convert.ToDateTime(formulario["fechaFin"]);
-                idPelicula =    Convert.ToInt16(formulario["idPelicula"]);
+                fechaInicio = Convert.ToDateTime(formulario["fechaInicio"]);
+                fechaFin = Convert.ToDateTime(formulario["fechaFin"]);
+                idPelicula = Convert.ToInt16(formulario["idPelicula"]);
                 ts = fechaFin - fechaInicio;
             }
             catch (Exception)
@@ -346,7 +334,8 @@ namespace TrabajoPractico1._1.Controllers
             return View("Reportes", reservas);
         }
 
-																			// CARTELERAS
+        
+        // CARTELERAS
 		public ActionResult carteleras()
 		{
 			List<Carteleras> listado = ctx.Carteleras.ToList();
