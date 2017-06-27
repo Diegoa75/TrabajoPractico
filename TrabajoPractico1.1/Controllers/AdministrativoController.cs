@@ -371,12 +371,19 @@ namespace TrabajoPractico1._1.Controllers
 		{
 			Carteleras miCartelera = new Carteleras();
 
+			var registroAmodificar = carteleraServiceImpl.buscarPorId(c.IdCartelera);
+
+			if (registroAmodificar != null)
+			{
+				carteleraServiceImpl.eliminarCartelera(registroAmodificar);
+			}
+
 			c.FechaCarga = DateTime.Now;
 			if (ModelState.IsValid)
-			{
+			{				
 				var registroRepetido = carteleraServiceImpl.buscarPorSedePeliculaYVersion(c);
 
-                var _carteleras = carteleraServiceImpl.buscarPorFechaDiasYSalas(c);
+        var _carteleras = carteleraServiceImpl.buscarPorFechaDiasYSalas(c);
 
 				if (registroRepetido == null && _carteleras.Count == 0)
 				{
@@ -426,6 +433,7 @@ namespace TrabajoPractico1._1.Controllers
                 ViewBag.versiones = versiones;
 
                 Carteleras aModificar = carteleraServiceImpl.buscarPorId(id);
+								TempData["id"] = aModificar.IdCartelera;
 
                 return View("crearCartelera", aModificar);
             }
