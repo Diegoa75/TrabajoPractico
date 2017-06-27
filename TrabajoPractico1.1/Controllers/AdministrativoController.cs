@@ -16,6 +16,8 @@ namespace TrabajoPractico1._1.Controllers
         sSedes sedeServiceImpl = new sSedes();
         sGeneros generoServiceImpl = new sGeneros();
         sCalificaciones calificacionServiceImpl = new sCalificaciones();
+        sCarteleras carteleraServiceImpl = new sCarteleras();
+        sVersiones versionServiceImpl = new sVersiones();
 
         //Administrativo/
         //LOGIN
@@ -334,126 +336,114 @@ namespace TrabajoPractico1._1.Controllers
             return View("Reportes", reservas);
         }
 
-        
+
         // CARTELERAS
-		public ActionResult carteleras()
-		{
-			List<Carteleras> listado = ctx.Carteleras.ToList();
-			return View(listado);
-		}
+        public ActionResult carteleras()
+        {
+            List<Carteleras> listado = carteleraServiceImpl.obtenerCarteleras();
+            return View(listado);
+        }
 
-		public ActionResult crearCartelera()
-		{
-			List<Sedes> sedes = ctx.Sedes.ToList();
-			ViewBag.sedes = sedes;
+        public ActionResult crearCartelera()
+        {
+            List<Sedes> sedes = sedeServiceImpl.obtenerSedes();
+            ViewBag.sedes = sedes;
 
-			var peliculas = ctx.Peliculas.ToList();
-			ViewBag.peliculas = peliculas;
+            var peliculas = peliculaServiceImpl.obtenerPeliculas();
+            ViewBag.peliculas = peliculas;
 
-			var versiones = ctx.Versiones.ToList();
-			ViewBag.versiones = versiones;
+            var versiones = versionServiceImpl.obtenerVersiones();
+            ViewBag.versiones = versiones;
 
-			return View();
-		}
+            return View();
+        }
 
-		[HttpPost]
-		public ActionResult cargarCartelera(Carteleras c)
-		{
-			Carteleras miCartelera = new Carteleras();
-			
-			c.FechaCarga = DateTime.Now;
-			if (ModelState.IsValid)
-			{
-				// Si los tres parametros son iguales, no pasa la validacion.
-				// Si al menos uno de los tres es distinto, guarda en BD.
-				var registroRepetido = (from _c in ctx.Carteleras
-																where _c.IdSede == c.IdSede && _c.IdPelicula == c.IdPelicula && _c.IdVersion == c.IdVersion
-																select _c).FirstOrDefault();
+        [HttpPost]
+        public ActionResult cargarCartelera(Carteleras c)
+        {
+            Carteleras miCartelera = new Carteleras();
 
-				// Guarda todas las sedes repetidas
-				var sedes = (from _c in ctx.Carteleras
-												where _c.IdSede == c.IdSede
-												select _c).ToList();
+            c.FechaCarga = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                // Si los tres parametros son iguales, no pasa la validacion.
+                // Si al menos uno de los tres es distinto, guarda en BD.
+                var registroRepetido = carteleraServiceImpl.buscarPorSedePeliculaYVersion(c);
 
-				Carteleras pisaDias = new Carteleras();
-				Carteleras pisaFechas = new Carteleras();
-				// Verifica que no se solapen dias en las salas de las sedes.
-				foreach (Carteleras soloSedesIguales in sedes)
-				{
-					if (soloSedesIguales.NumeroSala == c.NumeroSala)
-					{
-						if (soloSedesIguales.Lunes != c.Lunes &&
-								soloSedesIguales.Martes != c.Martes &&
-								soloSedesIguales.Miercoles != c.Miercoles &&
-								soloSedesIguales.Jueves != c.Jueves &&
-								soloSedesIguales.Viernes != c.Viernes &&
-								soloSedesIguales.Sabado != c.Sabado &&
-								soloSedesIguales.Domingo != c.Domingo)
-						{
-							pisaDias = soloSedesIguales;
-						}
+                // Guarda todas las sedes repetidas
+                var sedes = carteleraServiceImpl.buscarPorSede(c);
 
-						if (soloSedesIguales.validacionFecha(soloSedesIguales.FechaInicio, soloSedesIguales.FechaFin, c.FechaInicio) ||
-								soloSedesIguales.validacionFecha(soloSedesIguales.FechaInicio, soloSedesIguales.FechaFin, c.FechaFin)
-							)
-						{
-							pisaFechas = soloSedesIguales;
-						}
-					}
-				}
+                Carteleras pisaDias = new Carteleras();
+                Carteleras pisaFechas = new Carteleras();
+                // Verifica que no se solapen dias en las salas de las sedes.
+                foreach (Carteleras soloSedesIguales in sedes)
+                {
+                    if (soloSedesIguales.NumeroSala == c.NumeroSala)
+                    {
+                        if (soloSedesIguales.Lunes != c.Lunes &&
+                                soloSedesIguales.Martes != c.Martes &&
+                                soloSedesIguales.Miercoles != c.Miercoles &&
+                                soloSedesIguales.Jueves != c.Jueves &&
+                                soloSedesIguales.Viernes != c.Viernes &&
+                                soloSedesIguales.Sabado != c.Sabado &&
+                                soloSedesIguales.Domingo != c.Domingo)
+                        {
+                            pisaDias = soloSedesIguales;
+                        }
 
+                        if (soloSedesIguales.validacionFecha(soloSedesIguales.FechaInicio, soloSedesIguales.FechaFin, c.FechaInicio) ||
+                                soloSedesIguales.validacionFecha(soloSedesIguales.FechaInicio, soloSedesIguales.FechaFin, c.FechaFin))
+                        {
+                            pisaFechas = soloSedesIguales;
+                        }
+                    }
+                }
 
+                if (registroRepetido.IdCartelera > 0 && pisaDias.IdCartelera > 0 && pisaFechas.IdCartelera > 0)
+                {
+                    carteleraServiceImpl.agregarCartelera(c);
+                }
+                else
+                {
+                    ViewBag.errorCarga = "No se puede cargar la cartelera.";
+                }
+            }
 
-				if (registroRepetido.IdCartelera > 0 && pisaDias.IdCartelera > 0 && pisaFechas.IdCartelera > 0)
-				{
-					ctx.Carteleras.Add(c);
-					ctx.SaveChanges();
-				} else
-				{
-					ViewBag.errorCarga = "No se puede cargar la cartelera.";
-				}
-			}
+            var carteleras = carteleraServiceImpl.obtenerCarteleras();
+            return View("carteleras", carteleras);
+        }
 
-			var carteleras = ctx.Carteleras.ToList();
-			return View("carteleras", carteleras);
-		}
+        public ActionResult eliminarCartelera(int id)
+        {
+            List<Carteleras> misCarteleras = carteleraServiceImpl.obtenerCarteleras();
 
-		public ActionResult eliminarCartelera(int id)
-		{
-			List<Carteleras> misCarteleras = ctx.Carteleras.ToList();
+            Carteleras aBorrar = carteleraServiceImpl.buscarPorId(id);
 
-			Carteleras aBorrar = (from c in ctx.Carteleras
-														where c.IdCartelera == id
-														select c).FirstOrDefault();
-			if (aBorrar != null)
-			{
-				ctx.Carteleras.Remove(aBorrar);
-				ctx.SaveChanges();
+            if (aBorrar != null)
+            {
+                carteleraServiceImpl.eliminarCartelera(aBorrar);
+                ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
+            }
 
-				ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
-			}
+            List<Carteleras> carteleras = carteleraServiceImpl.obtenerCarteleras();
+            return View("carteleras", carteleras);
+        }
 
-			List<Carteleras> carteleras = ctx.Carteleras.ToList();
-			return View("carteleras", carteleras);
-		}
+        public ActionResult modificarCartelera(int id)
+        {
+            List<Sedes> sedes = sedeServiceImpl.obtenerSedes();
+            ViewBag.sedes = sedes;
 
-		public ActionResult modificarCartelera(int id)
-		{
-			List<Sedes> sedes = ctx.Sedes.ToList();
-			ViewBag.sedes = sedes;
+            var peliculas = peliculaServiceImpl.obtenerPeliculas();
+            ViewBag.peliculas = peliculas;
 
-			var peliculas = ctx.Peliculas.ToList();
-			ViewBag.peliculas = peliculas;
+            var versiones = versionServiceImpl.obtenerVersiones();
+            ViewBag.versiones = versiones;
 
-			var versiones = ctx.Versiones.ToList();
-			ViewBag.versiones = versiones;
+            Carteleras aModificar = carteleraServiceImpl.buscarPorId(id);
 
-			Carteleras aModificar = (from c in ctx.Carteleras
-															 where c.IdCartelera == id
-															 select c).FirstOrDefault();
+            return View("crearCartelera", aModificar);
+        }
 
-			return View("crearCartelera", aModificar);
-		}
-
-	}
+    }
 }
