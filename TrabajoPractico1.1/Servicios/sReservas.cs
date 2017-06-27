@@ -7,15 +7,20 @@ using TrabajoPractico1._1.ModelViews;
 
 namespace TrabajoPractico1._1.Servicios
 {
+    
     public class sReservas
     {
         ContextoPractico ctx = new ContextoPractico();
+        private DateTime fechaDesde = DateTime.Now.Date.AddDays(30);
+        private DateTime fechaHasta = DateTime.Now.Date;
 
         public vReserva cargarVersiones(vReserva reserva)
         {//Busca las posibles versiones de la pelicula seleccionada
             reserva.Versiones = (from ve in ctx.Versiones
                                  join ca in ctx.Carteleras on ve.IdVersion equals ca.IdVersion
                                  where ca.IdPelicula == reserva.IdPelicula
+                                    && ca.FechaFin >= fechaHasta
+                                     && ca.FechaInicio <= fechaDesde
                                  select ve).Distinct().ToList();
             return reserva;
         }
@@ -39,6 +44,8 @@ namespace TrabajoPractico1._1.Servicios
                                  join ca in ctx.Carteleras on se.IdSede equals ca.IdSede
                                  where ca.IdPelicula == reserva.IdPelicula
                                     && ca.IdVersion == reserva.idVersion
+                                    && ca.FechaFin >= fechaHasta
+                                    && ca.FechaInicio <= fechaDesde
                                  select se).Distinct().ToList();
             }
             return reserva;
