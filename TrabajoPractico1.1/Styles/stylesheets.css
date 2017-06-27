@@ -173,6 +173,15 @@ main {
 .panel-de-administracion {
 	display: inline-block;
 	position: relative;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+.btn-administracion {
+	display: inline-block;
+	width: calc(25% - 42px);
+	margin: 0px 20px;
 }
 
 .btn-nueva-pelicula {
