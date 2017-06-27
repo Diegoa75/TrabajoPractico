@@ -9,8 +9,6 @@ namespace TrabajoPractico1._1
 	{
 		public class CartelerasMetadata
 		{
-			public int IdCartelera { get; set; }
-
 			[Required(ErrorMessage = "El campo es requerido.")]
 			public int IdSede { get; set; }
 
@@ -31,27 +29,6 @@ namespace TrabajoPractico1._1
 
 			[Required(ErrorMessage = "El campo es requerido.")]
 			public int IdVersion { get; set; }
-
-			[Required(ErrorMessage = "El campo es requerido.")]
-			public bool Lunes { get; set; }
-
-			[Required(ErrorMessage = "El campo es requerido.")]
-			public bool Martes { get; set; }
-
-			[Required(ErrorMessage = "El campo es requerido.")]
-			public bool Miercoles { get; set; }
-
-			[Required(ErrorMessage = "El campo es requerido.")]
-			public bool Jueves { get; set; }
-
-			[Required(ErrorMessage = "El campo es requerido.")]
-			public bool Viernes { get; set; }
-
-			[Required(ErrorMessage = "El campo es requerido.")]
-			public bool Sabado { get; set; }
-
-			[Required(ErrorMessage = "El campo es requerido.")]
-			public bool Domingo { get; set; }
 
 			[Required(ErrorMessage = "El campo es requerido.")]
 			public DateTime FechaCarga { get; set; }

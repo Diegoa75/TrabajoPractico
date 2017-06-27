@@ -352,8 +352,7 @@ namespace TrabajoPractico1._1.Controllers
 		public ActionResult carteleras()
 		{
 			List<Carteleras> listado = ctx.Carteleras.ToList();
-			ViewBag.carteleras = listado;
-			return View();
+			return View(listado);
 		}
 
 		public ActionResult crearCartelera()
@@ -378,9 +377,9 @@ namespace TrabajoPractico1._1.Controllers
 		{
 			Carteleras miCartelera = new Carteleras();
 
+			c.FechaCarga = System.DateTime.Now;
 			if (ModelState.IsValid)
 			{
-				c.FechaCarga = System.DateTime.Now;
 				ctx.Carteleras.Add(c);
 				ctx.SaveChanges();
 			}
