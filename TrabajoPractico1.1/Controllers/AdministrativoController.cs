@@ -11,6 +11,9 @@ namespace TrabajoPractico1._1.Controllers
     public class administrativoController : Controller
     {
         ContextoPractico ctx = new ContextoPractico();
+        sPeliculas peliculaServiceImpl = new sPeliculas();
+        sSedes sedeServiceImpl = new sSedes();
+
         //Administrativo/
                                             //LOGIN
         [HttpPost]
@@ -74,8 +77,8 @@ namespace TrabajoPractico1._1.Controllers
         public ActionResult Sedes()
         {
             if (comprobarUsuario("Sedes"))
-            { 
-                ViewBag.Listado = ctx.Sedes.ToList();
+            {
+                ViewBag.Listado = sedeServiceImpl.obtenerSedes();
                 return View();
             }
             else
@@ -87,7 +90,7 @@ namespace TrabajoPractico1._1.Controllers
             if (comprobarUsuario("Sedes"))
             {
                 ViewBag.Nuevo = true;
-                ViewBag.Listado = ctx.Sedes.ToList();
+                ViewBag.Listado = sedeServiceImpl.obtenerSedes();
 
                 return View("Sedes");
             }
@@ -100,9 +103,7 @@ namespace TrabajoPractico1._1.Controllers
         {
             if (ModelState.IsValid)
             {
-                //verifica que no se este cargando una sede con mismo nombre y direccion a una existente
-                var sedeExistente = ctx.Sedes.Where(s => s.Nombre == nuevaSede.Nombre 
-                                                    && s.Direccion == nuevaSede.Direccion).FirstOrDefault();
+                var sedeExistente = sedeServiceImpl.buscarSedePorNombreYDireccion(nuevaSede);
 
                 if (sedeExistente != null)
                 {
@@ -110,12 +111,10 @@ namespace TrabajoPractico1._1.Controllers
                 }
                 else
                 {   
-                    //guarda la nueva sede
-                    ctx.Sedes.Add(nuevaSede);
-                    ctx.SaveChanges();
+                    sedeServiceImpl.guardarSede(nuevaSede);
                 }
             }
-            ViewBag.Listado = ctx.Sedes.ToList();
+            ViewBag.Listado = sedeServiceImpl.obtenerSedes();
 
             return View("Sedes");
         }
@@ -124,10 +123,9 @@ namespace TrabajoPractico1._1.Controllers
         {
             if (comprobarUsuario("Sedes"))
             {
-                Sedes sede = ctx.Sedes.Where(p => p.IdSede == id).SingleOrDefault();
-                ViewBag.Listado = ctx.Sedes.ToList();
+                Sedes sede = sedeServiceImpl.buscarSedePorId(id);
+                ViewBag.Listado = sedeServiceImpl.obtenerSedes();
 
-                //si la sede es encontrada la devuelve para modificarla
                 if (sede != null)
                     return View("Sedes", sede);
                 else
@@ -141,9 +139,7 @@ namespace TrabajoPractico1._1.Controllers
         public ActionResult ModificarSede(Sedes sedeModificada)
         {
             //verifica que no se este cargando una sede con mismo nombre y direccion a una existente
-            var sedeExistente = ctx.Sedes.Where(s => s.Nombre == sedeModificada.Nombre
-                                                    && s.Direccion == sedeModificada.Direccion
-                                                    && s.IdSede != sedeModificada.IdSede).FirstOrDefault();
+            var sedeExistente = sedeServiceImpl.buscarSedeIgualALaModificada(sedeModificada);
 
             if (sedeExistente != null)
             {
@@ -152,7 +148,7 @@ namespace TrabajoPractico1._1.Controllers
             else
             {
                 //busca la sede a modificar
-                Sedes sedeEncontrada = ctx.Sedes.Find(sedeModificada.IdSede);
+                Sedes sedeEncontrada = sedeServiceImpl.buscarSedePorId(sedeModificada.IdSede);
 
                 if (sedeEncontrada != null)
                 {
@@ -161,10 +157,10 @@ namespace TrabajoPractico1._1.Controllers
                     sedeEncontrada.Direccion = sedeModificada.Direccion;
                     sedeEncontrada.PrecioGeneral = sedeModificada.PrecioGeneral;
 
-                    ctx.SaveChanges();
+                    sedeServiceImpl.guardarCambiosEnContexto();
                 }
             }
-            ViewBag.Listado = ctx.Sedes.ToList();
+            ViewBag.Listado = sedeServiceImpl.obtenerSedes();
 
             return View("Sedes");
         }
