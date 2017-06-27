@@ -363,9 +363,6 @@ namespace TrabajoPractico1._1.Controllers
 			var peliculas = ctx.Peliculas.ToList();
 			ViewBag.peliculas = peliculas;
 
-			Carteleras miCartelera = new Carteleras();
-			ViewBag.horas = miCartelera.horas();
-
 			var versiones = ctx.Versiones.ToList();
 			ViewBag.versiones = versiones;
 
@@ -403,12 +400,21 @@ namespace TrabajoPractico1._1.Controllers
 				ViewBag.mensajeBorrar = "El registro se ha borrado con éxito.";
 			}
 
-			ViewBag.carteleras = ctx.Carteleras.ToList();
-			return View("carteleras");
+			List<Carteleras> carteleras = ctx.Carteleras.ToList();
+			return View("carteleras", carteleras);
 		}
 
 		public ActionResult modificarCartelera(int id)
 		{
+			List<Sedes> sedes = ctx.Sedes.ToList();
+			ViewBag.sedes = sedes;
+
+			var peliculas = ctx.Peliculas.ToList();
+			ViewBag.peliculas = peliculas;
+
+			var versiones = ctx.Versiones.ToList();
+			ViewBag.versiones = versiones;
+
 			Carteleras aModificar = (from c in ctx.Carteleras
 															 where c.IdCartelera == id
 															 select c).FirstOrDefault();

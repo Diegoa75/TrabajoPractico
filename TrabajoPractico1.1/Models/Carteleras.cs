@@ -15,6 +15,7 @@ namespace TrabajoPractico1._1
 			[Required(ErrorMessage = "El campo es requerido.")]
 			public int IdPelicula { get; set; }
 
+			[Range(15, 23, ErrorMessage = "La hora de inicio debe ser mayor a las 15hs y menor a las 00hs.")]
 			[Required(ErrorMessage = "El campo es requerido.")]
 			public int HoraInicio { get; set; }
 
@@ -34,42 +35,32 @@ namespace TrabajoPractico1._1
 			public DateTime FechaCarga { get; set; }
 		}
 
-		public List<string> horariosDelDia(int horarioInicio, int duracionPelicula)
-		{
-			List<string> listado = new List<string>();
-			float _horarioInicio = (float)horarioInicio;
+		//public List<string> horariosDelDia(int horarioInicio, int duracionPelicula)
+		//{
+		//	List<string> listado = new List<string>();
+		//	float _horarioInicio = (float)horarioInicio;
 
-			listado.Add(horarioInicio.ToString());
-			int horarioInicioEnMinutos = 0;
-			for (int i = 1; i < 7; i++)
-			{
-				horarioInicioEnMinutos += duracionPelicula + 30;
+		//	listado.Add(horarioInicio.ToString());
+		//	int horarioInicioEnMinutos = 0;
+		//	for (int i = 1; i < 7; i++)
+		//	{
+		//		horarioInicioEnMinutos += duracionPelicula + 30;
 
-				int horas = horarioInicioEnMinutos / 60;
-				int minutos = horarioInicioEnMinutos % 60;
+		//		int horas = horarioInicioEnMinutos / 60;
+		//		int minutos = horarioInicioEnMinutos % 60;
 
-				int horarioDeinicioMasHoras = horarioInicio + horas;
-				decimal minutosADoble = (decimal)(minutos / 100m);
+		//		int horarioDeinicioMasHoras = horarioInicio + horas;
+		//		decimal minutosADoble = (decimal)(minutos / 100m);
 
-				Decimal nuevaFuncion = Decimal.Round((horarioDeinicioMasHoras + minutosADoble), 2);
-				if(nuevaFuncion > 24)
-				{
-					nuevaFuncion = nuevaFuncion - 24;
-				}
-				listado.Add(nuevaFuncion.ToString());
-			}
+		//		Decimal nuevaFuncion = Decimal.Round((horarioDeinicioMasHoras + minutosADoble), 2);
+		//		if(nuevaFuncion > 24)
+		//		{
+		//			nuevaFuncion = nuevaFuncion - 24;
+		//		}
+		//		listado.Add(nuevaFuncion.ToString());
+		//	}
 
-			return listado;
-		}
-
-		public List<string> horas ()
-		{
-			List<string> horas = new List<string>();
-			for (int i = 15; i < 24; i++)
-			{
-				horas.Add(i + "hs.");
-			}
-			return horas;
-		}
+		//	return listado;
+		//}
 	}
 }

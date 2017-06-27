@@ -3,15 +3,23 @@
 @{
 	ViewBag.Title = "crearCartelera";
 }
+
 @{
 	if (ViewBag.ingresoCorrecto != null)
 	{
-		<p class="error-message"></p>
+		<p class="error-message">@ViewBag.ingresoCorrecto</p>
 	}
 }
+
 <form action="~/administrativo/cargarCartelera" method="POST" class="col-md-offset-3 panel-body panel panel-info col-md-6 crear-cartelera-form">
 	<div class="form-group panel-primary text-center">
-		<div class="text-center panel-heading"><h5>Nueva Cartelera</h5></div>
+		<div class="text-center panel-heading">
+			@{ if (Model != null)
+			{ <h5>Modificar Cartelera</h5> }
+			else
+			{ <h5>Nueva Cartelera</h5> }
+			}
+		</div>
 	</div>
 	<label class="form-control">
 		@Html.DropDownListFor(x => x.IdSede, new SelectList(ViewBag.sedes, "IdSede", "Nombre"), "Sedes")
@@ -22,29 +30,19 @@
 		@Html.ValidationMessage("IdPelicula")
 	</label>
 	<label class="form-control">
-		<select name="HoraInicio" id="HoraInicio">
-			<option>Horario de Inicio</option>
-			@{
-				int value = 0;
-				foreach (string i in ViewBag.horas)
-				{
-					<option value="@value">@i</option>
-					value++;
-				};
-			}
-		</select>
+		@Html.TextBoxFor(x => x.HoraInicio, new { htmlAttributes = new { @class = "input-date" }, @placeholder = "Hora de Inicio" })
 		@Html.ValidationMessage("HoraInicio")
 	</label>
 	<label class="form-control">
-		@Html.TextBox("FechaInicio", "", new { htmlAttributes = new { @class = "input-date" }, @placeholder = "Fecha de Inicio" })
+		@Html.TextBoxFor(x => x.FechaInicio, new { htmlAttributes = new { @class = "input-date" }, @placeholder = "Fecha de Inicio" })
 		@Html.ValidationMessage("FechaInicio")
 	</label>
 	<label class="form-control">
-		@Html.TextBox("FechaFin", "", new { htmlAttributes = new { @class = "input-date" }, @placeholder = "Fecha de Fin" })
+		@Html.TextBoxFor(x => x.FechaFin, new { htmlAttributes = new { @class = "input-date" }, @placeholder = "Fecha de Fin" })
 		@Html.ValidationMessage("FechaFin")
 	</label>
 	<label class="form-control">
-		@Html.TextBox("NumeroSala", "", new { htmlAttributes = new { @class = "input-text" }, @placeholder = "Número de sala" })
+		@Html.TextBoxFor(x => x.NumeroSala, new { htmlAttributes = new { @class = "input-text" }, @placeholder = "Número de sala" })
 		@Html.ValidationMessage("NumeroSala")
 	</label>
 	<label class="form-control">
@@ -54,33 +52,39 @@
 	<label>
 		<span class="input-checkbox">
 			<strong>Lunes</strong>
-			<input type="checkbox" value="Lunes" name="Lunes" />
+			@Html.CheckBoxFor(x => x.Lunes)
 		</span>
 		<span class="input-checkbox">
 			<strong>Martes</strong>
-			<input type="checkbox" value="Martes" name="Martes" />
+			@Html.CheckBoxFor(x => x.Martes)
 		</span>
 		<span class="input-checkbox">
 			<strong>Miércoles</strong>
-			<input type="checkbox" value="Miercoles" name="Miercoles" />
+			@Html.CheckBoxFor(x => x.Miercoles)
 		</span>
 		<span class="input-checkbox">
 			<strong>Jueves</strong>
-			<input type="checkbox" value="Jueves" name="Jueves" />
+			@Html.CheckBoxFor(x => x.Jueves)
 		</span>
 		<span class="input-checkbox">
 			<strong>Viernes</strong>
-			<input type="checkbox" value="Viernes" name="Viernes" />
+			@Html.CheckBoxFor(x => x.Viernes)
 		</span>
 		<span class="input-checkbox">
 			<strong>Sábado</strong>
-			<input type="checkbox" value="Sabado" name="Sabado" />
+			@Html.CheckBoxFor(x => x.Sabado)
 		</span>
 		<span class="input-checkbox">
 			<strong>Domingo</strong>
-			<input type="checkbox" value="Domingo" name="Domingo" />
+			@Html.CheckBoxFor(x => x.Domingo)
 		</span>
 	</label>
-	<button type="submit" class="btn-crear-cartelera btn btn-info">Crear Cartelera</button>
+	<button type="submit" class="btn-crear-cartelera btn btn-info">
+		@{ if (Model != null)
+			{ <span>Guardar Cartelera</span> }
+			else
+			{ <span>Crear Cartelera</span> }
+		}
+	</button>
 	<a href="~/administrativo/carteleras" class="btn-cancelar-cartelera btn btn-info">Cancelar</a>
 </form>

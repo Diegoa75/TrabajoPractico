@@ -271,3 +271,7 @@ footer ul {
 .btn-crear-cartelera {
 	margin-bottom: 10px !important;
 }
+
+.btn-crear-cartelera span {
+	color: white !important;
+}
