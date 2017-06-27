@@ -371,12 +371,48 @@ namespace TrabajoPractico1._1.Controllers
 		public ActionResult cargarCartelera(Carteleras c)
 		{
 			Carteleras miCartelera = new Carteleras();
-
+			
 			c.FechaCarga = DateTime.Now;
 			if (ModelState.IsValid)
 			{
-				ctx.Carteleras.Add(c);
-				ctx.SaveChanges();
+				// Si los tres parametros son iguales, no pasa la validacion.
+				// Si al menos uno de los tres es distinto, guarda en BD.
+				var registroRepetido = (from _c in ctx.Carteleras
+																where _c.IdSede == c.IdSede && _c.IdPelicula == c.IdPelicula && _c.IdVersion == c.IdVersion
+																select _c).FirstOrDefault();
+
+				// Guarda todas las sedes repetidas
+				var sedes = (from _c in ctx.Carteleras
+												where _c.IdSede == c.IdSede
+												select _c).ToList();
+
+				Carteleras pisaDias = new Carteleras();
+				// Verifica que no se solapen dias en las salas de las sedes.
+				foreach (Carteleras soloSedesIguales in sedes)
+				{
+					if (soloSedesIguales.NumeroSala == c.NumeroSala)
+					{
+						if (soloSedesIguales.Lunes != c.Lunes &&
+								soloSedesIguales.Martes != c.Martes &&
+								soloSedesIguales.Miercoles != c.Miercoles &&
+								soloSedesIguales.Jueves != c.Jueves &&
+								soloSedesIguales.Viernes != c.Viernes &&
+								soloSedesIguales.Sabado != c.Sabado &&
+								soloSedesIguales.Domingo != c.Domingo)
+						{
+							pisaDias = soloSedesIguales;
+						}
+					}
+				}
+
+				if (registroRepetido == null && pisaDias == null)
+				{
+					ctx.Carteleras.Add(c);
+					ctx.SaveChanges();
+				} else
+				{
+					ViewBag.errorCarga = "No se puede cargar la cartelera.";
+				}
 			}
 
 			var carteleras = ctx.Carteleras.ToList();

@@ -9,6 +9,11 @@
 	{
 		<p class="mensaje-notificacion">@ViewBag.mensajeBorrar</p>
 	}
+
+	if (ViewBag.errorCarga != null)
+	{
+		<p class="mensaje-notificacion">@ViewBag.errorCarga</p>
+	}
 }
 <a href="~/administrativo/crearCartelera" class="btn-agregar-nueva-cartelera btn btn-info">Agregar nueva cartelera</a>
 <table class="table table-hover listado-cartelera">
