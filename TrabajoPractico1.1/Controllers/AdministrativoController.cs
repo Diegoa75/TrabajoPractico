@@ -370,41 +370,21 @@ namespace TrabajoPractico1._1.Controllers
 																where _c.IdSede == c.IdSede && _c.IdPelicula == c.IdPelicula && _c.IdVersion == c.IdVersion
 																select _c).FirstOrDefault();
 
-				// Guarda todas las sedes repetidas
-				var sedes = (from _c in ctx.Carteleras
-												where _c.IdSede == c.IdSede
-												select _c).ToList();
+				var _carteleras = (from _c in ctx.Carteleras
+										 where _c.IdSede == c.IdSede
+																	 && _c.NumeroSala == c.NumeroSala
+																	 && ((c.FechaInicio >= _c.FechaInicio && c.FechaInicio <= _c.FechaFin)
+																			 || (c.FechaFin >= _c.FechaInicio && c.FechaFin <= _c.FechaFin))
+																	 && (c.Lunes == _c.Lunes
+																			 || c.Martes == _c.Martes
+																			 || c.Miercoles == _c.Miercoles
+																			 || c.Jueves == _c.Jueves
+																			 || c.Viernes == _c.Viernes
+																			 || c.Sabado == _c.Sabado
+																			 || c.Domingo == _c.Domingo)
+										 select _c).ToList();
 
-				Carteleras pisaDias = new Carteleras();
-				Carteleras pisaFechas = new Carteleras();
-				// Verifica que no se solapen dias en las salas de las sedes.
-				foreach (Carteleras soloSedesIguales in sedes)
-				{
-					if (soloSedesIguales.NumeroSala == c.NumeroSala)
-					{
-						if (soloSedesIguales.Lunes != c.Lunes &&
-								soloSedesIguales.Martes != c.Martes &&
-								soloSedesIguales.Miercoles != c.Miercoles &&
-								soloSedesIguales.Jueves != c.Jueves &&
-								soloSedesIguales.Viernes != c.Viernes &&
-								soloSedesIguales.Sabado != c.Sabado &&
-								soloSedesIguales.Domingo != c.Domingo)
-						{
-							pisaDias = soloSedesIguales;
-						}
-
-						if (soloSedesIguales.validacionFecha(soloSedesIguales.FechaInicio, soloSedesIguales.FechaFin, c.FechaInicio) ||
-								soloSedesIguales.validacionFecha(soloSedesIguales.FechaInicio, soloSedesIguales.FechaFin, c.FechaFin)
-							)
-						{
-							pisaFechas = soloSedesIguales;
-						}
-					}
-				}
-
-
-
-				if (registroRepetido.IdCartelera > 0 && pisaDias.IdCartelera > 0 && pisaFechas.IdCartelera > 0)
+				if (registroRepetido == null && _carteleras.Count == 0)
 				{
 					ctx.Carteleras.Add(c);
 					ctx.SaveChanges();

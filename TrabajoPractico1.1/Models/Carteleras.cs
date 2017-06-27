@@ -63,14 +63,14 @@ namespace TrabajoPractico1._1
 		//	return listado;
 		//}
 
-		public bool validacionFecha (DateTime inicio, DateTime fin, DateTime seleccion)
+		public bool validacionFecha (DateTime inicio, DateTime fin, DateTime _inicio, DateTime _fin)
 		{
-			if ((seleccion >= inicio) && (seleccion <= fin))
+			if ((_inicio < inicio && _fin < inicio) || (_inicio > fin && _fin > fin))
 			{
-				return false;
+				return true;
 			}
 
-			return true;
+			return false;
 		}
 
 	}
