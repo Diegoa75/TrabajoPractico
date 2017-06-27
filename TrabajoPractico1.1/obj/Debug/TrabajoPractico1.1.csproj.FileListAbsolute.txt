@@ -303,3 +303,7 @@ C:\Users\fmunoz\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.
 C:\Users\fmunoz\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.dll
 C:\Users\fmunoz\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.pdb
 C:\Users\Flor\Desktop\TrabajoPractico\TrabajoPractico1.1\obj\Debug\TrabajoPractico1.1.csprojResolveAssemblyReference.cache
+C:\Users\fmunoz\TrabajoPractico\TrabajoPractico1.1\bin\20171C_TP.mdf
+C:\Users\fmunoz\TrabajoPractico\TrabajoPractico1.1\bin\20171C_TP_log.ldf
+C:\Users\fmunoz\TrabajoPractico\TrabajoPractico1.1\bin\DAL.dll
+C:\Users\fmunoz\TrabajoPractico\TrabajoPractico1.1\bin\DAL.pdb

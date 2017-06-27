@@ -1,10 +1,15 @@
-﻿@{
+﻿@using DAL
+@model List<Reservas>
+@{
     ViewBag.Title = "Reportes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using TrabajoPractico1._1
-@model List<Reservas>
-
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger text-center">
+        <h5>@(ViewBag.error)</h5>
+    </div>
+}
 @using (Html.BeginForm("Reporte", "Administrativo", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="panel-body panel panel-info">
@@ -26,12 +31,6 @@
             <input type="date" name="fechaFin" placeholder="Fecha Fin" />
         </div>
         <button type="submit" class="btn btn-info">Buscar</button><br /><br />
-        @if (ViewBag.error != null)
-        {
-            <div class="alert alert-danger text-center">
-                <h5>@(ViewBag.error)</h5>
-            </div>
-        }
 
         @if (ViewBag.IntervaloFechas != null)
         {

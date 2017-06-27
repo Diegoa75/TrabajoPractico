@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
-using TrabajoPractico1._1.Servicios;
+using DAL.Servicios;
 
 namespace TrabajoPractico1._1.Models.Servicios
 {

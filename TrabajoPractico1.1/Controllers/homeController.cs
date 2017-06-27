@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using TrabajoPractico1._1;
-using TrabajoPractico1._1.Servicios;
+using DAL;
+using DAL.Servicios;
 
 
 

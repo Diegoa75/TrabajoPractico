@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="C_TPModelStoreContainer" CdmEntityContainer="ContextoPractico">
+    <EntitySetMapping Name="Calificaciones">
+      <EntityTypeMapping TypeName="C_TPModel.Calificaciones">
+        <MappingFragment StoreEntitySet="Calificaciones">
+          <ScalarProperty Name="IdCalificacion" ColumnName="IdCalificacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Carteleras">
+      <EntityTypeMapping TypeName="C_TPModel.Carteleras">
+        <MappingFragment StoreEntitySet="Carteleras">
+          <ScalarProperty Name="IdCartelera" ColumnName="IdCartelera" />
+          <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+          <ScalarProperty Name="IdPelicula" ColumnName="IdPelicula" />
+          <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="NumeroSala" ColumnName="NumeroSala" />
+          <ScalarProperty Name="IdVersion" ColumnName="IdVersion" />
+          <ScalarProperty Name="Lunes" ColumnName="Lunes" />
+          <ScalarProperty Name="Martes" ColumnName="Martes" />
+          <ScalarProperty Name="Miercoles" ColumnName="Miercoles" />
+          <ScalarProperty Name="Jueves" ColumnName="Jueves" />
+          <ScalarProperty Name="Viernes" ColumnName="Viernes" />
+          <ScalarProperty Name="Sabado" ColumnName="Sabado" />
+          <ScalarProperty Name="Domingo" ColumnName="Domingo" />
+          <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Generos">
+      <EntityTypeMapping TypeName="C_TPModel.Generos">
+        <MappingFragment StoreEntitySet="Generos">
+          <ScalarProperty Name="IdGenero" ColumnName="IdGenero" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Peliculas">
+      <EntityTypeMapping TypeName="C_TPModel.Peliculas">
+        <MappingFragment StoreEntitySet="Peliculas">
+          <ScalarProperty Name="IdPelicula" ColumnName="IdPelicula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="IdCalificacion" ColumnName="IdCalificacion" />
+          <ScalarProperty Name="IdGenero" ColumnName="IdGenero" />
+          <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+          <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservas">
+      <EntityTypeMapping TypeName="C_TPModel.Reservas">
+        <MappingFragment StoreEntitySet="Reservas">
+          <ScalarProperty Name="IdReserva" ColumnName="IdReserva" />
+          <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+          <ScalarProperty Name="IdVersion" ColumnName="IdVersion" />
+          <ScalarProperty Name="IdPelicula" ColumnName="IdPelicula" />
+          <ScalarProperty Name="FechaHoraInicio" ColumnName="FechaHoraInicio" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+          <ScalarProperty Name="NumeroDocumento" ColumnName="NumeroDocumento" />
+          <ScalarProperty Name="CantidadEntradas" ColumnName="CantidadEntradas" />
+          <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sedes">
+      <EntityTypeMapping TypeName="C_TPModel.Sedes">
+        <MappingFragment StoreEntitySet="Sedes">
+          <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="PrecioGeneral" ColumnName="PrecioGeneral" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposDocumentos">
+      <EntityTypeMapping TypeName="C_TPModel.TiposDocumentos">
+        <MappingFragment StoreEntitySet="TiposDocumentos">
+          <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="C_TPModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Versiones">
+      <EntityTypeMapping TypeName="C_TPModel.Versiones">
+        <MappingFragment StoreEntitySet="Versiones">
+          <ScalarProperty Name="IdVersion" ColumnName="IdVersion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

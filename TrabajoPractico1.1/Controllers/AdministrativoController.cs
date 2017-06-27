@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using DAL.Models.Servicios;
+using DAL.Servicios;
+using DAL;
 using TrabajoPractico1._1.Models.Servicios;
-using TrabajoPractico1._1.Servicios;
 
 
 namespace TrabajoPractico1._1.Controllers

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TrabajoPractico1._1;
-using TrabajoPractico1._1.ModelViews;
-using TrabajoPractico1._1.Servicios;
+using DAL;
+using DAL.ModelViews;
+using DAL.Servicios;
 
 namespace TrabajoPractico.Controllers
 {

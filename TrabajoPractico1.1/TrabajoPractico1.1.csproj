@@ -129,12 +129,6 @@
     <Compile Include="App_Start\HomeController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Calificaciones.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Carteleras.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="CodeTemplates\AddController\ControllerWithContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -143,76 +137,18 @@
     <Compile Include="Controllers\administrativoController.cs" />
     <Compile Include="Controllers\homeController.cs" />
     <Compile Include="Controllers\peliculasController.cs" />
-    <Compile Include="Generos.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Carteleras.cs" />
-    <Compile Include="Models\ModelViews\vConfirmacion.cs" />
-    <Compile Include="Models\ModelViews\vReserva.cs" />
-    <Compile Include="Models\Peliculas.cs" />
-    <Compile Include="Models\Reservas.cs" />
-    <Compile Include="Models\Sedes.cs" />
-    <Compile Include="Servicios\sCalificaciones.cs" />
-    <Compile Include="Servicios\sCarteleras.cs" />
-    <Compile Include="Servicios\sGeneros.cs" />
-    <Compile Include="Servicios\sReportes.cs" />
-    <Compile Include="Servicios\sPeliculas.cs" />
     <Compile Include="Servicios\sImagenes.cs" />
-    <Compile Include="Servicios\sInicio.cs" />
-    <Compile Include="Servicios\sReservas.cs" />
-    <Compile Include="Servicios\sSedes.cs" />
-    <Compile Include="Servicios\sString.cs" />
-    <Compile Include="Servicios\sUsuarios.cs" />
-    <Compile Include="Models\Usuarios.cs" />
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />
     <Compile Include="NavigationRoutes\NavigationExtensions.cs" />
     <Compile Include="NavigationRoutes\NavigationRouteConfigurationExtensions.cs" />
     <Compile Include="NavigationRoutes\NavigationRouteFilter.cs" />
-    <Compile Include="Peliculas.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reservas.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Sedes.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Servicios\sVersiones.cs" />
-    <Compile Include="TiposDocumentos.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Usuarios.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Versiones.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\20171C_TP.mdf" />
-    <Content Include="App_Data\20171C_TP_log.ldf">
-      <DependentUpon>20171C_TP.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -342,23 +278,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ControllerWithContext.cs</LastGenOutput>
     </Content>
-    <EntityDeploy Include="Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-3.0.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -419,6 +338,7 @@
     <Content Include="Views\Shared\_menuAdministrativo.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="bin\" />
   </ItemGroup>
   <ItemGroup>
@@ -426,6 +346,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{31b674ca-26ca-462e-8307-876c92a72508}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

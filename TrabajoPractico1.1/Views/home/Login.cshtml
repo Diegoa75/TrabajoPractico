@@ -1,4 +1,4 @@
-﻿@using TrabajoPractico1._1
+﻿@using DAL
 @model Usuarios
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
@@ -39,7 +39,7 @@ else if (Session["Action"] != null)
             </div>
             <div class="form-group">
                 <div class="form-control">
-                    @Html.TextBoxFor(model => model.Password, new { @placeholder = "Contraseña" })
+                    @Html.PasswordFor(model => model.Password, new { @placeholder = "Contraseña" })
                 </div>
                 @Html.ValidationMessage("Password")
             </div>

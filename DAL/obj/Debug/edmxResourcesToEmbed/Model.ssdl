@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="C_TPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="Calificaciones">
+    <Key>
+      <PropertyRef Name="IdCalificacion" />
+    </Key>
+    <Property Name="IdCalificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Carteleras">
+    <Key>
+      <PropertyRef Name="IdCartelera" />
+    </Key>
+    <Property Name="IdCartelera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSede" Type="int" Nullable="false" />
+    <Property Name="IdPelicula" Type="int" Nullable="false" />
+    <Property Name="HoraInicio" Type="int" Nullable="false" />
+    <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+    <Property Name="FechaFin" Type="datetime" Nullable="false" />
+    <Property Name="NumeroSala" Type="int" Nullable="false" />
+    <Property Name="IdVersion" Type="int" Nullable="false" />
+    <Property Name="Lunes" Type="bit" Nullable="false" />
+    <Property Name="Martes" Type="bit" Nullable="false" />
+    <Property Name="Miercoles" Type="bit" Nullable="false" />
+    <Property Name="Jueves" Type="bit" Nullable="false" />
+    <Property Name="Viernes" Type="bit" Nullable="false" />
+    <Property Name="Sabado" Type="bit" Nullable="false" />
+    <Property Name="Domingo" Type="bit" Nullable="false" />
+    <Property Name="FechaCarga" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Generos">
+    <Key>
+      <PropertyRef Name="IdGenero" />
+    </Key>
+    <Property Name="IdGenero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Peliculas">
+    <Key>
+      <PropertyRef Name="IdPelicula" />
+    </Key>
+    <Property Name="IdPelicula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="750" Nullable="false" />
+    <Property Name="Imagen" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="IdCalificacion" Type="int" Nullable="false" />
+    <Property Name="IdGenero" Type="int" Nullable="false" />
+    <Property Name="Duracion" Type="int" Nullable="false" />
+    <Property Name="FechaCarga" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reservas">
+    <Key>
+      <PropertyRef Name="IdReserva" />
+    </Key>
+    <Property Name="IdReserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSede" Type="int" Nullable="false" />
+    <Property Name="IdVersion" Type="int" Nullable="false" />
+    <Property Name="IdPelicula" Type="int" Nullable="false" />
+    <Property Name="FechaHoraInicio" Type="datetime" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
+    <Property Name="NumeroDocumento" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CantidadEntradas" Type="int" Nullable="false" />
+    <Property Name="FechaCarga" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sedes">
+    <Key>
+      <PropertyRef Name="IdSede" />
+    </Key>
+    <Property Name="IdSede" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="PrecioGeneral" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TiposDocumentos">
+    <Key>
+      <PropertyRef Name="IdTipoDocumento" />
+    </Key>
+    <Property Name="IdTipoDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Versiones">
+    <Key>
+      <PropertyRef Name="IdVersion" />
+    </Key>
+    <Property Name="IdVersion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Carteleras_Peliculas">
+    <End Role="Peliculas" Type="Self.Peliculas" Multiplicity="1" />
+    <End Role="Carteleras" Type="Self.Carteleras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Peliculas">
+        <PropertyRef Name="IdPelicula" />
+      </Principal>
+      <Dependent Role="Carteleras">
+        <PropertyRef Name="IdPelicula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carteleras_Sedes">
+    <End Role="Sedes" Type="Self.Sedes" Multiplicity="1" />
+    <End Role="Carteleras" Type="Self.Carteleras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sedes">
+        <PropertyRef Name="IdSede" />
+      </Principal>
+      <Dependent Role="Carteleras">
+        <PropertyRef Name="IdSede" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carteleras_Versiones">
+    <End Role="Versiones" Type="Self.Versiones" Multiplicity="1" />
+    <End Role="Carteleras" Type="Self.Carteleras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Versiones">
+        <PropertyRef Name="IdVersion" />
+      </Principal>
+      <Dependent Role="Carteleras">
+        <PropertyRef Name="IdVersion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Peliculas_Calificaciones">
+    <End Role="Calificaciones" Type="Self.Calificaciones" Multiplicity="1" />
+    <End Role="Peliculas" Type="Self.Peliculas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calificaciones">
+        <PropertyRef Name="IdCalificacion" />
+      </Principal>
+      <Dependent Role="Peliculas">
+        <PropertyRef Name="IdCalificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Peliculas_Generos">
+    <End Role="Generos" Type="Self.Generos" Multiplicity="1" />
+    <End Role="Peliculas" Type="Self.Peliculas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Generos">
+        <PropertyRef Name="IdGenero" />
+      </Principal>
+      <Dependent Role="Peliculas">
+        <PropertyRef Name="IdGenero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservas_Peliculas">
+    <End Role="Peliculas" Type="Self.Peliculas" Multiplicity="1" />
+    <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Peliculas">
+        <PropertyRef Name="IdPelicula" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="IdPelicula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservas_Sedes">
+    <End Role="Sedes" Type="Self.Sedes" Multiplicity="1" />
+    <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sedes">
+        <PropertyRef Name="IdSede" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="IdSede" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservas_TiposDocumentos">
+    <End Role="TiposDocumentos" Type="Self.TiposDocumentos" Multiplicity="1" />
+    <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposDocumentos">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservas_Versiones">
+    <End Role="Versiones" Type="Self.Versiones" Multiplicity="1" />
+    <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Versiones">
+        <PropertyRef Name="IdVersion" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="IdVersion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="C_TPModelStoreContainer">
+    <EntitySet Name="Calificaciones" EntityType="Self.Calificaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Carteleras" EntityType="Self.Carteleras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Generos" EntityType="Self.Generos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Peliculas" EntityType="Self.Peliculas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservas" EntityType="Self.Reservas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sedes" EntityType="Self.Sedes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposDocumentos" EntityType="Self.TiposDocumentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Versiones" EntityType="Self.Versiones" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Carteleras_Peliculas" Association="Self.FK_Carteleras_Peliculas">
+      <End Role="Peliculas" EntitySet="Peliculas" />
+      <End Role="Carteleras" EntitySet="Carteleras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carteleras_Sedes" Association="Self.FK_Carteleras_Sedes">
+      <End Role="Sedes" EntitySet="Sedes" />
+      <End Role="Carteleras" EntitySet="Carteleras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carteleras_Versiones" Association="Self.FK_Carteleras_Versiones">
+      <End Role="Versiones" EntitySet="Versiones" />
+      <End Role="Carteleras" EntitySet="Carteleras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Peliculas_Calificaciones" Association="Self.FK_Peliculas_Calificaciones">
+      <End Role="Calificaciones" EntitySet="Calificaciones" />
+      <End Role="Peliculas" EntitySet="Peliculas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Peliculas_Generos" Association="Self.FK_Peliculas_Generos">
+      <End Role="Generos" EntitySet="Generos" />
+      <End Role="Peliculas" EntitySet="Peliculas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservas_Peliculas" Association="Self.FK_Reservas_Peliculas">
+      <End Role="Peliculas" EntitySet="Peliculas" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservas_Sedes" Association="Self.FK_Reservas_Sedes">
+      <End Role="Sedes" EntitySet="Sedes" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservas_TiposDocumentos" Association="Self.FK_Reservas_TiposDocumentos">
+      <End Role="TiposDocumentos" EntitySet="TiposDocumentos" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservas_Versiones" Association="Self.FK_Reservas_Versiones">
+      <End Role="Versiones" EntitySet="Versiones" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,11 @@
+C:\Users\fmunoz\TrabajoPractico\DAL\bin\Debug\20171C_TP.mdf
+C:\Users\fmunoz\TrabajoPractico\DAL\bin\Debug\20171C_TP_log.ldf
+C:\Users\fmunoz\TrabajoPractico\DAL\bin\Debug\DAL.dll.config
+C:\Users\fmunoz\TrabajoPractico\DAL\bin\Debug\DAL.dll
+C:\Users\fmunoz\TrabajoPractico\DAL\bin\Debug\DAL.pdb
+C:\Users\fmunoz\TrabajoPractico\DAL\bin\Debug\EntityFramework.dll
+C:\Users\fmunoz\TrabajoPractico\DAL\bin\Debug\EntityFramework.xml
+C:\Users\fmunoz\TrabajoPractico\DAL\bin\Debug\es\EntityFramework.resources.dll
+C:\Users\fmunoz\TrabajoPractico\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\fmunoz\TrabajoPractico\DAL\obj\Debug\DAL.dll
+C:\Users\fmunoz\TrabajoPractico\DAL\obj\Debug\DAL.pdb

@@ -1,4 +1,4 @@
-﻿@using TrabajoPractico1._1
+﻿@using DAL
 @model List<Reservas>
     <div>
         @if (Model != null && Model.Any()) {
@@ -17,7 +17,7 @@
                         <td>@reserva.Sedes.Nombre</td>
                         <td>@reserva.Versiones.Nombre</td>
                         <td>@reserva.Peliculas.Nombre</td>
-                        <td>@reserva.Sedes.PrecioGeneral</td>
+                        <td>@( Convert.ToDecimal(reserva.Sedes.PrecioGeneral) * Convert.ToInt32(reserva.CantidadEntradas))</td>
                     </tr>
                 }
             </table>
