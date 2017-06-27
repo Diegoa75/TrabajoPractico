@@ -14,30 +14,30 @@
 <table class="table table-hover listado-cartelera">
 	<thead>
 		<tr>
-			<td>Sede</td>
-			<td>Pelicula</td>
-			<td>Hora de Inicio</td>
-			<td>Fecha de Inicio</td>
-			<td>Fecha de Fin</td>
-			<td>Sala</td>
-			<td>Version</td>
-			<td>Dias</td>
-			<td>Fecha de carga</td>
-			<td></td>
-			<td></td>
+			<td class="col-sm-1">Sede</td>
+			<td class="col-sm-1">Pelicula</td>
+			<td class="col-sm-1">Hora de Inicio</td>
+			<td class="col-sm-1">Fecha de Inicio</td>
+			<td class="col-sm-1">Fecha de Fin</td>
+			<td class="col-sm-1">Sala</td>
+			<td class="col-sm-1">Version</td>
+			<td class="col-sm-1">Dias</td>
+			<td class="col-sm-1">Fecha de carga</td>
+			<td class="col-sm-1"></td>
+			<td class="col-sm-1"></td>
 		</tr>
 	</thead>
 	@foreach (Carteleras c in Model)
 	{
 		<tr>
-			<td>@c.IdSede</td>
-			<td>@c.IdPelicula</td>
-			<td>@c.HoraInicio</td>
-			<td>@c.FechaInicio</td>
-			<td>@c.FechaFin</td>
-			<td>@c.NumeroSala</td>
-			<td>@c.FechaInicio</td>
-			<td>
+			<td class="col-sm-1">@c.Sedes.Nombre</td>
+			<td class="col-sm-1">@c.Peliculas.Nombre</td>
+			<td class="col-sm-1">@c.HoraInicio</td>
+			<td class="col-sm-1">@c.FechaInicio.ToShortDateString()</td>
+			<td class="col-sm-1">@c.FechaFin.ToShortDateString()</td>
+			<td class="col-sm-1">@c.NumeroSala</td>
+			<td class="col-sm-1">@c.FechaInicio.ToShortDateString()</td>
+			<td class="col-sm-1">
 				@{
 					string l = "";
 					string m = "";
@@ -46,31 +46,31 @@
 					string v = "";
 					string s = "";
 					string d = "";
-					if (c.Lunes != false) { l = "Lunes"; }
+					if (c.Lunes != false) { l = "Lunes "; }
 					@l
-
-					if (c.Martes != false) { m = "Martes"; }
+					
+					if (c.Martes != false) { m = "Martes "; }
 					@m
 
-					if (c.Miercoles != false) { mi = "Miercoles"; }
+					if (c.Miercoles != false) { mi = "Miercoles "; }
 					@mi
 
-					if (c.Jueves != false) { j = "Jueves"; }
+					if (c.Jueves != false) { j = "Jueves "; }
 					@j
 
-					if (c.Viernes != false) { v = "Viernes"; }
+					if (c.Viernes != false) { v = "Viernes "; }
 					@v
 
-					if (c.Sabado != false) { s = "Sábado"; }
+					if (c.Sabado != false) { s = "Sábado "; }
 					@s
 
-					if (c.Domingo != false) { d = "Domingo"; }
+					if (c.Domingo != false) { d = "Domingo "; }
 					@d
 				}
 			</td>
-			<td>@c.FechaCarga</td>
-			<td><a href="~/administrativo/modificarCartelera/@c.IdCartelera" class="btn btn-info">Modificar</a></td>
-			<td><a href="~/administrativo/eliminarCartelera/@c.IdCartelera" class="btn btn-info">Eliminar</a></td>
+			<td class="col-sm-1">@c.FechaCarga.ToShortDateString()</td>
+			<td class="col-sm-1"><a href="~/administrativo/modificarCartelera/@c.IdCartelera" class="btn btn-info">Modificar</a></td>
+			<td class="col-sm-1"><a href="~/administrativo/eliminarCartelera/@c.IdCartelera" class="btn btn-info">Eliminar</a></td>
 		</tr>
 					}
 </table>

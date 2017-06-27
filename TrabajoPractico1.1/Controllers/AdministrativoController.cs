@@ -377,7 +377,7 @@ namespace TrabajoPractico1._1.Controllers
 		{
 			Carteleras miCartelera = new Carteleras();
 
-			c.FechaCarga = System.DateTime.Now;
+			c.FechaCarga = DateTime.Now;
 			if (ModelState.IsValid)
 			{
 				ctx.Carteleras.Add(c);
