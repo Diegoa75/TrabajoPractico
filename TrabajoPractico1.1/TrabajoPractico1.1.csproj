@@ -171,6 +171,7 @@
     <Compile Include="Models\Reservas.cs" />
     <Compile Include="Models\Sedes.cs" />
     <Compile Include="Servicios\sCalificaciones.cs" />
+    <Compile Include="Servicios\sCarteleras.cs" />
     <Compile Include="Servicios\sGeneros.cs" />
     <Compile Include="Servicios\sReportes.cs" />
     <Compile Include="Servicios\sPeliculas.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Sedes.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\sVersiones.cs" />
     <Compile Include="TiposDocumentos.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
